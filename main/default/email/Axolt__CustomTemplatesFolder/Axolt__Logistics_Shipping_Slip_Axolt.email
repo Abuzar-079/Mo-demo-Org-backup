@@ -1,0 +1,198 @@
+<messaging:emailTemplate subject="Shipping Slip" recipientType="Contact" relatedToType="Axolt__Shipment__c">
+
+    <messaging:htmlEmailBody >
+
+        <!-- Invoice Title -->
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:0px solid #ddd;">
+                    <tr >
+                    <td width="20%" style="padding:4px;" align="right">
+                                   <apex:image url="{!$Label.axolt__CompanyLogo}" alt="Company Logo" width="150" height="85"/>
+                                <!--<apex:image url="https://erp-mark-7-dev-ed--c.eu14.content.force.com/servlet/servlet.ImageServer?id=0151o000004NFir&oid=00D24000000q8Wb&lastMod=1514987141000" width="180" height="61" title="Aqxolt Pvt Ltd."/>-->
+                            </td>
+                            </tr>
+                </table>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr style="background:#f2f2f2;">
+                    <td align="center" style="font-family:Arial, Helvetica, sans-serif; font-size:20px; padding:10px; color:#757575;">
+                        SHIPPING SLIP
+                    </td>
+                </tr>
+            </table>
+        <!-- @end of Invoice Title -->
+
+        <!-- Billto shipto -->
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="50%" style="border:1px solid #ececec; font-family:Arial, Helvetica, sans-serif; font-size:14px;">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left" valign="top">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td align="left" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; padding:10px 10px 5px 10px;color:#4b4f52; ">
+                                                <strong>Ship to:</strong><br/>
+                                                {!relatedTo.Shipping_Address__r.Customer__r.Name}<br/>
+                                                {!relatedTo.Shipping_Address__r.Address_Line1__c},
+                                                {!relatedTo.Shipping_Address__r.Address_Line2__c},
+                                                {!relatedTo.Shipping_Address__r.Address_Line3__c}<br/>
+                                                {!relatedTo.Shipping_Address__r.Postal_Code__c},
+                                                {!relatedTo.Shipping_Address__r.City__c},
+                                                {!relatedTo.Shipping_Address__r.State__c}<br/>
+                                                {!relatedTo.Shipping_Address__r.Country__c}
+                                            </td>
+                                            <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; padding:10px 10px 5px 10px;color:#4b4f52;">
+                                                 <table>
+                                                      <tr>
+                                                        <td style="font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#4b4f52; font-weight:normal;">
+                                                            <strong> ATTN :</strong><br/>
+                                                             {!relatedTo.Shipping_Address__r.Contact__r.Name}
+                                                        </td>
+                                                        <td>&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="font-family:Arial, Helvetica, sans-serif; font-size:11px;color:#4b4f52; font-weight:normal;">
+                                                            <strong> TEL :</strong><br/>
+                                                            {!relatedTo.Shipping_Address__r.Contact__r.Phone}
+                                                        </td>
+                                                        <td>&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#4b4f52; font-weight:normal;">
+                                                            <strong> FAX :</strong><br/>
+                                                            {!relatedTo.Shipping_Address__r.Contact__r.Fax}
+                                                        </td>
+                                                        <td>&nbsp;</td>
+                                                    </tr>
+                                                 </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>&nbsp;</td>
+                            </tr>
+
+                        </table>
+                    </td>
+
+                    <td width="50%" style="border:1px solid #ececec; font-family:Arial, Helvetica, sans-serif; font-size:14px;">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td align="left" valign="top">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td align="left" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; padding:10px 10px 5px 10px;color:#4b4f52;">
+                                                <strong> From:</strong><br/>
+                                                {!$Organization.Name} <br/>
+                                                {!$Organization.Street} <br/>
+                                                {!$Organization.City}, {!$Organization.PostalCode} <br/>
+                                                {!$Organization.Country}
+                                            </td>
+                                            <td style="font-family:Arial, Helvetica, sans-serif; font-size:11px; padding:10px 10px 5px 10px;color:#4b4f52;">
+                                                <table>
+                                                    <tr>
+                                                        <td style="font-family:Arial, Helvetica, sans-serif; font-size:11px;color:#4b4f52; font-weight:normal;">
+                                                            <strong>ATTN :</strong> <br/>
+                                                            {!$Organization.Name}
+                                                        </td>
+                                                        <td>&nbsp;</td>
+                                                   </tr>
+                                                    <tr>
+                                                        <td style="font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#4b4f52; font-weight:normal;">
+                                                             <strong>TEL :</strong><br/>
+                                                              {!$Organization.Phone}
+                                                        </td>
+                                                        <td>&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="font-family:Arial, Helvetica, sans-serif; font-size:11px;color:#4b4f52; font-weight:normal;">
+                                                           <strong> FAX :</strong><br/> {!$Organization.Fax}
+                                                        </td>
+                                                        <td style="font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#4b4f52;">&nbsp;</td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <td>&nbsp;</td>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        <!-- @end of Billto shipto -->
+
+        <!-- Forwarder --->
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="50%" style="border:1px solid #ececec; font-family:Arial, Helvetica, sans-serif; font-size:14px;">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; padding:10px 10px 5px 10px;color:#4b4f52; font-weight:normal;">
+                                    <strong>Forwarder :</strong><br/>
+                                    {!$Organization.Name}
+                                </td>
+                                <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; padding:10px 10px 5px 10px;color:#4b4f52;">
+                                    <strong>Service :</strong><br/>
+                                    {!relatedTo.UPS_Services__c}
+                                </td>
+                            </tr>
+
+                        </table>
+                    </td>
+                    <td width="50%" style="border:1px solid #ececec; font-family:Arial, Helvetica, sans-serif; font-size:14px;">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; padding:10px 10px 5px 10px;color:#4b4f52; font-weight:bold;">
+                                    Total Number of Boxes and Pallets :
+                                </td>
+                                <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; padding:10px 10px 5px 10px;color:#4b4f52;">
+                                    {!relatedTo.Number_Of_Pieces_In_Shipment__c}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; padding:10px 10px 5px 10px;color:#4b4f52; font-weight:bold;">
+                                    &nbsp;
+                                </td>
+                                <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; padding:10px 10px 5px 10px;color:#4b4f52; font-weight:bold;">
+                                    &nbsp;
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr><td>&nbsp;</td></tr>
+            </table>
+        <!-- @end of Forwarder --->
+
+        <!-- Package line items section -->
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr style="font-family:Arial, Helvetica, sans-serif; font-size:14px; padding:10px; text-align:center; Package">
+                    <th width="20%" bgcolor="#f7f7f7"  align="left" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; padding:10px; color:#757575;">Package</th>
+                    <th width="10%" bgcolor="#f7f7f7" align="left" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; padding:10px; color:#757575;">Weight</th>
+                    <th width="20%" bgcolor="#f7f7f7" align="left" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; padding:10px; color:#757575;">Tracking No</th>
+                    <th width="35%" bgcolor="#f7f7f7" align="left" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; padding:10px; color:#757575;">Description</th>
+                </tr>
+
+                <apex:repeat value="{!relatedTo.Packages__r}" var="p" id="packDetials">
+                    <tr bgcolor="#ffffff" style="font-family:Arial, Helvetica, sans-serif; font-size:14px; padding:10px; text-align:center;" >
+                        <td align="left" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; padding:10px; color:#4b4f52;">{!p.Name}</td>
+                        <td align="left" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; padding:10px; color:#4b4f52;">{!p.Weight__c}</td>
+                        <td align="left" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; padding:10px; color:#4b4f52;">{!p.Tracking_Number__c}</td>
+                        <td align="left" valign="top" style="font-family:Arial, Helvetica, sans-serif; font-size:12px; padding:10px; color:#4b4f52;">{!p.Description__c}</td>
+                    </tr>
+
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td colspan="4">
+                           
+                        </td>
+                    </tr>
+                </apex:repeat>
+            </table>
+        <!-- @end of Package line items section -->
+
+    </messaging:htmlEmailBody>
+
+</messaging:emailTemplate>

@@ -1,0 +1,414 @@
+<messaging:emailTemplate subject="Quote -{!RelatedTo.Name}" recipientType="Contact" relatedToType="Axolt__Quotes__c">
+
+<messaging:plainTextEmailBody >
+   Hi {!Recipient.Name},<br/> Please find the attachment for Quotation from Unity Pvt Ltd. Your immediate attention to this Quotation is appreciated.<br/> Thanks and Regards,<br/> Unity Pvt Ltd.
+</messaging:plainTextEmailBody>
+
+<messaging:htmlEmailBody >
+<html>
+  <head>
+
+    <title>Unity Invoice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+    <link rel="preconnect" href="https://fonts.gstatic.com" ></link>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet"></link>
+  </head>
+  <style>
+    .wrapper {
+      width: 800px;
+      height: auto;
+      margin: 10px auto 10px;
+      /*box-shadow: 0px 0px 7px 0px rgba(0,0,0, 0.1);*/
+      padding: 10px;
+    }
+  </style>
+
+  <body style="background: #fff;">
+    <div class="wrapper" style="background:#fff;">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody>
+          <tr>
+            <td width="60%" style="font: 600 24px 'Montserrat', sans-serif;color:#333;text-align:left;padding-left:30px;"><img src="https://aqxolt-base-dev-ed.develop.my.salesforce.com/servlet/servlet.ImageServer?id=015J70000011GqK&oid=00D8d000007YxgS" width="120" height="" /></td><!--img src="https://aqxolt.file.force.com/servlet/servlet.FileDownload?file=015N1000000tXkv" width="120" height="" /></td-->
+            <td style="font: 500 12px 'Montserrat', sans-serif;color:#333;text-align:left;">
+              <table>
+                <tr>
+                  <td style="font: 700 12px 'Montserrat', sans-serif;color:#333;text-align:left;"> Quotation FORM for : </td>
+                  <td style="font: 500 12px 'Montserrat', sans-serif;color:#333;text-align:left;"> <apex:outputText id="compName1" value="{!RelatedTo.Customer__r.Name}" /> </td>
+                </tr>
+                <!--<tr>
+                  <td style="font: 700 12px 'Montserrat', sans-serif;color:#333;text-align:left;"> Offer Valid Through: </td>
+                  <td style="font: 500 12px 'Montserrat', sans-serif;color:#333;text-align:left;"> 29/01/2024 </td>
+                </tr>-->
+                <tr>
+                  <td style="font: 700 12px 'Montserrat', sans-serif;color:#333;text-align:left;"> Proposed by: </td>
+                  <td style="font: 500 12px 'Montserrat', sans-serif;color:#333;text-align:left;"> <apex:outputText value="{!RelatedTo.Employee__r.Name}" /> </td>
+                </tr>
+                <tr>
+                  <td style="font: 700 12px 'Montserrat', sans-serif;color:#333;text-align:left;"> Quote Number: </td>
+                  <td style="font: 500 12px 'Montserrat', sans-serif;color:#333;text-align:left;"> <apex:outputText id="compName12" value="{!RelatedTo.Name}" />  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="background:#f8f9fa; padding:5px;border-radius:20px;width:99%">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding:10px 10px 0px 10px;">
+          <tbody>
+            <tr>
+              <td colspan="2" style="font: 700 15px 'Montserrat', sans-serif;font-size:15px;color:#e1142a;padding:5px; "> Quote Document </td>
+            </tr>
+            <tr>
+              <td colspan="2" style="font: 700 13px 'Montserrat', sans-serif;font-size:13px;color:#333333;padding:5px;">Address Information </td>
+            </tr>
+            <tr>
+              <td valign="top" align="left" width="50%" style="font: 500 15px 'Montserrat', sans-serif;font-size:15px;color:#333333;padding:5px;">
+                <table>
+                  <tr>
+                    <td style="font: 700 12px 'Montserrat', sans-serif;color:#333333;"> Bill To: </td>
+                    <td style="font: 500 12px 'Montserrat', sans-serif;color:#333333;"></td>
+                  </tr>
+                  <tr>
+                    <td style="font: 600 12px 'Montserrat', sans-serif;color:#333333;width:32%;"> Company Name: </td>
+                    <td style="font: 500 12px 'Montserrat', sans-serif;color:#333333;"><apex:outputText id="compName" value="{!RelatedTo.Bill_To_Address__r.Customer__r.Name}" /><br/>. </td>
+                  </tr>
+                  <tr>
+                    <td style="font: 600 12px 'Montserrat', sans-serif;color:#333333;"> Contact Name: </td>
+                    <td style="font: 500 12px 'Montserrat', sans-serif;color:#333333;"> {!RelatedTo.Contact__r.Name} </td>
+                  </tr>
+                  <tr>
+                    <td style="font: 600 12px 'Montserrat', sans-serif;color:#333333;"> Email Address: </td>
+                    <td style="font: 500 12px 'Montserrat', sans-serif;color:#333333;"> <apex:outputText id="acc" value="{!RelatedTo.Contact__r.Email}" /></td>
+                  </tr>
+                  <tr>
+                    <td style="font: 600 12px 'Montserrat', sans-serif;color:#333333;vertical-align:top;"> Billing Address: </td>
+                    <td style="font: 500 12px 'Montserrat', sans-serif;color:#333333;">
+                                            <apex:outputText id="a1" value="{!RelatedTo.Bill_To_Address__r.Axolt__Address_Line1__c}" />
+                                            <apex:outputText id="a2" value="{!RelatedTo.Bill_To_Address__r.Axolt__Address_Line2__c}" />
+                                            <apex:outputText id="a3" value="{!RelatedTo.Bill_To_Address__r.Axolt__Address_Line3__c}" />
+                                            <apex:outputText id="city" value="{!RelatedTo.Bill_To_Address__r.Axolt__City__c}" /> <br />
+                                            <apex:outputText id="county" value="{!RelatedTo.Bill_To_Address__r.Axolt__State__c}" />
+                                            <apex:outputText id="country" value="{!RelatedTo.Bill_To_Address__r.Axolt__Country__c}" /> <br />
+                                            <apex:outputText id="pc" value="{!RelatedTo.Bill_To_Address__r.Axolt__Postal_Code__c}" /> <br />
+                    </td>
+                  </tr>
+                </table>
+              </td>
+              <td valign="top" align="left" width="50%" style="font: 500 15px 'Montserrat', sans-serif;font-size:15px;color:#333333;padding:5px;">
+                <table>
+                  <tr>
+                    <td style="font: 700 12px 'Montserrat', sans-serif;color:#333333;"> Ship To: </td>
+                    <td style="font: 500 12px 'Montserrat', sans-serif;color:#333333;"></td>
+                  </tr>
+                  <tr>
+                    <td style="font: 600 12px 'Montserrat', sans-serif;color:#333333;width:32%;"> Contact Name: </td>
+                    <td style="font: 500 12px 'Montserrat', sans-serif;color:#333333;">  <apex:outputText id="pc0" value="{!RelatedTo.Ship_To_Address__r.Contact__r.Name }" /></td>
+                  </tr>
+                  <tr>
+                    <td style="font: 600 12px 'Montserrat', sans-serif;color:#333333;"> Email Address: </td>
+                    <td style="font: 500 12px 'Montserrat', sans-serif;color:#333333;"> <apex:outputText id="pc2" value="{!RelatedTo.Ship_To_Address__r.Contact__r.Email }" /> </td>
+                  </tr>
+                  <tr>
+                    <td style="font: 600 12px 'Montserrat', sans-serif;color:#333333;vertical-align:top;"> Billing Address: </td>
+                    <td style="font: 500 12px 'Montserrat', sans-serif;color:#333333;"> <apex:outputText id="a10" value="{!RelatedTo.Ship_To_Address__r.Axolt__Address_Line1__c}" /><br />
+                                            <apex:outputText id="a7" value="{!RelatedTo.Ship_To_Address__r.Axolt__Address_Line2__c}" />
+                                            <apex:outputText id="a9" value="{!RelatedTo.Ship_To_Address__r.Axolt__Address_Line3__c}" />
+                                            <apex:outputText id="city1" value="{!RelatedTo.Ship_To_Address__r.Axolt__City__c}" /><br />
+                                            <apex:outputText id="county1" value="{!RelatedTo.Ship_To_Address__r.Axolt__State__c}" />
+                                            <apex:outputText id="country1" value="{!RelatedTo.Ship_To_Address__r.Axolt__Country__c}" /><br />
+                                            <apex:outputText id="pc1" value="{!RelatedTo.Ship_To_Address__r.Postal_Code__c }" />.</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding:0px 10px 10px 10px;">
+          <tbody>
+            <tr>
+              <td colspan="2" style="font: 600 13px 'Montserrat', sans-serif;font-size:13px;color:#333333;padding:5px;">Terms and conditions</td>
+            </tr>
+            <tr>
+              <td valign="top" align="left" width="50%" style="font: 500 15px 'Montserrat', sans-serif;font-size:15px;color:#333333;padding:5px;">
+                <table>
+                  <tr>
+                    <td style="font: 600 12px 'Montserrat', sans-serif;color:#333333;"> Contract Start Date* </td>
+                    <td style="font: 500 12px 'Montserrat', sans-serif;color:#333333;">  <!--apex:outputField value="{!RelatedTo.EffectiveDate}" /--> </td>
+                  </tr>
+                  <tr>
+                    <td style="font: 600 12px 'Montserrat', sans-serif;color:#333333;"> Contract End Date* </td>
+                    <td style="font: 500 12px 'Montserrat', sans-serif;color:#333333;"> <!--apex:outputField value="{!RelatedTo.EndDate}" /--> </td>
+                  </tr>
+                  <tr>
+                    <td style="font: 600 12px 'Montserrat', sans-serif;color:#333333;"> Billing Frequency: </td>
+                    <td style="font: 500 12px 'Montserrat', sans-serif;color:#333333;">  <!--apex:outputField value="{!RelatedTo.Billing_Frequency__c}" /--> </td>
+                  </tr>
+                </table>
+              </td>
+              <td valign="top" align="left" width="50%" style="font: 500 15px 'Montserrat', sans-serif;font-size:15px;color:#333333;padding:5px;">
+                <table>
+                  <tr>
+                    <td style="font: 600 12px 'Montserrat', sans-serif;color:#333333;"> Payment method: </td>
+                    <td style="font: 500 12px 'Montserrat', sans-serif;color:#333333;"> <!--apex:outputField value="{!RelatedTo.Payment_method__c}" /--> </td>
+                  </tr>
+                  <tr>
+                    <td style="font: 600 12px 'Montserrat', sans-serif;color:#333333;"> Payment Terms: </td>
+                    <td style="font: 500 12px 'Montserrat', sans-serif;color:#333333;"> <!--apex:outputField value="{!RelatedTo.Payment_Terms__c}" /--> </td>
+                  </tr>
+                  <tr>
+                    <td style="font: 600 12px 'Montserrat', sans-serif;color:#333333;vertical-align:top;"> Billing Method: </td>
+                    <td style="font: 500 12px 'Montserrat', sans-serif;color:#333333;"> <!--apex:outputField value="{!RelatedTo.Billing_Method__c}" /--> </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding:10px;padding-bottom: 0px;">
+        <tbody>
+          <tr>
+            <td style="font: 600 18px 'Montserrat', sans-serif;font-size:15px;color:#333;text-align:left;padding:5px;"> Subsriptions </td>
+          </tr>
+        </tbody>
+      </table>
+      <!--<table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td height="30"></td></tr><tr style="background:#757575"><td style="font: 300 14px 'Montserrat', sans-serif;font-size:14px;color:#ffffff;padding:5px;text-align:center;text-transform:uppercase;">SALES ORDER Line Items</td></tr></tbody></table>-->
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding: 10px;padding-bottom: 0px;">
+        <thead>
+          <tr bgcolor="f8f9fa">
+            <td align="left" width="25%" style="font:bold 12px 'Montserrat', sans-serif;font-size:12px;color:#333333;padding:5px;">Products</td>
+            <td align="left" style="font:bold 12px 'Montserrat', sans-serif;font-size:12px;color:#333333;padding:5px;">Order Start Date*</td>
+            <td align="left" style="font:bold 12px 'Montserrat', sans-serif;font-size:12px;color:#333333;padding:5px;">Order End Date*</td>
+            <td align="left" style="font:bold 12px 'Montserrat', sans-serif;font-size:12px;color:#333333;padding:5px;">Order Term(months)*</td>
+            <td align="left" style="font:bold 12px 'Montserrat', sans-serif;font-size:12px;color:#333333;padding:5px;">Monthly Unit Price</td>
+            <td align="left" style="font:bold 12px 'Montserrat', sans-serif;font-size:12px;color:#333333;padding:5px;">Quantity</td>
+             <td align="left" style="font:bold 12px 'Montserrat', sans-serif;font-size:12px;color:#333333;padding:5px;">Total Price</td>
+          </tr>
+          </thead>
+          <apex:variable value="{!0}" var="itemCounter" />
+          <apex:repeat var="item" value="{!RelatedTo.Quote_Line_Items__r}" id="pli">
+          <tr>
+
+             <td valign="top" align="left"  style="font:normal 12px 'Montserrat', sans-serif;font-size:12px;color:#333333;padding:5px;border-bottom: 1px solid #ebebeb;border-top: 1px solid #ebebeb;border-left: 1px solid #ebebeb;">
+                <apex:outputText value="{!item.Name}" />
+            </td>
+            <td valign="top" align="left"  style="font:normal 12px 'Montserrat', sans-serif;font-size:12px;color:#333333;padding:5px;border-bottom: 1px solid #ebebeb;border-top: 1px solid #ebebeb;border-left: 1px solid #ebebeb;"><apex:outputText value="{!item.Axolt__Start_Date__c}" /></td>
+            <td valign="top" align="left"  style="font:normal 12px 'Montserrat', sans-serif;font-size:12px;color:#333333;padding:5px;border-bottom: 1px solid #ebebeb;border-top: 1px solid #ebebeb;border-left: 1px solid #ebebeb;"><apex:outputText value="{!item.Axolt__End_Date__c}" /></td>
+            <td valign="top" align="left"  style="font:normal 12px 'Montserrat', sans-serif;font-size:12px;color:#333333;padding:5px;border-bottom: 1px solid #ebebeb;border-top: 1px solid #ebebeb;border-left: 1px solid #ebebeb;"><apex:outputText value="{!item.Axolt__Month_Duration__c}" /></td>
+            <td valign="top" align="left"  style="font:normal 12px 'Montserrat', sans-serif;font-size:12px;color:#333333;padding:5px;border-bottom: 1px solid #ebebeb;border-top: 1px solid #ebebeb;border-left: 1px solid #ebebeb;"><apex:outputText value="{!item.Axolt__List_Price__c}"/></td>
+            <td valign="top" align="left"  style="font:normal 12px 'Montserrat', sans-serif;font-size:12px;color:#333333;padding:5px;border-bottom: 1px solid #ebebeb;border-top: 1px solid #ebebeb;border-left: 1px solid #ebebeb;border-right: 1px solid #ebebeb;"><apex:outputField value="{!item.Axolt__Quantity__c}" /></td>
+            <td align="left" style="font:bold 12px 'Montserrat', sans-serif;font-size:12px;color:#333333;padding:5px;border-bottom: 1px solid #ebebeb;border-top: 1px solid #ebebeb;border-left: 1px solid #ebebeb;border-right: 1px solid #ebebeb;"><apex:outputField value="{!item.Axolt__TotalPrice__c}"/></td>
+          </tr>
+          <apex:variable var="itemCounter" value="{!itemCounter + 1}" />
+          </apex:repeat>
+           <tr>
+            <td valign="top" align="left"  style="font:normal 12px 'Montserrat', sans-serif;font-size:12px;color:#333333;padding:5px;border-bottom: 1px solid #ebebeb;border-top: 1px solid #ebebeb;border-left: 1px solid #ebebeb;">
+
+            </td>
+            <td valign="top" align="left"  style="font:normal 12px 'Montserrat', sans-serif;font-size:12px;color:#333333;padding:5px;border-bottom: 1px solid #ebebeb;border-top: 1px solid #ebebeb;border-left: 1px solid #ebebeb;"></td>
+            <td valign="top" align="left"  style="font:normal 12px 'Montserrat', sans-serif;font-size:12px;color:#333333;padding:5px;border-bottom: 1px solid #ebebeb;border-top: 1px solid #ebebeb;border-left: 1px solid #ebebeb;"></td>
+            <td valign="top" align="left"  style="font:normal 12px 'Montserrat', sans-serif;font-size:12px;color:#333333;padding:5px;border-bottom: 1px solid #ebebeb;border-top: 1px solid #ebebeb;border-left: 1px solid #ebebeb;"></td>
+            <td valign="top" align="left"  style="font:normal 12px 'Montserrat', sans-serif;font-size:12px;color:#333333;padding:5px;border-bottom: 1px solid #ebebeb;border-top: 1px solid #ebebeb;border-left: 1px solid #ebebeb;"></td>
+            <td valign="top" align="left"  style="font:bold 12px 'Montserrat', sans-serif;font-size:12px;color:#333333;padding:5px;border-bottom: 1px solid #ebebeb;border-top: 1px solid #ebebeb;border-left: 1px solid #ebebeb;border-right: 1px solid #ebebeb;">Total</td>
+            <td align="left" style="font:bold 12px 'Montserrat', sans-serif;font-size:12px;color:#333333;padding:5px;border-bottom: 1px solid #ebebeb;border-top: 1px solid #ebebeb;border-left: 1px solid #ebebeb;border-right: 1px solid #ebebeb;"><apex:outputText id="diss" value="{!RelatedTo.Axolt__Total_Due__c}" /></td>
+          </tr>
+
+      </table>
+
+
+
+          <table>
+            <tr>
+              <td style="height:10px;"></td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <td style="font:500 12px 'Montserrat', sans-serif;font-size:12px;color:#333333;padding:10px;">
+                + The Monthly/Unit Price shown above has been rounded to two decimal places for display purposes. As many as eight decimal places may be present in the actual pvrice. The totals for this order
+                were calculated using the actual price, rather than the Monthly/Unit Price displayed above, and are the true and binding totals for this order.<br/><br/>
+                * If this Order Form is executed and/or returned to Unity by Customer after the Order Start Date above, Unity may adjust these terms, without increasing the Total Price, based on the date Unity
+                activates the products above. Following activation, any adjustments to these terms may be confirmed by logging into Checkout, by reference to the order confirmation email sent by Unity to the
+                Billing Email Address above, and/or by contacting Customer Service.<br/><br/>
+                Prices shown above do not include any taxes that may apply. Any such taxes are the responsibility of Customer. This is not an invoice..
+              </td>
+            </tr>
+          </table>
+
+
+          <div style="background:#f8f9fa; padding:5px;border-radius:20px;width:99%">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding:10px 10px 0px 10px;">
+        <tbody>
+            <tr>
+                <td colspan="2" style="font: 700 13px 'Montserrat', sans-serif; font-size:13px; color:#333333; padding:5px;">Purchase Order Information </td>
+            </tr>
+            <tr>
+                <td valign="top" align="left" width="100%" style="font: 500 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px;">
+                    Is a Purchase Order (PO) required for the purchase or payment of the products on this Order Form?
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" align="left" width="100%" style="font: 500 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px;">
+                    Please select: (Customer to complete)<br/><br/>
+                    [&nbsp;&nbsp;&nbsp;&nbsp;] No<br/>
+                    [&nbsp;&nbsp;&nbsp;&nbsp;] Yes<br/><br/>
+                    If yes, please complete the following:
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" align="left" width="100%" style="font: 700 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px; padding-top:20px;">
+                    PO Number<br/><br/>
+                    ______________________________________
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" align="left" width="100%" style="font: 700 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px; padding-top:20px;">
+                    PO Number<br/><br/>
+                    ______________________________________
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" align="left" width="100%" style="font: 500 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px;">
+                    Upon signature by Customer and submission to Unity, this Order Form shall become legally binding and governed by the Master Subscription Agreement between Unity and Customer,
+                    unless this Order Form is rejected by Unity. Unity may reject this Order Form if: (1) the signatory below does not have the authority to bind Customer to this Order Form, (2) changes
+                    have been made to this Order Form (other than completion of the purchase order information and the signature block), or (3) the requested purchase order information or signature is
+                    incomplete or does not match our records or the rest of this Order Form. Subscriptions are non-cancelable before their Order End Date.
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="font: 700 13px 'Montserrat', sans-serif; font-size:13px; color:#333333; padding:5px;"> Customer:&nbsp;<!--apex:outputText id="compName109" value="{!RelatedTo.Account.Name}" /--></td>
+            </tr>
+            <tr>
+                <td valign="top" align="left" width="100%" style="font: 700 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px; padding-top:20px;">
+                    Signature<br/><br/>
+                    ______________________________________
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" align="left" width="100%" style="font: 700 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px; padding-top:10px;">
+                    Name<br/><br/>
+                    ______________________________________
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" align="left" width="100%" style="font: 700 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px; padding-top:10px;">
+                    Business Title<br/><br/>
+                    ______________________________________
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" align="left" width="100%" style="font: 700 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px; padding-top:10px;">
+                    Date<br/><br/>
+                    ______________________________________
+                </td>
+            </tr>
+
+            <tr>
+              <td valign="top" align="left" width="100%" style="font: 700 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px; padding-top:10px;">
+                Bank Details<br/><br/>
+                  ______________________________________
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" align="left" width="100%" style="font: 700 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px; padding-top:10px;">
+                Account holder : Unity Ltd
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" align="left" width="100%" style="font: 700 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px; padding-top:10px;">
+                ACH and Wire routing number : 89876545
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" align="left" width="100%" style="font: 700 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px; padding-top:10px;">
+                Account number : 8660029987
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" align="left" width="100%" style="font: 700 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px; padding-top:10px;">
+                BIC/SWIFT Code : GBHGUD44
+              </td>
+            </tr>
+
+            <tr>
+              <td valign="top" align="left" width="100%" style="font: 700 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px; padding-top:10px;">
+               Bank Details<br/><br/>
+                  ______________________________________
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" align="left" width="100%" style="font: 700 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px; padding-top:10px;">
+                Account holder : Unity Ltd
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" align="left" width="100%" style="font: 700 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px; padding-top:10px;">
+                ACH and Wire routing number : 65435656
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" align="left" width="100%" style="font: 700 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px; padding-top:10px;">
+                Account number : 288009915430
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" align="left" width="100%" style="font: 700 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px; padding-top:10px;">
+                BIC/SWIFT Code : RTXCBVW1XZA
+              </td>
+            </tr>
+
+            <tr>
+              <td valign="top" align="left" width="100%" style="font: 700 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px; padding-top:10px;">
+                Bank Details<br/><br/>
+                  ______________________________________
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" align="left" width="100%" style="font: 700 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px; padding-top:10px;">
+                Bank Name : HSBC
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" align="left" width="100%" style="font: 700 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px; padding-top:10px;">
+                Sort Code: 30-06-03
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" align="left" width="100%" style="font: 700 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px; padding-top:10px;">
+                Account Number: 87680077
+              </td>
+            </tr>
+            <tr>
+              <td valign="top" align="left" width="100%" style="font: 700 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px; padding-top:10px;">
+                BIC/SWIFT Code : LGQMDB2432C
+              </td>
+            </tr>
+
+            <tr>
+              <td valign="top" align="left" width="100%" style="font: 700 12px 'Montserrat', sans-serif; font-size:12px; color:#333333; padding:5px; padding-top:10px;">
+                IBAN : BG46HYGL50070322012877
+
+              </td>
+            </tr>
+        </tbody>
+    </table>
+
+        </div>
+      <table>
+        <tr>
+          <td height="50">&nbsp;</td>
+        </tr>
+      </table>
+      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td style="font:normal 12px 'Montserrat', sans-serif;font-size:12px;color:#333333;text-align:center;padding:10px;">
+            Confidential and proprietary. © Copyright 2000-2022 Unity, Inc. All rights reserved
+          </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+
+</html>
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

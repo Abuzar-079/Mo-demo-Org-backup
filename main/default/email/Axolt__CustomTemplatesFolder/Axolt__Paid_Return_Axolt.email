@@ -1,0 +1,32 @@
+<messaging:emailTemplate subject="Free Returns back to {!$Organization.Name}" recipientType="Contact" relatedToType="Axolt__Package__c">
+    
+    <messaging:htmlEmailBody >
+        <apex:image url="https://c.eu2.content.force.com/servlet/servlet.ImageServer?id=015b0000002j5sR&oid=00Db0000000Zoz5&lastMod=1440513795000" width="180" height="" title="Aqxolt Pvt Ltd."/> <br/>
+        
+        <span style="font-family: 'Open Sans', sans-serif;color:#757575;">Hi {!relatedTo.Order__r.Account.Name}</span> <br/>
+        <p style="font-family: 'Open Sans', sans-serif;color:#757575;">Our Team have looked into your complaint. We want to offer you a free returns on the products at fault. Below you will find the details on how to return the faulty items back to Aqxolt.</p>
+        <span style="font-family: 'Open Sans', sans-serif;color:#757575;">What to do next:</span> <br/>
+        <ul style="font-family: 'Open Sans', sans-serif;color:#757575;">
+            <li>Box the return items up in a secure package</li>
+            <li>Print out the returns slips (attached) insert this in the top of the box</li>
+            <li>Print out the UPS Returns label (attached) and attach onto the outside of the box</li>
+            <li>UPS Will collect the package from you on the <apex:outputText value="{0,date, dd/MM/yyyy}">
+                                                                 <apex:param value="{!relatedTo.Shipment__r.Axolt__Shipment_Date__c}"/>
+                                                             </apex:outputText> please ensure that someone is there to hand over the package to the UPS Driver</li>
+        </ul>
+        <p style="font-family: 'Open Sans', sans-serif;color:#757575;">Once we receive your returned package we will do an inspection on the stock. We will keep you updated at each stage of the return process.</p>        
+        <span style="font-family: 'Open Sans', sans-serif;color:#757575;"><b>Order Details:</b></span> <br/>
+        <b style="font-family: 'Open Sans', sans-serif;color:#757575;">Invoice No: </b> {!relatedTo.Shipment__r.Invoice__r.Name} <br/>
+        <!-- <b>PO: </b> 4958382912  <br/>  --> 
+        <b style="font-family: 'Open Sans', sans-serif;color:#757575;">Order Status: </b><span style="font-family: 'Open Sans', sans-serif;color:#757575;"> Free Returns</span> <br/>
+        <b style="font-family: 'Open Sans', sans-serif;color:#757575;">Authorised by: </b>  <br/>
+        <b style="font-family: 'Open Sans', sans-serif;color:#757575;">Order Fulfilled by:</b> 
+        <br/>
+        <p style="font-family: 'Open Sans', sans-serif;color:#757575;">If you need to get in touch about your return please email us or call the office +44 (0) 1900 837942</p>
+        <p style="font-family: 'Open Sans', sans-serif;color:#757575;">Kindest Regards
+        <br/>
+        Aqxolt Fulfilment Team</p>
+    
+    </messaging:htmlEmailBody>
+    
+</messaging:emailTemplate>

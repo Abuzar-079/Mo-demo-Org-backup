@@ -1,0 +1,45 @@
+<messaging:emailTemplate subject="Confirmation: Your Appointment on {!relatedTo.Axolt__Appointment_DateDt__c}" recipientType="Contact" relatedToType="Axolt__Registration__c">
+<messaging:htmlEmailBody >
+    <html>
+        <body style="font-family: Arial, sans-serif; color: #333;">
+            <div style="max-width: 600px; margin: auto; border: 1px solid #ddd; padding: 20px; border-radius: 8px;">
+                <h2 style="color: #0070d2;">Appointment Confirmed</h2>
+                <p>Hi <b>{!relatedTo.Contact__r.FirstName} {!relatedTo.Contact__r.LastName}</b>,</p>                
+                <p>Your On-field service appointment has been successfully scheduled. Here are the details:</p>
+                
+                <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Service:</strong></td>
+                        <td style="padding: 8px; border-bottom: 1px solid #eee;">{!relatedTo.Product2__r.Name}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Date &amp; Time:</strong></td>
+                       <td style="padding: 8px; border-bottom: 1px solid #eee;">
+                            <apex:outputText value="{0, date, MMMM d, yyyy 'at' h:mm a}">
+                                <apex:param value="{!relatedTo.Axolt__Registration_Time__c}" />
+                            </apex:outputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Location:</strong></td>
+                        <td style="padding: 8px; border-bottom: 1px solid #eee;">{!relatedTo.Location__r.Name}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border-bottom: 1px solid #eee;"><strong>Booking ID:</strong></td>
+                        <td style="padding: 8px; border-bottom: 1px solid #eee;">{!relatedTo.Name}</td>
+                    </tr>
+                </table>
+
+                <p style="margin-top: 20px;">
+                    Need to change plans? 
+                    <a href="YOUR_COMMUNITY_URL_HERE" style="color: #0070d2; text-decoration: none;">Manage your booking here</a>.
+                </p>
+                
+                <p style="font-size: 12px; color: #999; margin-top: 30px;">
+                    Thank you for choosing us!
+                </p>
+            </div>
+        </body>
+    </html>
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

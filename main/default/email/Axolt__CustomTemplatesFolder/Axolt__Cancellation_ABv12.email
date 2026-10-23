@@ -1,0 +1,42 @@
+<messaging:emailTemplate subject="Cancelled: Your {!relatedTo.Product2__r.Name} Booking" recipientType="Contact" relatedToType="Axolt__Registration__c">
+<messaging:htmlEmailBody >
+    <html>
+        <body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333; background-color: #f4f6f9; padding: 30px 10px; margin: 0;">
+            <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                <div style="background-color: #d93c3c; padding: 30px 20px; text-align: center;">
+                    <h1 style="color: #ffffff; margin: 0; font-size: 26px; font-weight: 600;">Booking Cancelled</h1>
+                </div>
+                <div style="padding: 30px 40px;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 15px;">
+                        <tr>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; color: #706e6b; width: 35%;"><strong>Customer Info:</strong></td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; font-weight: 500; color: #080707;">{!relatedTo.Axolt__Customer_Name__c} {!relatedTo.Axolt__Customer_Lastname__c}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; color: #706e6b;"><strong>Booking Ref:</strong></td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; font-weight: 500; color: #080707;">{!relatedTo.Name}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; color: #706e6b;"><strong>Service Name:</strong></td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; font-weight: 500; color: #080707;">{!relatedTo.Product2__r.Name}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; color: #706e6b;"><strong>Time Window:</strong></td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; font-weight: 500; color: #080707; text-decoration: line-through;">
+                                <apex:outputField value="{!relatedTo.Axolt__Registration_Time__c}"/> - <apex:outputField value="{!relatedTo.Axolt__End_Time__c}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; color: #706e6b;"><strong>Specialist Details:</strong></td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; font-weight: 500; color: #080707; text-decoration: line-through;">
+                                {!relatedTo.Resource__r.Name}<br/>
+                                <span style="font-size: 13px;">{!relatedTo.Axolt__Resource_Email__c}</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </body>
+    </html>
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

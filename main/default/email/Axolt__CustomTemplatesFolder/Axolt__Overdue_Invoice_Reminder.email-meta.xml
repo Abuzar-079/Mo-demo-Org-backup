@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Reminder email for overdue invoices</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Overdue Invoice Reminder</name>
+    <style>none</style>
+    <subject>Reminder: Overdue Invoice - {{InvoiceName}}</subject>
+    <textOnly>Dear {!Contact.FirstName},
+
+This is a friendly reminder regarding your overdue invoice(s).
+
+Invoice Number Due Date Amount Due Days Overdue
+
+Please make the payment at your earliest convenience to avoid further delays.
+
+If you have already made the payment ignore this email.
+
+Thank you for your prompt attention.
+
+Best regards,</textOnly>
+    <type>custom</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

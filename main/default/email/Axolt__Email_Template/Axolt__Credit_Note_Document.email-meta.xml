@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <available>true</available>
+    <description>Credit Note Document</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Credit Note Document</name>
+    <style>none</style>
+    <subject>Credit Note for SO #{!RelatedTo.Order__r.Name}</subject>
+    <type>visualforce</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

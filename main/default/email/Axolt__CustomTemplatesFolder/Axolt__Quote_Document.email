@@ -1,0 +1,199 @@
+<messaging:emailTemplate subject="Quote -{!RelatedTo.Name}" recipientType="Contact" relatedToType="Axolt__Quotes__c">
+<messaging:plainTextEmailBody >
+        Hi {!Recipient.Name},<br/> Please find the attachment for Quote from AQXOLT Pvt Ltd. Your immediate attention to this Quote is appreciated.<br/> Thanks and Regards,<br/> AQXOLT Pvt Ltd.
+    </messaging:plainTextEmailBody>
+    <messaging:htmlEmailBody >
+        <html>
+
+        <head>
+            <META http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        </head>
+
+        <body>
+
+            <div>
+                <div>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+
+                            <td style="font-family: 'Open Sans', sans-serif;font-size:22px;color:#757575;padding:5px;text-align:center">QUOTE FIRST</td>
+                        </tr>
+                    </table>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td width="29%" style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;padding:5px"><strong style="font-size:16px"><apex:outputText id="Org1" value="{!RelatedTo.Organisation__r.Name}" /></strong><br/>
+                                <apex:outputText id="Org2" value="{!RelatedTo.Organisation__r.BillingStreet}" />&nbsp;
+                                <apex:outputText id="Org3" value="{!RelatedTo.Organisation__r.BillingCity}" />&nbsp;
+                                <apex:outputText id="Org4" value="{!RelatedTo.Organisation__r.BillingState}" />&nbsp;
+                                <br/>
+                                <apex:outputText id="Org5" value="{!RelatedTo.Organisation__r.BillingCountry}" /> <br/>
+                                <apex:outputText id="Org6" value="{!RelatedTo.Organisation__r.Phone}" /><br/>
+                                <apex:outputText id="Org7" value="{!RelatedTo.Organisation__r.Fax}" />
+                            </td>
+                            <td width="62%" align="right">
+                                <apex:image url="https://aqxolt-base-dev-ed.develop.my.salesforce.com/servlet/servlet.FileDownload?file=015J70000011GDn" width="202" height="85" />
+                            </td>
+                            <td width="1%"> </td>
+                        </tr>
+                    </table>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td width="32%" height="50"> </td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;padding:5px;"><strong>Bill To</strong><br/>
+                                <apex:outputText value="{!RelatedTo.Bill_To_Address__r.Contact__r.Name}" />
+                                <br/>
+                                <apex:outputText id="compName" value="{!RelatedTo.Customer__r.Axolt__Company__c}" /><br/>
+                                <apex:outputText id="a1" value="{!RelatedTo.Bill_To_Address__r.Axolt__Address_Line1__c}" />&nbsp;
+                                <apex:outputText id="a2" value="{!RelatedTo.Bill_To_Address__r.Axolt__Address_Line2__c}" />&nbsp;
+                                <apex:outputText id="a3" value="{!RelatedTo.Bill_To_Address__r.Axolt__Address_Line3__c}" />&nbsp;<br/>
+                                <apex:outputText id="city" value="{!RelatedTo.Bill_To_Address__r.Axolt__City__c}" />&nbsp;
+                                <apex:outputText id="country" value="{!RelatedTo.Bill_To_Address__r.Axolt__Country__c}" />&nbsp;
+                                <apex:outputText id="pc" value="{!RelatedTo.Bill_To_Address__r.Zip_Postal_Code__c }" /><br/>
+                                <apex:outputText value="{!RelatedTo.Bill_To_Address__r.Contact__r.Phone}" id="ph" />
+                            </td>
+                            <td width="32%" style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;padding:5px;"><strong>Ship To</strong><br/>
+                                <apex:outputText id="ShipToacc" value="{!RelatedTo.Ship_To_Address__r.Contact__r.Name}" /><br/>
+                                <apex:outputText id="ShipTocompName" value="{!RelatedTo.Customer__r.Axolt__Company__c}" /><br/>
+                                <apex:outputText id="ShipToa1" value="{!RelatedTo.Ship_To_Address__r.Axolt__Address_Line1__c}" />&nbsp;
+                                <apex:outputText id="ShipToa2" value="{!RelatedTo.Ship_To_Address__r.Axolt__Address_Line2__c}" />&nbsp;
+                                <apex:outputText id="ShipToa3" value="{!RelatedTo.Ship_To_Address__r.Axolt__Address_Line3__c}" />&nbsp;<br/>
+                                <apex:outputText id="ShipTocity" value="{!RelatedTo.Ship_To_Address__r.Axolt__City__c}" />&nbsp;
+                                <apex:outputText id="ShipTocountry" value="{!RelatedTo.Ship_To_Address__r.Axolt__Country__c}" />&nbsp;
+                                <apex:outputText id="ShipTopc" value="{!RelatedTo.Ship_To_Address__r.Axolt__Zip_Postal_Code__c}" /><br/>
+                                <apex:outputField id="ShipTophone" value="{!RelatedTo.Ship_To_Address__r.Contact__r.Phone}" />
+                            </td>
+                            <td width="34%" style="padding:5px">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;"><strong>Request Date</strong></td>
+                                        <td style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;">
+                                            <apex:outputText id="ReqDate" value="{0,date, dd MMM yyyy}">
+                                                <apex:param value="{!RelatedTo.Axolt__Request_Date__c}" />
+                                            </apex:outputText>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;"><strong>Status</strong></td>
+                                        <td style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;">
+                                            <apex:outputField value="{!RelatedTo.Axolt__Status__c}" id="status" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;"><strong>Detail</strong></td>
+                                        <td style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;">
+                                            <apex:outputField value="{!RelatedTo.Axolt__Detail__c}" id="detail" /> </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;"><strong>Quote Name</strong></td>
+                                        <td style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;">
+                                            <apex:outputField value="{!RelatedTo.Name}" id="Name" /> </td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;"> </td>
+                                        <td style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;"> </td>
+                                        <td style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;"> </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td width="2%"> </td>
+                        </tr>
+                    </table>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td height="30"> </td>
+                        </tr>
+                        <tr style="background:#BDBDBD">
+
+                            <td style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#ffffff;padding:5px;text-align:center;text-transform:uppercase;">Quote Line Items</td>
+                        </tr>
+                    </table>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <thead>
+                            <tr style="background:#f7f7f7">
+                                <th width="12%" style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;padding:5px;text-align:left;">Name</th>
+                                                            <th width="12%" style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;padding:5px;text-align:left;">Product Code</th>
+                                <th width="12%" style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;padding:5px;text-align:left;">Product</th>
+                                <th width="12%" style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;padding:5px;text-align:left;">Quantity</th>
+                                <th width="12%" style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;text-align:left;">Unit Price</th>
+                                <th width="10%" style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;text-align:left;">Discount </th>
+
+                                <th width="10%" style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;text-align:left;">Tax Amount</th>
+                                <th width="12%" style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;padding:5px;text-align:right;">Total Price</th>
+                                <th width="3%"> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <apex:variable value="{!0}" var="itemCounter" />
+                            <apex:repeat var="item" value="{!RelatedTo.Quote_Line_Items__r}" id="pli">
+                                <tr>
+                                    <td style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;padding:5px;">
+                                        <apex:outputText value="{!item.Name}" />
+                                    </td>
+                                        <td style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;padding:5px;">
+                                        <apex:outputText value="{!item.Product__r.ProductCode}" />
+                                    </td>
+                                    <td style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;padding:5px;">
+                                        <apex:outputText value="{!item.Product__r.Name}" />
+                                    </td>
+                                    <td style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;padding:5px;">
+                                        <apex:outputText value="{!item.Axolt__Quantity__c}" />
+                                    </td>
+                                    <td style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;padding:5px;">
+                                        <apex:outputText value="{!item.Axolt__List_Price__c}" />
+                                    </td>
+                                    <td style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;padding:5px;text-align:right;">
+                                        <apex:outputText value="{!item.Axolt__Discount_Percent__c}"/>%
+                                    </td>
+
+                                    <td style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;padding:5px;text-align:right;">
+                                        <apex:outputText value="{!item.Axolt__Total_Tax__c}"/>
+                                    </td>
+                                    <td style="font-family: 'Open Sans', sans-serif;font-size:14px;color:#757575;padding:5px;text-align:right;">
+                                        <apex:outputText value="{!item.Axolt__TotalPrice__c}" />
+                                    </td>
+                                    <td> </td>
+                                </tr>
+                                <apex:variable var="itemCounter" value="{!itemCounter + 1}" />
+                            </apex:repeat>
+                        </tbody>
+                    </table>
+
+
+
+                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                         <tr><td>&nbsp;</td></tr>
+                         <tr>
+                            <td width="70%">&nbsp;</td>
+                            <td width="14%" style="font-family: 'Open Sans', sans-serif; font-size:14px; color:#757575;padding:4px;text-align:right; "><strong>Sub Total</strong></td>
+                            <td width="13%" style="font-family: 'Open Sans', sans-serif; font-size:14px; color:#757575; padding:4px; padding-left:5px;text-align:right; "><apex:outputField id="st" value="{!relatedTo.Axolt__Total_Due__c}"/></td>
+                            <td width="3%">&nbsp;</td>
+                        </tr>
+                        <tr>
+                                                    <td width="70%">&nbsp;</td>
+
+                        <td width="14%" style="font-family: 'Open Sans', sans-serif; font-size:14px; color:#757575;padding:4px;text-align:right; "><strong>Total Discount</strong></td>
+                            <td width="13%" style="font-family: 'Open Sans', sans-serif; font-size:14px; color:#757575; padding:4px; padding-left:5px;text-align:right; "><apex:outputField id="td" value="{!relatedTo.Axolt__Total_Discount__c}"/></td>
+                            </tr>
+                            <tr>
+                                                        <td width="70%">&nbsp;</td>
+
+                        <td width="14%" style="font-family: 'Open Sans', sans-serif; font-size:14px; color:#757575;padding:4px;text-align:right; "><strong>Total Tax</strong></td>
+                            <td width="13%" style="font-family: 'Open Sans', sans-serif; font-size:14px; color:#757575; padding:4px; padding-left:5px;text-align:right; "><apex:outputField id="tt" value="{!relatedTo.Axolt__Total_Tax__c}"/></td>
+                            </tr>
+                     </table>
+                </div>
+            </div>
+
+        </body>
+
+        </html>
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

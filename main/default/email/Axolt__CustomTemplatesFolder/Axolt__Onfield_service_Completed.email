@@ -1,0 +1,49 @@
+<messaging:emailTemplate subject="Service Completed: {!relatedTo.Product2__r.Name}" recipientType="Contact" relatedToType="Axolt__Registration__c">
+<messaging:htmlEmailBody >
+    <html>
+        <body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333; background-color: #f4f6f9; padding: 30px 10px; margin: 0;">
+            <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                
+                <div style="background-color: #2e844a; padding: 30px 20px; text-align: center;">
+                    <h1 style="color: #ffffff; margin: 0; font-size: 26px; font-weight: 600;">Service Complete!</h1>
+                    <p style="color: #e5f5eb; margin: 10px 0 0 0; font-size: 16px;">
+                        Thank you, {!relatedTo.Contact__r.FirstName}. Your service has been successfully completed.
+                    </p>
+                </div>
+
+                <div style="padding: 30px 40px;">
+                    <h2 style="font-size: 18px; border-bottom: 2px solid #f0f2f5; padding-bottom: 10px; margin-top: 0; color: #16325c;">
+                        Service Summary
+                    </h2>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 15px;">
+                        <tr>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; color: #706e6b; width: 35%;"><strong>Booking Ref:</strong></td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; font-weight: 500; color: #080707;">{!relatedTo.Name}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; color: #706e6b;"><strong>Service:</strong></td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; font-weight: 500; color: #080707;">{!relatedTo.Product2__r.Name}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; color: #706e6b;"><strong>Completed On:</strong></td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; font-weight: 500; color: #080707;">
+                                <apex:outputField value="{!relatedTo.Axolt__Serve_Finished_Time__c}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; color: #706e6b;"><strong>Specialist:</strong></td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; font-weight: 500; color: #080707;">{!relatedTo.Resource__r.Name}</td>
+                        </tr>
+                    </table>
+
+                    <div style="margin-top: 40px; text-align: center;">
+                        <p style="font-size: 15px; color: #333; line-height: 1.5;">
+                            We hope you had a great experience with {!relatedTo.Resource__r.Name}. If you need anything else, we are just a click away!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </body>
+    </html>
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

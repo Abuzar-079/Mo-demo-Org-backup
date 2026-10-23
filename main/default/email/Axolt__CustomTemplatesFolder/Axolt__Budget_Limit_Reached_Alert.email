@@ -1,0 +1,17 @@
+Dear {!Axolt__Budget_Plan__c.OwnerLastName},
+
+This is an automated notification regarding the status of your assigned Budget Plan. The consumption threshold has been reached, and the plan is now operating on the remaining available funds.
+
+--------------------------------------------------------
+ BUDGET PLAN: {!Axolt__Budget_Plan__c.Name}
+---------------------------------------------------------
+
+Total Allocated Budget: {!Axolt__Budget_Plan__c.Axolt__Total_Budget_Amount__c}
+Threshold Limit Set: {!Axolt__Budget_Plan__c.Axolt__Threshold_Limit__c}%
+Remaining Available Funds: {!Axolt__Budget_Plan__c.Axolt__Remaining_Amount__c}
+
+You can review the full status of the Budget Plan using this link:
+{!Axolt__Budget_Plan__c.Link}
+
+
+Thank you

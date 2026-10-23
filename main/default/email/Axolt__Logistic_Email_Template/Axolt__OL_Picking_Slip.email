@@ -1,0 +1,115 @@
+<messaging:emailTemplate subject="Picking slip {!relatedTo.Name}" relatedToType="Axolt__Logistic__c">
+    <messaging:plainTextEmailBody >Picking slip {!relatedTo.Name}</messaging:plainTextEmailBody>
+    <messaging:htmlEmailBody >
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><style>/* Start by Zan - Reason: hide the Axolt ERP printed-by and page footer */.d-foot{display:none !important}/* End here */
+/* Start by Zan - Reason: Code 39 barcode drawn with table cells so it prints in the PDF */.bc39{border-collapse:collapse;display:inline-table;width:auto !important;margin:0 0 0 auto}.bc39 td{height:34px;padding:0 !important;border:0 !important}.bc39 .bq{width:1.2px;background-color:#000000}.bc39 .br{width:3px;background-color:#000000}.bc39 .sq{width:1.2px}.bc39 .sr{width:3px}.bc39 .nx{width:0;display:none}/* End here */
+@page{margin:10mm 6mm 14mm 6mm !important;background-color:#f5f6f8}@page :first{margin-top:2mm !important}html,body,.d-page{background-color:#f5f6f8 !important}
+.d-page{position:relative;background:#fff;color:#101828;font:400 10.5px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.d-page *{box-sizing:border-box}
+.d-page[data-size="a4"]{width:794px;min-height:1123px;padding:44px 48px 64px;display:flex;flex-direction:column}
+.d-page[data-size="4x6"]{width:384px;height:576px;overflow:hidden}
+.d-page[data-size="2x1"]{width:288px;height:144px;overflow:hidden}
+.d-body{flex:1;display:flex;flex-direction:column;gap:18px}
+.x-val .d-mono{font-size:15px;color:#475467}
+@media print{.d-page[data-size="a4"]{width:auto;min-height:0;padding:0}.d-page{page-break-after:auto !important}.d-page + .d-page{page-break-before:always}.d-foot span{margin-right:14px}}
+.d-head{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding-bottom:16px;border-bottom:1px solid #e5e8ed}
+.d-org{display:flex;gap:12px;align-items:flex-start}
+.d-org>div{display:flex;flex-direction:column;gap:1px;color:#475467;font-size:10px}
+.d-org b{color:#344054;font-size:14px;font-weight:700;margin-bottom:2px}
+.d-logo{width:34px;height:34px;border-radius:8px;background:#e30917;color:#fff;display:grid;place-items:center;font-weight:800;font-size:12px;letter-spacing:-.02em;flex:none}
+.d-title{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.d-kind{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#667085}
+.d-no{font:700 12px Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0f1728}
+.d-status{margin-top:3px;font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border:1px solid #d7e3fe;border-radius:999px;background:#eff4ff;color:#0f1728}
+.d-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.d-meta div{display:flex;flex-direction:column;gap:3px;padding:10px 14px;background:#fff;border:1px solid #e5e8ed;border-radius:8px;margin-right:.8%;min-width:0}
+.d-meta div:nth-child(4n){margin-right:0}
+.d-meta div:first-child{background:#eff4ff;border-color:#d7e3fe}
+.d-meta>div>span,.d-k{font-size:10.5px;font-weight:700;color:#0f1728}
+.d-meta>div>span:after{content:" :"}
+.d-party .d-k{font-size:9px;letter-spacing:.04em;text-transform:uppercase}
+.d-meta b{font-weight:400;font-size:13px;color:#475467;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.d-parties{display:grid;gap:12px;border-top:1px solid #e5e8ed;padding-top:18px}
+.d-cols-2{grid-template-columns:1fr 1fr}.d-cols-3{grid-template-columns:repeat(3,1fr)}.d-cols-1{grid-template-columns:1fr}
+.d-party{display:flex;flex-direction:column;gap:2px;padding:14px 16px;background:#f9fafb;border:1px solid #e5e8ed;border-radius:8px;font-size:12px;line-height:1.55;color:#475467}
+.d-party b{color:#0f1728;font-size:12.5px;margin-top:6px}
+.d-mut{color:#667085}
+.d-table{width:100%;border-collapse:collapse;font-size:12.5px;line-height:18px}
+.d-table th{text-align:left;font-size:10.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#0f1728;background:#eff4ff;padding:8px 6px}
+.d-table td{padding:7px 6px;vertical-align:top;color:#0f1728}
+.d-table .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.d-table .mono,.d-mono{font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:11px;color:#667085}
+.d-table .ctr{text-align:center}
+.d-table tr.is-parent td{font-weight:700;color:#0f1728;background:#f6f4ff}
+.d-table tr.is-child td{color:#344054}
+.d-table tr.is-group td{background:#fafbfc;font-weight:700;font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;color:#0f1728;padding-top:10px}
+.d-table tfoot td{font-weight:700;font-size:15px;background:#eff4ff}
+.d-table .d-sub{display:block;color:#667085;font-size:11px;line-height:16px;margin-top:2px}
+.d-child{display:inline-flex;align-items:center;gap:6px;padding-left:4px}
+.d-child i{width:9px;height:9px;border-left:1px solid #98A2B3;border-bottom:1px solid #98A2B3;margin-top:-5px;flex:none}
+.d-cont{display:flex;gap:8px;align-items:baseline;font-size:11px;color:#475467;padding:9px 14px;background:#eff4ff;border:1px solid #d7e3fe;border-radius:8px}
+.d-cont b{color:#0f1728;font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif}
+.d-serials{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px 10px;font-size:9.5px}
+.d-serials>span{display:flex;align-items:center;gap:5px;white-space:nowrap}
+.d-count td{padding-top:9px;padding-bottom:9px}
+.d-cb{display:inline-block;width:11px;height:11px;border:1.2px solid #344054;border-radius:2px;vertical-align:-2px}
+.d-cb.is-on{background:#101828;box-shadow:inset 0 0 0 2px #fff}
+.d-fill{display:inline-block;min-width:44px;border-bottom:1px solid #98A2B3;height:14px}
+.d-totals{margin-left:auto;width:280px;display:flex;flex-direction:column;gap:4px;font-size:10.5px}
+.d-totals div{display:flex;justify-content:space-between;gap:16px}
+.d-totals span{color:#475467}
+.d-totals .is-strong{background:#eff4ff;padding:6px 6px;margin-top:4px;font-size:15px}
+.d-note{display:flex;flex-direction:column;gap:2px;padding:12px 16px;background:#fffaeb;border:1px solid #fedf89;border-radius:8px;font-size:11px;color:#475467}
+.d-note b{font-size:10.5px;color:#0f1728}
+.d-sec h4{margin:0 0 8px;padding-left:8px;border-left:3px solid #2563eb;font-size:12.5px;color:#0f1728}
+.d-sign{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:auto;padding-top:24px;border-top:1px solid #e5e8ed}
+.d-sign div{display:flex;flex-direction:column;gap:3px;font-size:11px;font-weight:700;color:#0f1728}
+.d-sign .d-mut{font-weight:400;font-size:8.5px}
+.d-line{height:34px;border-bottom:1px solid #98a2b3}
+.d-foot{position:absolute;left:48px;right:48px;bottom:24px;display:flex;justify-content:space-between;gap:12px;font-size:9px;color:#98a2b3;padding-top:8px}
+.d-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.d-kpis div{border:1px solid #e5e8ed;border-radius:8px;padding:10px 14px;display:flex;flex-direction:column;gap:3px}
+.d-kpis div:first-child{background:#eff4ff;border-color:#d7e3fe}
+.d-kpis span{font-size:10.5px;font-weight:700;color:#0f1728}
+.d-kpis b{font-size:15px;font-weight:400;color:#475467}
+.d-pos{color:#0B5E8A}.d-neg{color:#B42318}
+.d-tag{display:inline-block;font-size:8px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:1px 7px;border-radius:999px;background:#f4f3ff;color:#5925dc;white-space:nowrap}
+.bc{display:inline-flex;flex-direction:column;align-items:center;gap:2px;line-height:1}
+.bc-svg{display:block}
+.bc-txt{font:500 9px Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;letter-spacing:.06em;color:#101828}
+.mx{display:block}
+/* 4×6 shipping / carton labels */
+.d-label{border:1.5px solid #000;font-family:'Helvetica Neue',Arial,sans-serif;color:#000;display:flex;flex-direction:column}
+.l-row{border-bottom:2px solid #000;padding:8px 10px}
+.l-row:last-child{border-bottom:0}
+.l-from{display:flex;justify-content:space-between;gap:10px;font-size:9.5px;line-height:1.3}
+.l-from b{font-size:10px}
+.l-wt{text-align:right;font-weight:700;white-space:nowrap;font-size:11px}
+.l-to{position:relative;padding-left:30px;font-size:12px;line-height:1.3;min-height:116px}
+.l-to .l-k{position:absolute;left:8px;top:10px;writing-mode:vertical-rl;transform:rotate(180deg);font-size:9px;font-weight:800;letter-spacing:.06em}
+.l-to b{font-size:13px}
+.l-city{font-size:17px;font-weight:800;letter-spacing:.01em}
+.l-mid{display:flex;gap:12px;align-items:center}
+.l-route{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.l-route b{font-size:22px;font-weight:800;letter-spacing:.02em}
+.l-svc{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.l-svc b{font-size:15px;font-weight:800;letter-spacing:.01em}
+.l-big{font-size:34px;font-weight:900;background:#000;color:#fff;padding:0 10px;line-height:1.05}
+.l-trk{font-size:11px;font-weight:700;padding-bottom:4px}
+.l-bars{display:flex;justify-content:center;padding:6px 8px 4px}
+.l-ref{font-size:9px;display:flex;justify-content:space-between;gap:8px}
+.l-hz{display:flex;gap:8px;align-items:center;font-size:10px;font-weight:800}
+.l-diamond{width:30px;height:30px;border:2px solid #000;transform:rotate(45deg);display:grid;place-items:center;flex:none;background:repeating-linear-gradient(90deg,#000 0 2px,#fff 2px 4px)}
+.l-diamond span{transform:rotate(-45deg);background:#fff;font-size:10px;font-weight:900;padding:0 1px}
+.l-carrier{font-weight:900;font-size:22px;letter-spacing:-.01em}
+/* Label sheets (A4, 3 × 7) */
+.d-sheet{padding:36px 30px 56px}
+.d-sheet-grid{display:grid;grid-template-columns:repeat(var(--cols),1fr);gap:8px}
+.d-cell{height:136px;border:1px dashed #D0D5DD;border-radius:6px;padding:9px 10px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.d-cell .c-top{display:flex;justify-content:space-between;gap:6px;align-items:flex-start}
+.d-cell .c-name{font-size:10px;font-weight:700;line-height:1.25}
+.d-cell .c-sub{font-size:8.5px;color:#475467}
+.d-cell .c-big{font:800 17px Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;letter-spacing:.02em}
+.d-cell .bc{align-self:center}</style></head><body><Axolt:OutboundLogisticsDoc logisticId="{!relatedTo.Id}" documentType="pickingSlip"/></body></html>
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

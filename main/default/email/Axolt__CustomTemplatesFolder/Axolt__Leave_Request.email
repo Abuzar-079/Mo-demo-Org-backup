@@ -1,0 +1,56 @@
+<messaging:emailTemplate subject="Leave Request by -{!relatedTo.Employee__r.Name}" recipientType="Contact" relatedToType="Axolt__Leave_Request__c">
+<messaging:HtmlEmailBody >
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+            <meta name="viewport" content="width=device-width"/>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        </head>
+        <body style="margin:0px;">
+            <div style="font-family:'open-sans', sans-serif; padding:20px 0;width:100%;background-color:#f5f8fa;text-align:center">
+                <div style="background-color:#ffffff;border-radius:5px;margin:0 auto;max-width:600px;text-align:left;width:90%">
+                    <div style="border-bottom:solid 1px #dddddd;font-size:14px;padding:30px 30px">
+                        <a href="" style="text-decoration:none" target="_blank">
+                        <!--<apex:image url="https://www.axolt.com/wp-content/uploads/2017/10/aqxolt-logo-red-1.png" width="180"/>-->
+                         <apex:image url="{!$Label.axolt__CompanyLogo}" alt="Company Logo" width="150" height="85"/>
+                        </a>
+                    </div>
+                    <div style="border-top:solid 1px #eeeeee;font-size:14px;padding:30px 30px">
+                        <div style="font:30px/38px Arial, Helvetica, sans-serif; color:#292c34; padding:0 0 24px;">
+                            Hi {!relatedTo.Employee__r.First_Name__c}&nbsp;{!relatedTo.Employee__r.Last_Name__c}! 
+                        </div>
+                        <div style="font:18px Arial, Helvetica, sans-serif; color:#999999">
+                            The following employee has submitted for Leave request. 
+                        </div>
+                    </div>
+                    <div style="border-top:solid 0px #eeeeee;font-size:14px;padding:0px 30px 30px 30px">
+                         <div>
+                             <div style="color:#333333;font:16px Arial, Helvetica, sans-serif;">
+                                 <strong>Emp No :</strong> {!relatedTo.Employee__r.Code__c}<br/><br/>
+                                 <strong>Emp Name :</strong> {!relatedTo.Employee__r.Name}<br/> <br/>
+                                 <strong>Leave Start Date :</strong> 
+                                 <apex:outputText value="{0, date, MMMM d','  yyyy}">
+                                     <apex:param value="{!relatedTo.Axolt__Leave_Start_Date__c}"/>
+                                 </apex:outputText><br/> <br/>
+                                 <strong>Leave End Date :</strong> 
+                                 <apex:outputText value="{0, date, MMMM d','  yyyy}">
+                                     <apex:param value="{!relatedTo.Axolt__Leave_End_Date__c}"/>
+                                 </apex:outputText><br/> <br/>
+                                 <strong>Applied Date :</strong> 
+                                 <apex:outputText value="{0, date, MMMM d','  yyyy}">
+                                     <apex:param value="{!relatedTo.Axolt__Applied_Date__c}"/>
+                                 </apex:outputText>
+                                 <br/><br/> 
+                                 <strong>Organization :</strong> {!relatedTo.Employee__r.Company__r.Name}<br/> <br/>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+                <div style="color:#999999;font-size:14px;margin-bottom:100px;padding:30px 30px">
+                    Aqxolt Pvt Ltd. &nbsp; All Rights Reserved.<br/> 
+                </div>
+            </div>
+        </body>
+    </html>
+</messaging:HtmlEmailBody>
+</messaging:emailTemplate>

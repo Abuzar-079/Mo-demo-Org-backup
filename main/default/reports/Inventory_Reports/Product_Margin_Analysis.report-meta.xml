@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Axolt__Invoice_Line_Item__c$Name</field>
+    </columns>
+    <columns>
+        <field>Axolt__Invoice_Line_Item__c$Axolt__Invoice__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Axolt__Invoice_Line_Item__c$Axolt__Quantity__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Axolt__Invoice_Line_Item__c$Axolt__Total_Price__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Axolt__Invoice_Line_Item__c$Axolt__Cost_Price__c</field>
+    </columns>
+    <description>Joined report analyzing Product Sales Revenue against Cost of Goods Sold (COGS) to calculate Gross Profit and Gross Margin %.</description>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Axolt__Invoice_Line_Item__c$Axolt__Product__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Product Margin Analysis</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Invoices_with_Line_Items__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Axolt__Invoice_Line_Item__c$Axolt__Posted_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

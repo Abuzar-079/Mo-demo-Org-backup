@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>65.0</apiVersion>
+    <available>false</available>
+    <description>Primary reminder email sent before subscription expiry based on configured reminder days.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Subscription Expiry Reminder Primary</name>
+    <style>none</style>
+    <type>visualforce</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

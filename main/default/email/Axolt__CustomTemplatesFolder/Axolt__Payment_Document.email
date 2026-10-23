@@ -1,0 +1,321 @@
+<messaging:emailTemplate subject="Receipt for Payment No. {!RelatedTo.Name} " recipientType="Contact" relatedToType="Axolt__Payment__c" >
+<messaging:plainTextEmailBody >
+Hello {!Recipient.Name},<br/>
+<!--<br/> Please find attached a Payment detailed for the invoice # {!RelatedTo.Invoice__r.Name} <br/>-->
+<apex:outputText rendered="{!RelatedTo.Axolt__Order__c !=null}">
+<br/>
+Thank you for your payment.
+</apex:outputText>
+<br/>Please see the attached receipt for the payment of  {!RelatedTo.Total_Amount__c} made on &nbsp;<apex:outputText value="{0,date,dd/MM/yyyy}">
+                                                                           <apex:param value="{!RelatedTo.Axolt__Payment_Date__c}"/>
+                                                                        </apex:outputText> <apex:outputText rendered="{!RelatedTo.Axolt__Order__c !=null}">&nbsp;for the order of {!RelatedTo.Order__r.Name}.</apex:outputText><br/>
+                                                                        <br/>Kind regards and stay safe,<br/>
+                                                                        <apex:outputText rendered="{!If(RelatedTo.Axolt__Payment_Type__c == 'Voucher', true, false)}">
+                                                                       <!-- <br/> Valerie Seed<br/> -->
+<!-- Accounting at Northern Wide Plank<br/>
+5930 Lloydtown-Aurora Rd., Schomberg ON L0G 1T0<br/>
+D 905.939.9858 Ext.228  P 877/763/6169  W northernwideplank.ca<br/> -->
+</apex:outputText>
+</messaging:plainTextEmailBody>
+<messaging:htmlEmailBody >
+    <html>
+            <head>
+                <meta charset="utf-8"/>
+                <title>Payment Invoice</title>
+                <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700" rel="stylesheet"/>
+            </head>
+         
+            <style>
+                .wrapper{
+                    width:800px;
+                    margin:0 auto;
+                    box-shadow: 0 2px 7px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
+                    padding:10px;  
+                }
+               
+            </style>
+            <body>
+       
+            <!--<div class="maqsood erp_Mark7" style="background:#ffffff;float:left;width:100%;min-height:400px;padding:20px;">-->
+        <!-- Payment Receipt Starts here -->
+        <table border="0" width="100%" cellpadding="0" cellspacing="0" align="center" ><!--padding-left:30px;padding-right:30px;padding-top:30px;padding-bottom:30px;--> <!--style="width:100% !important;min-width:100% !important;max-width:100% !important;margin:auto;border-spacing:0;border-collapse:collapse;background:white;border-radius:0px 0px 10px 10px;display:block"-->
+            <tbody>
+                <tr>
+                    <td style="text-align:center;vertical-align:top;font-size:0;border-collapse:collapse">
+                        <table border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="#f3f3f3" style="width: 100%;border-spacing:0;border-collapse:collapse">
+                            <tbody>
+                                <tr bgcolor="#262626;" style="background-size:cover;background: #f3f3f3;">
+                                    <td style=" background: #f3f3f3;width:60%;text-align:left;border-collapse:collapse;border-radius:0px 0px 0px 0px;color:white;height:50px">
+                                        <apex:image value="{!URLFOR($Resource.Axolt__CompanyLogo)}" width="160" alt="Company Logo"/>
+                                        <!--<apex:image url="https://erp-mark-7-dev-ed-c.documentforce.com/servlet/servlet.ImageServer?id=01524000000jqCK&oid=00D24000000q8Wb&lastMod=1514987818000" width="202" height="85"/>-->
+                                    </td>
+                                    <!--<apex:outputText rendered="{!If(RelatedTo.Invoice__c == null, false, true)}">
+                                    <td style="background: #f3f3f3;width:40%;text-align:center;border-collapse:collapse;border-radius:0px 0px 0px 0px;color:white;height:50px;">
+                                        <div style="color:#4f4f4f;font-size:18px;font-family:'Roboto',sans-serif;text-transform:uppercase;">Payment Confirmation</div>
+                                      </td>
+                                      </apex:outputText>
+                                      <apex:outputText rendered="{!If(RelatedTo.Bill__c == null, true, false)}">
+                                    <td style="background: #f3f3f3;width:40%;text-align:center;border-collapse:collapse;border-radius:0px 0px 0px 0px;color:white;height:50px;">
+                                        <div style="color:#4f4f4f;font-size:18px;font-family:'Roboto',sans-serif;text-transform:uppercase;">Payment Receipt</div>
+                                      </td>
+                                      </apex:outputText>-->
+                                       <apex:outputText rendered="{!If(RelatedTo.Axolt__Payment_Type__c == 'Voucher', true, false)}">
+                                    <td style="background: #f3f3f3;width:40%;text-align:center;border-collapse:collapse;border-radius:0px 0px 0px 0px;color:white;height:50px;">
+                                        <div style="color:#4f4f4f;font-size:18px;font-family:'Roboto',sans-serif;text-transform:uppercase;">Payment Confirmation</div>
+                                      </td>
+                                      </apex:outputText>
+                                      <apex:outputText rendered="{!If(RelatedTo.Axolt__Payment_Type__c != 'Voucher', true, false)}">
+                                    <td style="background: #f3f3f3;width:40%;text-align:center;border-collapse:collapse;border-radius:0px 0px 0px 0px;color:white;height:50px;">
+                                        <div style="color:#4f4f4f;font-size:18px;font-family:'Roboto',sans-serif;text-transform:uppercase;">Payment Receipt</div>
+                                      </td>
+                                      </apex:outputText>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align:top;font-size:0;border-collapse:collapse">
+                        <table border="0" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;table-layout:fixed;">
+                            <tbody>
+                                <tr>
+                                    <td height="20">&nbsp;</td>
+                                </tr>
+                                <tr>                                   
+                                    <td width="50%" style="font-family:'Open Sans', sans-serif;
+                                                                font-size:14px;
+                                                                color:#757575;
+                                                                padding:5px;">
+                                            <strong style="font-size:16px;">From</strong><br/>
+                                            <apex:outputText value="{!RelatedTo.Accounts__r.Name}" /><br/>
+                                            <apex:outputText value="{!RelatedTo.Accounts__r.BillingStreet}" />&nbsp;
+                                            <apex:outputText value="{!RelatedTo.Accounts__r.BillingCity}" />&nbsp;
+                                            <apex:outputText value="{!RelatedTo.Accounts__r.BillingState}" /><br/>
+                                            <apex:outputText value="{!RelatedTo.Accounts__r.BillingCountry}" /> - <apex:outputText value="{!RelatedTo.Company__r.BillingPostalCode}" />
+                                            <apex:outputText value="{!RelatedTo.Accounts__r.Phone}" /><br/>
+                                            <apex:outputText value="{!RelatedTo.Accounts__r.Fax}" />
+                                        </td>
+                                        <td width="50%" style="font-family:'Open Sans', sans-serif; font-size:14px; color:#757575; padding:5px 5px 5px 40px; vertical-align:top; text-align:left;">
+                                            <strong style="font-size:16px;">Billed To</strong><br/>
+                                            <apex:outputText id="Org1" value="{!RelatedTo.Account__r.Name}" /><br/>
+                                            <apex:outputText id="Org2" value="{!RelatedTo.Account__r.BillingStreet}" />&nbsp;
+                                            <apex:outputText id="Org3" value="{!RelatedTo.Account__r.BillingCity}" />&nbsp;
+                                            <apex:outputText id="Org4" value="{!RelatedTo.Account__r.BillingState}" /> <br/>
+                                            <apex:outputText id="Org5" value="{!RelatedTo.Account__r.BillingCountry}" /> - <apex:outputText id="Org6" value="{!RelatedTo.Account__r.BillingPostalCode}" /><br/>
+                                            <apex:outputText id="Org7" value="{!RelatedTo.Account__r.Phone}" /><br/>
+                                            <apex:outputText id="Org8" value="{!RelatedTo.Account__r.Fax}" />
+                                        </td>                                                                                                                                          
+                                </tr>
+                                <tr>
+                                    <td height="20">&nbsp;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <apex:outputText rendered="{!If(RelatedTo.Axolt__Payment_Type__c == 'Voucher', true, false)}">
+                        <c:PaymentDocument recipientupdate="{!RelatedTo.id}" Invoiced="Bill"/>
+                        </apex:outputText>
+                        <apex:outputText rendered="{!If(RelatedTo.Axolt__Payment_Type__c != 'Voucher', true, false)}">
+                           
+                            <c:PaymentDocument recipientupdate="{!RelatedTo.id}" Invoiced="Invoice"/>
+                        </apex:outputText>
+                        <!--<apex:outputText rendered="{!If(RelatedTo.Invoice__c == null, true, false)}">
+                        <ERP7:PaymentDocument recipientupdate="{!RelatedTo.id}"/>
+                        </apex:outputText>
+                        <apex:outputText rendered="{!If(RelatedTo.Bill__c == null, true, false)}">
+                           
+                        </apex:outputText>-->
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td bgcolor="#F8F8F8" style="border-radius:8px!important;border-collapse:collapse">
+                                       
+                                        <table border="0" width="100%" cellpadding="0" align="center" cellspacing="0" bgcolor="#F8F8F8" style="border-spacing:0;border-collapse:collapse">
+                                            <tbody>
+                                               
+                                                <tr>
+                                                    <td style="border-collapse:collapse">
+                                                       
+                                                        <table border="0" width="100%" cellpadding="0" cellspacing="0" style="margin-top:5px;border-spacing:0;border-collapse:collapse">
+                                                            <tbody>
+                                                                <!--<apex:outputText rendered="{!If(RelatedTo.Bill__c == null, false, true)}">-->
+                                                                <!--<tr style="border-bottom: 1px solid #ddd;">
+                                                                    <td width="70%" style="padding-left:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:left;font-weight:bold">
+                                                                        Vendor                                                                    </td>
+                                                                    <td width="30%" style="padding-right:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:right;font-weight:bold">
+                                                                        {!RelatedTo.Accounts__r.Name}
+                                                                    </td>
+                                                                </tr>-->
+                                                                <apex:outputText rendered="{!If(RelatedTo.Axolt__Payment_Type__c != 'Voucher', true, false)}">
+                                                                <!-- <tr style="border-bottom: 1px solid #ddd;"> commented by Raqeeb as already included
+                                                                    <td width="70%" style="padding-left:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:left;font-weight:bold">
+                                                                        Customer                                                                    </td>
+                                                                    <td width="30%" style="padding-right:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:right;font-weight:bold">
+                                                                        {!RelatedTo.Account__r.Name}
+                                                                    </td>
+                                                                </tr> -->
+                                                                </apex:outputText>
+                                                                <apex:outputText rendered="{!If(RelatedTo.Axolt__Payment_Type__c == 'Voucher', true, false)}">
+                                                                <tr style="border-bottom: 1px solid #ddd;">
+                                                                    <td width="70%" style="padding-left:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:left;font-weight:bold">
+                                                                        Vendor                                                                    </td>
+                                                                    <td width="30%" style="padding-right:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:right;font-weight:bold">
+                                                                        {!RelatedTo.Accounts__r.Name}
+                                                                    </td>
+                                                                </tr>
+                                                                </apex:outputText>
+                                                                <apex:outputText rendered="{!If(RelatedTo.Axolt__Payment_Type__c != 'Voucher', true, false)}">
+                                                                <apex:outputText rendered="{!If(RelatedTo.Axolt__Account_Holder_Name__c == null, false, true)}">
+                                                                <tr style="border-bottom: 1px solid #ddd;">
+                                                                    <td width="70%" style="padding-left:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:left;font-weight:bold">
+                                                                        Account Holder Name                                                                   </td>
+                                                                    <td width="30%" style="padding-right:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:right;font-weight:bold">
+                                                                        {!RelatedTo.Account_Holder_Name__c}
+                                                                    </td>
+                                                                </tr>
+                                                                </apex:outputText>
+                                                                </apex:outputText>
+                                                                <!--</apex:outputText>-->
+                                                           
+                                                                <!--<apex:outputText rendered="{!If(RelatedTo.Bill__c == null, true, false)}">
+                                                                <tr style="border-bottom: 1px solid #ddd;">
+                                                                    <td width="70%" style="padding-left:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:left;font-weight:bold">
+                                                                        Sales Order                                                                    </td>
+                                                                    <td width="30%" style="padding-right:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:right;font-weight:bold">
+                                                                        {!RelatedTo.Order__r.Name}
+                                                                    </td>
+                                                                </tr>
+                                                                </apex:outputText>-->
+                                                               
+                                                                <!--<apex:outputText rendered="{!If(RelatedTo.Bill__c == null, true, false)}">
+                                                                <tr style="border-bottom: 1px solid #ddd;">
+                                                                    <td width="70%" style="padding-left:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:left;font-weight:bold">
+                                                                        Invoice
+                                                                    </td>
+                                                                    <td width="30%" style="padding-right:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:right;font-weight:bold">
+                                                                        {!RelatedTo.Invoice__r.Name}
+                                                                    </td>
+                                                                </tr>
+                                                                </apex:outputText>-->
+                                                               
+                                                                <!--<apex:outputText rendered="{!If(RelatedTo.Bill__c == null, true, false)}">-->
+                                                                <tr style="border-bottom: 1px solid #ddd;">
+                                                                    <td width="70%" style="padding-left:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:left;font-weight:bold">
+                                                                        Payment Date
+                                                                    </td>
+                                                                    <td width="30%" style="padding-right:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:right;font-weight:bold">
+                                                                        <!--<apex:outputField value="{!RelatedTo.Posted_Date__c}"/>-->
+                                                                        <apex:outputText value="{0,date,dd/MM/yyyy}">
+                                                                           <apex:param value="{!RelatedTo.Axolt__Payment_Date__c}"/>
+                                                                        </apex:outputText>
+                                                                    </td>
+                                                                </tr>
+                                                                <!--</apex:outputText>-->
+                                                           
+                                                                <tr style="border-bottom: 1px solid #ddd;">
+                                                                    <td width="70%" style="padding-left:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:left;font-weight:bold">
+                                                                        Mode of payment
+                                                                    </td>
+                                                                    <td width="30%" style="padding-right:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:right;font-weight:bold">
+                                                                        {!RelatedTo.Payment_Type__c}
+                                                                    </td>
+                                                                </tr>                                                                                                                               
+                                                                    <apex:outputText rendered="{!If(RelatedTo.Axolt__Transaction_ID__c == null, false, true)}">
+                                                                    <tr style="border-bottom: 1px solid #ddd;">
+                                                                        <td width="70%" style="padding-left:10px; padding-top:5px; padding-bottom:5px; border-collapse:collapse; font-family:'Roboto',sans-serif; font-size:18px; line-height:30px; color:#4f4f4f; text-align:left; font-weight:bold">
+                                                                            Transaction ID </td>
+                                                                        <td width="30%" style="padding-right:10px; padding-top:5px; padding-bottom:5px; border-collapse:collapse; font-family:'Roboto',sans-serif; font-size:18px; line-height:30px; color:#4f4f4f; text-align:right; font-weight:bold">
+                                                                            {!RelatedTo.Transaction_ID__c} </td>
+                                                                    </tr>
+                                                                </apex:outputText>
+                                                                <tr style="border-bottom: 1px solid #ddd;">
+                                                                    <td width="70%" style="padding-left:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:left;font-weight:bold">
+                                                                        Reference Number
+                                                                    </td>
+                                                                    <td width="30%" style="padding-right:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:right;font-weight:bold">
+                                                                        {!RelatedTo.Reference_Cheque_No__c}
+                                                                    </td>
+                                                                </tr>                                                            
+                                                               <apex:outputText rendered="{!If(and(RelatedTo.Axolt__Debit_Note_Applied_Amount__c != null, RelatedTo.Axolt__Debit_Note_Applied_Amount__c > 0), true, false)}">
+                                                                <tr style="border-bottom: 1px solid #ddd;">
+                                                                    <td width="70%" style="padding-left:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:left;font-weight:bold">
+                                                                        Credit Applied
+                                                                    </td>
+                                                                    <td width="30%" style="padding-right:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:right;font-weight:bold">
+                                                                        <apex:outputText value="{0,number,$#,###,###.00}"  >
+                                                                               <apex:param value="{!RelatedTo.Axolt__Debit_Note_Applied_Amount__c}" />
+                                                                         </apex:outputText>
+                                                                    </td>
+                                                                </tr>
+                                                                </apex:outputText>
+                                                                <tr style="border-bottom: 1px solid #ddd;">
+                                                                    <td width="70%" style="padding-left:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:left;font-weight:bold">
+                                                                        Amount Paid
+                                                                    </td>
+                                                                    <td width="30%" style="padding-right:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:right;font-weight:bold">
+                                                                        <apex:outputText value="{0,number,$#,###,###.00}"  >
+                                                                               <apex:param value="{!RelatedTo.Axolt__Amount__c}" />
+                                                                         </apex:outputText>
+                                                                          <!--<apex:outputField value="{!RelatedTo.Total_Amount__c}"/>-->
+                                                                    </td>
+                                                                </tr>
+                                                                <!--<apex:outputText rendered="{!If(RelatedTo.Bill__c == null, true, false)}">
+                                                                <tr style="border-bottom: 0px solid #ddd;">
+                                                                    <td width="70%" style="padding-left:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:left;font-weight:bold">
+                                                                        Amount Due
+                                                                    </td>
+                                                                    <td width="30%" style="padding-right:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:right;font-weight:bold">
+                                                                       {!(RelatedTo.Amount__c-RelatedTo.Order__r.Sales_Order_Amount__c)}
+                                                                    </td>
+                                                                </tr>
+                                                                </apex:outputText>
+                                                               
+                                                                 <apex:outputText rendered="{!If(RelatedTo.Invoice__c == null, true, false)}">
+                                                                 <tr>
+                                                                    <td width="70%" style="padding-left:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:left;font-weight:bold">
+                                                                        Amount Due
+                                                                    </td>
+                                                                    <td width="30%" style="padding-right:10px;padding-top:5px;padding-bottom:5px;border-collapse:collapse;font-family:'Roboto',sans-serif;font-size:18px;line-height:30px;color:#4f4f4f;text-align:right;font-weight:bold">
+                                                                       {!(RelatedTo.Amount__c-RelatedTo.Bill__r.Total_Amount__c)}
+                                                                    </td>
+                                                                </tr>
+                                                                </apex:outputText>-->
+                                                            </tbody>
+                                                        </table>
+                                                        <table border="0" width="100%" cellpadding="0" cellspacing="0" style="border-spacing:0;border-collapse:collapse">
+                                                        </table>
+                                                        <table border="0" width="100%" cellpadding="0" cellspacing="0" style="margin-top:5px;border-spacing:0;border-collapse:collapse">
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                               
+                                            </tbody>
+                                        </table>
+                                       
+                                    </td>
+                                </tr>
+                        </table>
+                           
+                       
+                    </td>
+                </tr>
+               
+               
+                <tr>
+                    <td style="padding-top:30px;padding-left:15px;padding-right:15px;font-size:16px;line-height:18px;color:#828282;text-align:center;border-spacing:0;border-collapse:collapse;font-family:'Roboto',sans-serif">
+                        ©2026-<span class="il">Sinopec</span>, All rights reserved.
+                    </td>
+                </tr>
+                <tr>
+                     <td align="center" style="color:#777777; font-family:Arial, Helvetica, sans-serif; font-size:10px;">
+                      This is a system-generated receipt. No signature required.
+                      </td>
+                </tr>
+               
+            </tbody>
+        </table>
+       
+       <!-- ENd of the payment receipt -->
+    <!--</div>-->
+</body>
+</html>
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

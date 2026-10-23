@@ -1,0 +1,33 @@
+<messaging:emailTemplate subject="Return reminder: {!RelatedTo.Order_Product__r.Product2.Name} is due on {!RelatedTo.Axolt__End_Date__c}"
+    recipientType="Contact"
+    relatedToType="Axolt__Loan_Agreement__c">
+    <messaging:htmlEmailBody >
+        <html>
+            <body style="font-family:Arial, sans-serif;color:#1f2937;font-size:14px;line-height:1.5;">
+                <p>Dear {!Recipient.Name},</p>
+                <p>This is a reminder that the following loaned product is due for return.</p>
+                <table width="100%" cellpadding="7" cellspacing="0" border="0" style="border-collapse:collapse;border:1px solid #d8dde6;">
+                    <tr style="background:#f3f6f9;"><th align="left" colspan="2">Return details</th></tr>
+                    <tr><td><strong>Loan agreement</strong></td><td>{!RelatedTo.Name}</td></tr>
+                    <tr><td><strong>Product</strong></td><td>{!RelatedTo.Order_Product__r.Product2.Name}</td></tr>
+                    <tr><td><strong>Quantity</strong></td><td>{!RelatedTo.Order_Product__r.Quantity}</td></tr>
+                    <tr><td><strong>Return due date</strong></td><td>{!RelatedTo.End_Date__c}</td></tr>
+                    <tr><td><strong>Grace end date</strong></td><td>{!RelatedTo.Grace_End_Date__c}</td></tr>
+                </table>
+                <p style="margin-top:18px;">Please contact us to arrange return collection or return shipment instructions.</p>
+                <p>Thank you.</p>
+            </body>
+        </html>
+    </messaging:htmlEmailBody>
+    <messaging:plainTextEmailBody >
+Dear {!Recipient.Name},
+
+Return reminder for loan agreement {!RelatedTo.Name}
+Product: {!RelatedTo.Order_Product__r.Product2.Name}
+Quantity: {!RelatedTo.Order_Product__r.Quantity}
+Return due date: {!RelatedTo.End_Date__c}
+Grace end date: {!RelatedTo.Grace_End_Date__c}
+
+Please contact us to arrange the return.
+    </messaging:plainTextEmailBody>
+</messaging:emailTemplate>

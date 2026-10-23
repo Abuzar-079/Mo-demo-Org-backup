@@ -1,0 +1,48 @@
+<messaging:emailTemplate subject="Friendly Reminder: Subscription Expiry – {!relatedTo.Order__r.Name}" recipientType="Contact" relatedToType="Axolt__Subscription__c">
+    <messaging:htmlEmailBody >
+
+        <html>
+            <body style="font-family: Arial, sans-serif; font-size:14px; color:#333;">
+
+                <p>Dear {!recipient.Name},</p>
+
+                <p>
+                    We hope you are doing well.
+                </p>
+
+                <p>
+                    This is a friendly reminder that your subscription associated with 
+                    <strong>Order {!relatedTo.Order__r.Name}</strong> 
+                    is approaching its expiry date.
+                </p>
+
+                <table cellpadding="6" cellspacing="0" border="0">
+                    <tr>
+                        <td><strong>Product:</strong></td>
+                        <td>{!relatedTo.Order_Product__r.PricebookEntry.Product2.Name}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Subscription Period:</strong></td>
+                        <td>{!relatedTo.Start_Date__c} to {!relatedTo.End_Date__c}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Expiry Date:</strong></td>
+                        <td>{!relatedTo.End_Date__c}</td>
+                    </tr>
+                </table>
+
+                <p>
+                    To ensure uninterrupted service, we kindly recommend initiating the renewal process prior to the expiry date.
+                </p>
+
+              
+                <p>
+                    Kind regards,<br/>
+                    Axolt 
+                </p>
+
+            </body>
+        </html>
+
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

@@ -1,0 +1,6 @@
+<messaging:emailTemplate subject="Purchase Order {!RelatedTo.Name}" recipientType="Contact" relatedToType="Axolt__PO__c">
+    <messaging:plainTextEmailBody >Purchase order {!RelatedTo.Name}. Please see the attached document for items, delivery details and totals.</messaging:plainTextEmailBody>
+    <messaging:htmlEmailBody >
+        <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/></head><body><c:PurchaseDocumentNextGen recordId="{!RelatedTo.Id}"/></body></html>
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

@@ -1,0 +1,5 @@
+<messaging:emailTemplate subject="Your Account Statement" recipientType="Contact" relatedToType="Account">
+<messaging:plainTextEmailBody >
+
+</messaging:plainTextEmailBody>
+</messaging:emailTemplate>

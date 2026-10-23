@@ -1,0 +1,67 @@
+<?xml version="1.0" enheoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Axolt__Purchase_Line_Items__c.Axolt__Quantity__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Axolt__Purchase_Line_Items__c.Axolt__Total_Price__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Axolt__Purchase_Line_Items__c.Axolt__Shipping_Cost__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Axolt__Purchase_Line_Items__c.Axolt__Total_Tax__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>CDF1</field>
+    </columns>
+    <customDetailFormulas>
+        <calculatedFormula>BLANKVALUE(Axolt__Purchase_Line_Items__c.Axolt__Total_Price__c, 0) + BLANKVALUE(Axolt__Purchase_Line_Items__c.Axolt__Shipping_Cost__c, 0) + BLANKVALUE(Axolt__Purchase_Line_Items__c.Axolt__Total_Tax__c, 0)</calculatedFormula>
+        <dataType>Double</dataType>
+        <description>Base cost plus freight/shipping plus duty/tax.</description>
+        <developerName>CDF1</developerName>
+        <label>Landed Cost</label>
+        <scale>2</scale>
+    </customDetailFormulas>
+    <description>Finance summary of purchase landed cost by product and purchase order, including base, freight/shipping, and duty/tax components.</description>
+    <filter>
+        <criteriaItems>
+            <column>Axolt__Purchase_Line_Items__c.Axolt__Product__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Axolt__Purchase_Line_Items__c.Axolt__Product__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>CUST_NAME</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Landed Cost Summary</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntityCustomEntity$Axolt__PO__c$Axolt__Purchase_Line_Items__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Axolt__PO__c.Axolt__Actual_Delivery_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

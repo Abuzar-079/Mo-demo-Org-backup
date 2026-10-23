@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>68.0</apiVersion>
+    <available>true</available>
+    <description>Next Gen stock-transfer document rendered from the putaway record.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Stock Transfer Document Next Gen</name>
+    <style>none</style>
+    <subject>Stock transfer document</subject>
+    <type>visualforce</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

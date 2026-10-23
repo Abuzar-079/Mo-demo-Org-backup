@@ -1,0 +1,423 @@
+<messaging:emailTemplate subject="{!IF(RelatedTo.Axolt__Order_S__c != null, 'Invoice for SO', 'Invoice for WO')} #{!IF(RelatedTo.Axolt__Order_S__c != null, RelatedTo.Axolt__Order_S__r.Name, RelatedTo.Axolt__Work_Orders__r.Name)}" recipientType="Contact" relatedToType="Axolt__Invoice__c">
+
+<!-- ================= EMAIL BODY (no apex: tags allowed here) ================= -->
+<messaging:plainTextEmailBody >
+<html>
+<body style="margin:0;padding:0;background-color:#eef1f5;font-family:Arial,Helvetica,sans-serif;line-height:0;">
+<div style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#eef1f5;opacity:0;">Invoice {!RelatedTo.Name} from {!RelatedTo.Axolt__company__r.Name}.</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#eef1f5" style="width:100%;background-color:#eef1f5;border-collapse:collapse;border-spacing:0;line-height:0;mso-table-lspace:0pt;mso-table-rspace:0pt;">
+<tr><td align="center" style="padding:30px 12px;font-size:0;line-height:0;">
+<table role="presentation" width="640" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" style="width:640px;max-width:640px;background-color:#ffffff;border:1px solid #dfe3e8;border-collapse:collapse;border-spacing:0;line-height:0;mso-table-lspace:0pt;mso-table-rspace:0pt;">
+
+<!-- Header -->
+<tr><td align="center" style="padding:32px 0 0 0;font-size:0;line-height:0;">
+<table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="width:560px;table-layout:fixed;border-collapse:collapse;border-spacing:0;line-height:0;mso-table-lspace:0pt;mso-table-rspace:0pt;">
+<tr>
+<td width="64" valign="middle" style="width:64px;padding:0;font-size:0;line-height:0;"><img src="{!$Label.axolt__CompanyLogo}" alt="{!RelatedTo.Axolt__company__r.Name}" width="48" style="display:block;width:48px;max-width:48px;height:auto;border:0;outline:none;text-decoration:none;"/></td>
+<td width="306" valign="middle" align="left" style="width:306px;padding:0;font-size:0;line-height:0;">
+<div style="margin:0;font-size:18px;line-height:24px;font-weight:bold;color:#14213d;">{!RelatedTo.Axolt__company__r.Name}</div>
+<div style="margin:1px 0 0 0;font-size:13px;line-height:20px;color:#6b7487;">{!RelatedTo.Axolt__company__r.BillingCity}{!IF(ISBLANK(RelatedTo.Axolt__company__r.BillingState), '', ', ' + RelatedTo.Axolt__company__r.BillingState)}{!IF(ISBLANK(RelatedTo.Axolt__company__r.BillingCountry), '', ', ' + RelatedTo.Axolt__company__r.BillingCountry)}</div>
+</td>
+<td width="190" valign="middle" align="right" style="width:190px;padding:0;font-size:0;line-height:0;text-align:right;">
+<div style="margin:0;font-size:11px;line-height:17px;letter-spacing:1.5px;color:#6b7487;text-align:right;">{!IF(RelatedTo.RecordType.Name = 'Advance', 'PROFORMA INVOICE', 'INVOICE')}</div>
+<div style="margin:0;font-size:24px;line-height:32px;font-weight:bold;color:#14213d;text-align:right;">#{!RelatedTo.Name}</div>
+<div style="margin:0;font-size:11px;line-height:17px;font-weight:bold;color:#c8102e;text-align:right;">Payment due within 30 days</div>
+</td>
+</tr>
+</table>
+</td></tr>
+
+<!-- Dark divider -->
+<tr><td align="center" style="padding:20px 0 0 0;font-size:0;line-height:0;">
+<table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="width:560px;border-collapse:collapse;border-spacing:0;line-height:0;"><tr><td height="2" bgcolor="#14213d" style="height:2px;background-color:#14213d;padding:0;font-size:0;line-height:2px;">&#160;</td></tr></table>
+</td></tr>
+
+<!-- Greeting -->
+<tr><td align="center" style="padding:26px 0 24px 0;font-size:0;line-height:0;">
+<table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="width:560px;border-collapse:collapse;border-spacing:0;line-height:0;">
+<tr><td align="left" style="padding:0;font-size:0;line-height:0;">
+<div style="margin:0 0 10px 0;font-size:25px;line-height:33px;font-weight:bold;color:#14213d;">Your {!IF(RelatedTo.RecordType.Name = 'Advance', 'proforma invoice', 'invoice')} is ready.</div>
+<div style="margin:0;font-size:15px;line-height:24px;color:#3d4659;">Invoice {!RelatedTo.Name} for {!RelatedTo.Axolt__Account__r.Name} is attached as a PDF for your records. You can review the balance and pay securely online whenever you are ready.</div>
+</td></tr>
+</table>
+</td></tr>
+
+<!-- Amount due / payment -->
+<tr style="{!IF(IF(RelatedTo.RecordType.DeveloperName = 'Advance', BLANKVALUE(RelatedTo.Axolt__Total_Due__c, 0), BLANKVALUE(RelatedTo.Axolt__Final_Due_Amount__c, 0)) > 0, '', 'display:none;mso-hide:all;')}"><td align="center" style="padding:0 0 24px 0;font-size:0;line-height:0;">
+<table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" bgcolor="#17233f" style="width:560px;background-color:#17233f;border-collapse:separate;border-spacing:0;border-radius:10px;line-height:0;">
+<tr>
+<td width="330" valign="middle" style="width:330px;padding:24px 26px;font-size:0;line-height:0;">
+<div style="margin:0;font-size:11px;line-height:18px;letter-spacing:1.5px;font-weight:bold;color:#aeb8d0;">AMOUNT DUE</div>
+<div style="margin:0;font-size:34px;line-height:44px;font-weight:bold;color:#ffffff;">&#36;{!TEXT(ROUND(IF(RelatedTo.RecordType.DeveloperName = 'Advance', BLANKVALUE(RelatedTo.Axolt__Total_Due__c, 0), BLANKVALUE(RelatedTo.Axolt__Final_Due_Amount__c, 0)), 2))}</div>
+<div style="margin:0;font-size:12px;line-height:19px;color:#aeb8d0;">Includes &#36;{!TEXT(ROUND(BLANKVALUE(RelatedTo.Axolt__Tax__c, 0), 2))} tax</div>
+</td>
+<td width="230" valign="middle" align="right" style="width:230px;padding:24px 26px;font-size:0;line-height:0;text-align:right;">
+<table role="presentation" width="170" cellpadding="0" cellspacing="0" border="0" align="right" style="{!IF(OR(RelatedTo.Axolt__Payment_Mode__c = 'Cash', RelatedTo.Axolt__Payment_Mode__c = 'Wire Transfer'), 'display:none;mso-hide:all;', '')}width:170px;border-collapse:separate;border-spacing:0;line-height:0;"><tr><td align="center" bgcolor="#c8102e" style="background-color:#c8102e;border-radius:6px;padding:0;font-size:0;line-height:0;text-align:center;"><a href="https://orgfarm-f88edcecf8-dev-ed.develop.my.site.com/secureCheckout?token={!URLENCODE(RelatedTo.ID)}" target="_blank" style="display:block;padding:15px 22px;font-size:15px;line-height:20px;font-weight:bold;color:#ffffff;text-decoration:none;text-align:center;">Pay now &#8599;</a></td></tr></table>
+<table role="presentation" width="170" cellpadding="0" cellspacing="0" border="0" align="right" bgcolor="#243256" style="{!IF(OR(RelatedTo.Axolt__Payment_Mode__c = 'Cash', RelatedTo.Axolt__Payment_Mode__c = 'Wire Transfer'), '', 'display:none;mso-hide:all;')}width:170px;background-color:#243256;border-collapse:separate;border-spacing:0;border-radius:6px;line-height:0;"><tr><td align="center" style="padding:11px 12px;font-size:12px;line-height:18px;color:#ffffff;text-align:center;"><strong>Payment method</strong><br/><span style="font-size:11px;line-height:17px;color:#aeb8d0;">{!RelatedTo.Axolt__Payment_Mode__c}</span></td></tr></table>
+</td>
+</tr>
+</table>
+<table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="width:560px;border-collapse:collapse;border-spacing:0;line-height:0;"><tr><td style="padding:8px 0 0 0;font-size:11px;line-height:17px;color:#6b7487;">Payment availability follows the configured payment method.</td></tr></table>
+</td></tr>
+
+<!-- Invoice details (2x2 grid) -->
+<tr><td align="center" style="padding:0 0 26px 0;font-size:0;line-height:0;">
+<table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="width:560px;table-layout:fixed;border:1px solid #d7dce4;border-radius:8px;border-collapse:separate;border-spacing:0;line-height:0;">
+<tr>
+<td width="280" valign="top" style="width:280px;padding:13px 16px;border-right:1px solid #d7dce4;border-bottom:1px solid #d7dce4;font-size:0;line-height:0;"><div style="font-size:10px;line-height:16px;letter-spacing:1px;font-weight:bold;color:#6b7487;">INVOICE DATE</div><div style="font-size:14px;line-height:21px;font-weight:bold;color:#14213d;">{!MONTH(RelatedTo.Axolt__Invoice_Date__c)}/{!DAY(RelatedTo.Axolt__Invoice_Date__c)}/{!YEAR(RelatedTo.Axolt__Invoice_Date__c)}</div></td>
+<td width="280" valign="top" style="width:280px;padding:13px 16px;border-bottom:1px solid #d7dce4;font-size:0;line-height:0;"><div style="font-size:10px;line-height:16px;letter-spacing:1px;font-weight:bold;color:#6b7487;">SOURCE REFERENCE</div><div style="font-size:14px;line-height:21px;font-weight:bold;color:#14213d;">{!IF(RelatedTo.Axolt__Order_S__c != null, RelatedTo.Axolt__Order_S__r.Name, RelatedTo.Axolt__Work_Orders__r.Name)}</div></td>
+</tr>
+<tr>
+<td width="280" valign="top" style="width:280px;padding:13px 16px;border-right:1px solid #d7dce4;font-size:0;line-height:0;"><div style="font-size:10px;line-height:16px;letter-spacing:1px;font-weight:bold;color:#6b7487;">INVOICE NO.</div><div style="font-size:14px;line-height:21px;font-weight:bold;color:#14213d;">{!RelatedTo.Name}</div></td>
+<td width="280" valign="top" style="width:280px;padding:13px 16px;font-size:0;line-height:0;"><div style="font-size:10px;line-height:16px;letter-spacing:1px;font-weight:bold;color:#6b7487;">PAYMENT MODE</div><div style="font-size:14px;line-height:21px;font-weight:bold;color:#14213d;">{!IF(ISBLANK(RelatedTo.Axolt__Payment_Mode__c), '-', RelatedTo.Axolt__Payment_Mode__c)}</div></td>
+</tr>
+</table>
+</td></tr>
+
+<!-- Invoice summary -->
+<tr><td align="center" style="padding:0;font-size:0;line-height:0;">
+<table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="width:560px;border-collapse:collapse;border-spacing:0;line-height:0;">
+<tr><td align="right" style="padding:0;font-size:0;line-height:0;text-align:right;">
+<table role="presentation" width="340" cellpadding="0" cellspacing="0" border="0" align="right" style="width:340px;border-collapse:separate;border-spacing:0;line-height:0;">
+<tr><td colspan="2" align="left" style="padding:0 0 8px 0;font-size:17px;line-height:24px;font-weight:bold;color:#14213d;text-align:left;">Invoice summary</td></tr>
+<tr><td style="padding:6px 0;border-top:1px solid #e3e7ed;font-size:13px;line-height:20px;color:#6b7487;">Subtotal</td><td align="right" style="padding:6px 0;border-top:1px solid #e3e7ed;font-size:13px;line-height:20px;font-weight:bold;color:#14213d;text-align:right;">&#36;{!TEXT(ROUND(BLANKVALUE(RelatedTo.Axolt__Sub_Total2__c, 0), 2))}</td></tr>
+<tr style="{!IF(BLANKVALUE(RelatedTo.Axolt__Order_S__r.Axolt__TotalDiscount__c, 0) != 0, '', 'display:none;mso-hide:all;')}"><td style="padding:6px 0;font-size:13px;line-height:20px;color:#6b7487;">Discount</td><td align="right" style="padding:6px 0;font-size:13px;line-height:20px;font-weight:bold;color:#14213d;text-align:right;">&#8722;&#36;{!TEXT(ROUND(ABS(BLANKVALUE(RelatedTo.Axolt__Order_S__r.Axolt__TotalDiscount__c, 0)), 2))}</td></tr>
+<tr style="{!IF(BLANKVALUE(RelatedTo.Axolt__Order_S__r.Axolt__Total_Shipping_Amount__c, 0) != 0, '', 'display:none;mso-hide:all;')}"><td style="padding:6px 0;font-size:13px;line-height:20px;color:#6b7487;">Shipping</td><td align="right" style="padding:6px 0;font-size:13px;line-height:20px;font-weight:bold;color:#14213d;text-align:right;">&#36;{!TEXT(ROUND(BLANKVALUE(RelatedTo.Axolt__Order_S__r.Axolt__Total_Shipping_Amount__c, 0), 2))}</td></tr>
+<tr><td style="padding:6px 0;font-size:13px;line-height:20px;color:#6b7487;">Tax</td><td align="right" style="padding:6px 0;font-size:13px;line-height:20px;font-weight:bold;color:#14213d;text-align:right;">&#36;{!TEXT(ROUND(BLANKVALUE(RelatedTo.Axolt__Tax__c, 0), 2))}</td></tr>
+<tr><td style="padding:6px 0 12px 0;font-size:13px;line-height:20px;color:#6b7487;">Paid</td><td align="right" style="padding:6px 0 12px 0;font-size:13px;line-height:20px;font-weight:bold;color:#14213d;text-align:right;">&#36;{!TEXT(ROUND(BLANKVALUE(RelatedTo.Axolt__Paid_Amount__c, 0), 2))}</td></tr>
+<tr><td bgcolor="#fdecee" style="padding:14px 14px;background-color:#fdecee;border-radius:8px 0 0 8px;font-size:14px;line-height:22px;font-weight:bold;color:#a50f2d;">Amount due</td><td align="right" bgcolor="#fdecee" style="padding:14px 14px;background-color:#fdecee;border-radius:0 8px 8px 0;font-size:20px;line-height:24px;font-weight:bold;color:#c8102e;text-align:right;">&#36;{!TEXT(ROUND(IF(RelatedTo.RecordType.DeveloperName = 'Advance', BLANKVALUE(RelatedTo.Axolt__Total_Due__c, 0), BLANKVALUE(RelatedTo.Axolt__Final_Due_Amount__c, 0)), 2))}</td></tr>
+</table>
+</td></tr>
+</table>
+</td></tr>
+
+<!-- Order-based addresses -->
+<tr style="{!IF(RelatedTo.Axolt__Order_S__c != null, '', 'display:none;mso-hide:all;')}"><td align="center" style="padding:26px 0 18px 0;font-size:0;line-height:0;">
+<table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="width:560px;table-layout:fixed;border-collapse:collapse;border-spacing:0;line-height:0;">
+<tr>
+<td width="272" valign="top" style="width:272px;padding:0;border-left:2px solid #c8102e;font-size:0;line-height:0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;line-height:0;">
+<tr><td style="padding:2px 14px 4px;font-size:10px;line-height:17px;letter-spacing:1.5px;font-weight:bold;color:#6b7487;">BILL TO</td></tr>
+<tr><td style="padding:0 14px;font-size:14px;line-height:21px;font-weight:bold;color:#14213d;">{!RelatedTo.Axolt__Account__r.Name}</td></tr>
+<tr><td style="padding:0 14px;font-size:13px;line-height:19px;color:#3d4659;">{!RelatedTo.Axolt__Order_S__r.Axolt__Contact__r.Name}</td></tr>
+<tr><td style="padding:0 14px;font-size:13px;line-height:19px;color:#3d4659;">{!RelatedTo.Axolt__Order_S__r.Axolt__Bill_To_Address__r.Axolt__Address_Line1__c} {!RelatedTo.Axolt__Order_S__r.Axolt__Bill_To_Address__r.Axolt__Address_Line2__c}</td></tr>
+<tr><td style="padding:0 14px;font-size:13px;line-height:19px;color:#3d4659;">{!RelatedTo.Axolt__Order_S__r.Axolt__Bill_To_Address__r.Axolt__City__c} {!RelatedTo.Axolt__Order_S__r.Axolt__Bill_To_Address__r.Axolt__State__c} {!RelatedTo.Axolt__Order_S__r.Axolt__Bill_To_Address__r.Axolt__Postal_Code__c}</td></tr>
+<tr><td style="padding:0 14px 2px;font-size:13px;line-height:19px;color:#3d4659;">{!RelatedTo.Axolt__Order_S__r.Axolt__Bill_To_Address__r.Axolt__Country__c}</td></tr>
+</table></td>
+<td width="16" style="width:16px;padding:0;font-size:0;line-height:0;">&#160;</td>
+<td width="272" valign="top" style="width:272px;padding:0;border-left:2px solid #d7dce4;font-size:0;line-height:0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;line-height:0;">
+<tr><td style="padding:2px 14px 4px;font-size:10px;line-height:17px;letter-spacing:1.5px;font-weight:bold;color:#6b7487;">SHIP TO</td></tr>
+<tr><td style="padding:0 14px;font-size:14px;line-height:21px;font-weight:bold;color:#14213d;">{!RelatedTo.Axolt__Account__r.Name}</td></tr>
+<tr><td style="padding:0 14px;font-size:13px;line-height:19px;color:#3d4659;">{!RelatedTo.Axolt__Order_S__r.Axolt__Contact__r.Name}</td></tr>
+<tr><td style="padding:0 14px;font-size:13px;line-height:19px;color:#3d4659;">{!RelatedTo.Axolt__Order_S__r.Axolt__Ship_To_Address__r.Axolt__Address_Line1__c} {!RelatedTo.Axolt__Order_S__r.Axolt__Ship_To_Address__r.Axolt__Address_Line2__c}</td></tr>
+<tr><td style="padding:0 14px;font-size:13px;line-height:19px;color:#3d4659;">{!RelatedTo.Axolt__Order_S__r.Axolt__Ship_To_Address__r.Axolt__City__c} {!RelatedTo.Axolt__Order_S__r.Axolt__Ship_To_Address__r.Axolt__State__c} {!RelatedTo.Axolt__Order_S__r.Axolt__Ship_To_Address__r.Axolt__Postal_Code__c}</td></tr>
+<tr><td style="padding:0 14px 2px;font-size:13px;line-height:19px;color:#3d4659;">{!RelatedTo.Axolt__Order_S__r.Axolt__Ship_To_Address__r.Axolt__Country__c}</td></tr>
+</table></td>
+</tr>
+</table>
+</td></tr>
+
+<!-- Work-order-based addresses -->
+<tr style="{!IF(RelatedTo.Axolt__Work_Orders__c != null, '', 'display:none;mso-hide:all;')}"><td align="center" style="padding:26px 0 18px 0;font-size:0;line-height:0;">
+<table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="width:560px;table-layout:fixed;border-collapse:collapse;border-spacing:0;line-height:0;">
+<tr>
+<td width="272" valign="top" style="width:272px;padding:0;border-left:2px solid #c8102e;font-size:0;line-height:0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;line-height:0;">
+<tr><td style="padding:2px 14px 4px;font-size:10px;line-height:17px;letter-spacing:1.5px;font-weight:bold;color:#6b7487;">BILL TO</td></tr>
+<tr><td style="padding:0 14px;font-size:14px;line-height:21px;font-weight:bold;color:#14213d;">{!RelatedTo.Axolt__Account__r.Name}</td></tr>
+<tr><td style="padding:0 14px;font-size:13px;line-height:19px;color:#3d4659;">{!RelatedTo.Axolt__Work_Orders__r.Axolt__Contact__r.Name}</td></tr>
+<tr><td style="padding:0 14px;font-size:13px;line-height:19px;color:#3d4659;">{!RelatedTo.Axolt__Work_Orders__r.Axolt__Billing_Address__r.Axolt__Address_Line1__c} {!RelatedTo.Axolt__Work_Orders__r.Axolt__Billing_Address__r.Axolt__Address_Line2__c}</td></tr>
+<tr><td style="padding:0 14px;font-size:13px;line-height:19px;color:#3d4659;">{!RelatedTo.Axolt__Work_Orders__r.Axolt__Billing_Address__r.Axolt__City__c} {!RelatedTo.Axolt__Work_Orders__r.Axolt__Billing_Address__r.Axolt__State__c} {!RelatedTo.Axolt__Work_Orders__r.Axolt__Billing_Address__r.Axolt__Postal_Code__c}</td></tr>
+<tr><td style="padding:0 14px 2px;font-size:13px;line-height:19px;color:#3d4659;">{!RelatedTo.Axolt__Work_Orders__r.Axolt__Billing_Address__r.Axolt__Country__c}</td></tr>
+</table></td>
+<td width="16" style="width:16px;padding:0;font-size:0;line-height:0;">&#160;</td>
+<td width="272" valign="top" style="width:272px;padding:0;border-left:2px solid #d7dce4;font-size:0;line-height:0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;line-height:0;">
+<tr><td style="padding:2px 14px 4px;font-size:10px;line-height:17px;letter-spacing:1.5px;font-weight:bold;color:#6b7487;">SHIP TO</td></tr>
+<tr><td style="padding:0 14px;font-size:14px;line-height:21px;font-weight:bold;color:#14213d;">{!RelatedTo.Axolt__Account__r.Name}</td></tr>
+<tr><td style="padding:0 14px;font-size:13px;line-height:19px;color:#3d4659;">{!RelatedTo.Axolt__Work_Orders__r.Axolt__Contact__r.Name}</td></tr>
+<tr><td style="padding:0 14px;font-size:13px;line-height:19px;color:#3d4659;">{!RelatedTo.Axolt__Work_Orders__r.Axolt__Shipping_Address__r.Axolt__Address_Line1__c} {!RelatedTo.Axolt__Work_Orders__r.Axolt__Shipping_Address__r.Axolt__Address_Line2__c}</td></tr>
+<tr><td style="padding:0 14px;font-size:13px;line-height:19px;color:#3d4659;">{!RelatedTo.Axolt__Work_Orders__r.Axolt__Shipping_Address__r.Axolt__City__c} {!RelatedTo.Axolt__Work_Orders__r.Axolt__Shipping_Address__r.Axolt__State__c} {!RelatedTo.Axolt__Work_Orders__r.Axolt__Shipping_Address__r.Axolt__Postal_Code__c}</td></tr>
+<tr><td style="padding:0 14px 2px;font-size:13px;line-height:19px;color:#3d4659;">{!RelatedTo.Axolt__Work_Orders__r.Axolt__Shipping_Address__r.Axolt__Country__c}</td></tr>
+</table></td>
+</tr>
+</table>
+</td></tr>
+
+<!-- QR destination temporarily uses Invoice Description -->
+<tr style="{!IF(AND(NOT(ISBLANK(RelatedTo.Axolt__Discription__c)), IF(RelatedTo.RecordType.DeveloperName = 'Advance', BLANKVALUE(RelatedTo.Axolt__Total_Due__c, 0), BLANKVALUE(RelatedTo.Axolt__Final_Due_Amount__c, 0)) > 0, RelatedTo.Axolt__Payment_Mode__c != 'Cash', RelatedTo.Axolt__Payment_Mode__c != 'Wire Transfer'), '', 'display:none;mso-hide:all;')}"><td align="center" style="padding:0 0 24px 0;font-size:0;line-height:0;">
+<table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" bgcolor="#f7f8fa" style="width:560px;background-color:#f7f8fa;border:1px solid #e3e7ed;border-radius:8px;border-collapse:separate;border-spacing:0;line-height:0;">
+<tr>
+<td width="160" valign="middle" align="center" style="width:160px;padding:18px 12px;font-size:0;line-height:0;text-align:center;"><a href="{!RelatedTo.Axolt__Discription__c}" target="_blank" style="text-decoration:none;"><img src="https://api.qrserver.com/v1/create-qr-code/?size=124x124&amp;format=png&amp;margin=0&amp;data={!URLENCODE(RelatedTo.Axolt__Discription__c)}" width="124" height="124" alt="Scan payment QR code" style="display:block;width:124px;height:124px;margin:0 auto;border:0;outline:none;text-decoration:none;"/></a></td>
+<td width="398" valign="middle" align="left" style="width:398px;padding:18px 22px 18px 8px;font-size:0;line-height:0;">
+<div style="margin:0;font-size:17px;line-height:24px;font-weight:bold;color:#14213d;">Scan to continue on your phone</div>
+<div style="margin:4px 0 0 0;font-size:14px;line-height:22px;color:#3d4659;">Use your phone camera to scan the QR code. It temporarily uses the Invoice Description value as its destination.</div>
+</td>
+</tr>
+</table>
+</td></tr>
+
+<!-- Support / sign-off -->
+<tr><td align="center" style="padding:0;font-size:0;line-height:0;">
+<table role="presentation" width="560" cellpadding="0" cellspacing="0" border="0" style="width:560px;border-top:1px solid #e3e7ed;border-collapse:collapse;border-spacing:0;line-height:0;">
+<tr><td align="left" style="padding:20px 0 0;font-size:14px;line-height:21px;color:#3d4659;text-align:left;">Questions about this invoice? Reply to this email.</td></tr>
+<tr><td height="12" style="height:12px;padding:0;font-size:1px;line-height:12px;">&#160;</td></tr>
+<tr><td align="left" style="padding:0;font-size:14px;line-height:21px;color:#3d4659;text-align:left;">Sincerely,</td></tr>
+<tr><td align="left" style="padding:0 0 22px;font-size:14px;line-height:21px;font-weight:bold;color:#14213d;text-align:left;">The {!RelatedTo.Axolt__company__r.Name} Accounts Department</td></tr>
+</table>
+</td></tr>
+
+<!-- Legal footer -->
+<tr><td bgcolor="#f4f6f9" style="background-color:#f4f6f9;border-top:1px solid #e3e7ed;padding:18px 40px;font-size:11px;line-height:18px;color:#6b7487;">This is a computer-generated {!IF(RelatedTo.RecordType.Name = 'Advance', 'proforma invoice', 'invoice')} and is valid without signature.<br/>{!RelatedTo.Axolt__company__r.Name} &#183; Invoice {!RelatedTo.Name}</td></tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>
+</messaging:plainTextEmailBody>
+
+<!-- ================= PDF / DOCUMENT LAYOUT ================= -->
+<messaging:htmlEmailBody >
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Invoice {!RelatedTo.Name}</title>
+<style>
+@page {
+margin: 28px 36px 52px 36px;
+@bottom-left {
+content: "This is a computer-generated {!IF(RelatedTo.RecordType.Name = 'Advance', 'proforma invoice', 'invoice')} and is valid without signature.";
+font-family: Arial, Helvetica, sans-serif;
+font-size: 8px;
+color: #6b7487;
+border-top: 1px solid #d7dce4;
+padding-top: 6px;
+vertical-align: top;
+text-align: left;
+}
+@bottom-right {
+content: "{!RelatedTo.Axolt__company__r.Name}   \00B7   {!RelatedTo.Name}   \00B7   Page " counter(page) " of " counter(pages);
+font-family: Arial, Helvetica, sans-serif;
+font-size: 8px;
+color: #6b7487;
+border-top: 1px solid #d7dce4;
+padding-top: 6px;
+vertical-align: top;
+text-align: right;
+}
+}
+</style>
+</head>
+<body style="margin:0;padding:10px;font-family:Arial,Helvetica,sans-serif;color:#14213d;background-color:#ffffff;font-size:11px;">
+
+<!-- Header -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="table-layout:fixed;border-collapse:collapse;margin-top:10px;">
+<tr>
+<td width="12%" valign="middle" align="left" style="padding:0 14px 0 0;"><apex:image url="{!$Label.axolt__CompanyLogo}" alt="Company Logo" width="64" style="display:block;border:0;max-width:64px;height:auto;"/></td>
+<td width="54%" valign="middle" align="left" style="padding:0 10px 0 0;font-size:11px;line-height:16px;color:#5e687b;">
+<div style="font-size:20px;font-weight:bold;color:#14213d;line-height:26px;">{!RelatedTo.Axolt__company__r.Name}</div>
+<div style="{!IF(ISBLANK(RelatedTo.Axolt__company__r.BillingStreet), 'display:none;', '')}">{!RelatedTo.Axolt__company__r.BillingStreet}</div>
+<div>{!RelatedTo.Axolt__company__r.BillingCity}{!IF(ISBLANK(RelatedTo.Axolt__company__r.BillingState), '', ', ' + RelatedTo.Axolt__company__r.BillingState)}</div>
+<div>{!RelatedTo.Axolt__company__r.BillingCountry}</div>
+<div style="{!IF(ISBLANK(RelatedTo.Axolt__company__r.Phone), 'display:none;', '')}">Phone: {!RelatedTo.Axolt__company__r.Phone}</div>
+</td>
+<td width="34%" valign="middle" align="right" style="padding:0;">
+<div style="font-size:9px;line-height:14px;color:#6b7487;text-align:right;letter-spacing:1.5px;text-transform:uppercase;">{!IF(RelatedTo.RecordType.Name = 'Advance', 'Proforma invoice', 'Invoice')}</div>
+<div style="font-size:28px;line-height:36px;font-weight:bold;color:#14213d;text-align:right;">#{!RelatedTo.Name}</div>
+<div style="font-size:10px;line-height:16px;font-weight:bold;color:#c8102e;text-align:right;">Payment due within 30 days</div>
+</td>
+</tr>
+</table>
+
+<!-- Dark divider -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;margin-top:18px;"><tr><td style="height:1px;background-color:#c9c9c9;font-size:1px;line-height:1px;">&#160;</td></tr></table>
+
+<!-- Meta grid + Amount due card -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="table-layout:fixed;border-collapse:collapse;margin-top:20px;">
+<tr>
+<td width="62%" valign="top" style="padding:0;">
+<div style="margin:0 4px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#d7dce4;">&#160;</div><div style="margin:0 2px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#ffffff;border-left:2px solid #d7dce4;border-right:2px solid #d7dce4;">&#160;</div><div style="margin:0 1px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#ffffff;border-left:1px solid #d7dce4;border-right:1px solid #d7dce4;">&#160;</div><div style="margin:0 1px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#ffffff;border-left:1px solid #d7dce4;border-right:1px solid #d7dce4;">&#160;</div><div style="background-color:#ffffff;border-left:1px solid #d7dce4;border-right:1px solid #d7dce4;padding:0;"><table width="100%" cellpadding="0" cellspacing="0" border="0" style="table-layout:fixed;border-collapse:collapse;">
+<tr>
+<td width="50%" valign="top" style="padding:10px 14px;border-right:1px solid #d7dce4;border-bottom:1px solid #d7dce4;">
+<div style="font-size:8px;line-height:13px;color:#6b7487;letter-spacing:1px;font-weight:bold;">INVOICE DATE</div>
+<div style="font-size:12px;line-height:18px;font-weight:bold;color:#14213d;"><apex:outputText value="{0, date, MMM d, yyyy}"><apex:param value="{!RelatedTo.Axolt__Invoice_Date__c}"/></apex:outputText></div>
+</td>
+<td width="50%" valign="top" style="padding:10px 14px;border-bottom:1px solid #d7dce4;">
+<div style="font-size:8px;line-height:13px;color:#6b7487;letter-spacing:1px;font-weight:bold;">SOURCE REFERENCE</div>
+<div style="font-size:12px;line-height:18px;font-weight:bold;color:#14213d;">{!IF(RelatedTo.Axolt__Order_S__c != null, RelatedTo.Axolt__Order_S__r.Name, RelatedTo.Axolt__Work_Orders__r.Name)}</div>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top" style="padding:10px 14px;border-right:1px solid #d7dce4;">
+<div style="font-size:8px;line-height:13px;color:#6b7487;letter-spacing:1px;font-weight:bold;">PAYMENT MODE</div>
+<div style="font-size:12px;line-height:18px;font-weight:bold;color:#14213d;">{!IF(ISBLANK(RelatedTo.Axolt__Payment_Mode__c), '-', RelatedTo.Axolt__Payment_Mode__c)}</div>
+</td>
+<td width="50%" valign="top" style="padding:10px 14px;">
+<div style="font-size:8px;line-height:13px;color:#6b7487;letter-spacing:1px;font-weight:bold;">VAT NUMBER</div>
+<div style="font-size:12px;line-height:18px;font-weight:bold;color:#14213d;">{!IF(ISBLANK(RelatedTo.Axolt__company__r.Axolt__VAT_registration_number__c), '-', RelatedTo.Axolt__company__r.Axolt__VAT_registration_number__c)}</div>
+</td>
+</tr>
+</table>
+</div><div style="margin:0 1px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#ffffff;border-left:1px solid #d7dce4;border-right:1px solid #d7dce4;">&#160;</div><div style="margin:0 1px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#ffffff;border-left:1px solid #d7dce4;border-right:1px solid #d7dce4;">&#160;</div><div style="margin:0 2px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#ffffff;border-left:2px solid #d7dce4;border-right:2px solid #d7dce4;">&#160;</div><div style="margin:0 4px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#d7dce4;">&#160;</div></td>
+<td width="3%" style="padding:0;">&#160;</td>
+<td width="35%" valign="top" style="padding:0;"><div style="margin:0 4px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#17233f;">&#160;</div><div style="margin:0 2px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#17233f;border-left:2px solid #17233f;border-right:2px solid #17233f;">&#160;</div><div style="margin:0 1px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#17233f;border-left:1px solid #17233f;border-right:1px solid #17233f;">&#160;</div><div style="margin:0 1px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#17233f;border-left:1px solid #17233f;border-right:1px solid #17233f;">&#160;</div><div style="background-color:#17233f;border-left:1px solid #17233f;border-right:1px solid #17233f;padding:18px 20px;">
+<div style="font-size:8px;line-height:14px;color:#aeb8d0;letter-spacing:1.5px;font-weight:bold;">{!IF(BLANKVALUE(RelatedTo.Axolt__Down_Payment__c, 0) > 0, 'TOTAL DOWN PAYMENT', 'AMOUNT DUE')}</div>
+<div style="font-size:26px;line-height:38px;font-weight:bold;color:#ffffff;"><apex:outputText value="{0, number, currency}"><apex:param value="{!IF(BLANKVALUE(RelatedTo.Axolt__Down_Payment__c, 0) > 0, BLANKVALUE(RelatedTo.Axolt__Total_Down_Payment_Amount__c, 0), IF(RelatedTo.RecordType.DeveloperName = 'Advance', BLANKVALUE(RelatedTo.Axolt__Total_Due__c, 0), BLANKVALUE(RelatedTo.Axolt__Final_Due_Amount__c, 0)))}"/></apex:outputText></div>
+<div style="font-size:9px;line-height:14px;color:#aeb8d0;">Due within 30 days</div>
+</div><div style="margin:0 1px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#17233f;border-left:1px solid #17233f;border-right:1px solid #17233f;">&#160;</div><div style="margin:0 1px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#17233f;border-left:1px solid #17233f;border-right:1px solid #17233f;">&#160;</div><div style="margin:0 2px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#17233f;border-left:2px solid #17233f;border-right:2px solid #17233f;">&#160;</div><div style="margin:0 4px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#17233f;">&#160;</div></td>
+</tr>
+</table>
+
+<!-- Bill To / Ship To -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="table-layout:fixed;border-collapse:collapse;margin-top:22px;margin-bottom:22px;font-size:11px;line-height:16px;color:#3d4659;">
+<tbody style="{!IF(RelatedTo.Axolt__Order_S__c != null, '', 'display:none;')}">
+<tr>
+<td width="49%" valign="top" style="width:49%;padding:2px 0 2px 14px;border-left:2px solid #c8102e;">
+<div style="font-weight:bold;font-size:8px;color:#6b7487;line-height:16px;margin-bottom:6px;letter-spacing:1.5px;">BILL TO</div>
+<div style="font-weight:bold;color:#14213d;font-size:13px;line-height:20px;">{!RelatedTo.Axolt__Account__r.Name}</div>
+<div>{!RelatedTo.Axolt__Order_S__r.Axolt__Contact__r.Name}</div>
+<div>{!RelatedTo.Axolt__Order_S__r.Axolt__Bill_To_Address__r.Axolt__Address_Line1__c} {!RelatedTo.Axolt__Order_S__r.Axolt__Bill_To_Address__r.Axolt__Address_Line2__c} {!RelatedTo.Axolt__Order_S__r.Axolt__Bill_To_Address__r.Axolt__Address_Line3__c}</div>
+<div>{!RelatedTo.Axolt__Order_S__r.Axolt__Bill_To_Address__r.Axolt__City__c} {!RelatedTo.Axolt__Order_S__r.Axolt__Bill_To_Address__r.Axolt__State__c} {!RelatedTo.Axolt__Order_S__r.Axolt__Bill_To_Address__r.Axolt__Postal_Code__c}</div>
+<div>{!RelatedTo.Axolt__Order_S__r.Axolt__Bill_To_Address__r.Axolt__Country__c}</div>
+<div>Phone: {!RelatedTo.Axolt__Order_S__r.Axolt__Contact__r.Phone}</div>
+</td>
+<td width="2%" style="width:2%;padding:0;">&#160;</td>
+<td width="49%" valign="top" style="width:49%;padding:2px 0 2px 14px;border-left:2px solid #d7dce4;">
+<div style="font-weight:bold;font-size:8px;color:#6b7487;line-height:16px;margin-bottom:6px;letter-spacing:1.5px;">SHIP TO</div>
+<div style="font-weight:bold;color:#14213d;font-size:13px;line-height:20px;">{!RelatedTo.Axolt__Account__r.Name}</div>
+<div>{!RelatedTo.Axolt__Order_S__r.Axolt__Contact__r.Name}</div>
+<div>{!RelatedTo.Axolt__Order_S__r.Axolt__Ship_To_Address__r.Name}</div>
+<div>{!RelatedTo.Axolt__Order_S__r.Axolt__Ship_To_Address__r.Axolt__Address_Line1__c} {!RelatedTo.Axolt__Order_S__r.Axolt__Ship_To_Address__r.Axolt__Address_Line2__c} {!RelatedTo.Axolt__Order_S__r.Axolt__Ship_To_Address__r.Axolt__Address_Line3__c}</div>
+<div>{!RelatedTo.Axolt__Order_S__r.Axolt__Ship_To_Address__r.Axolt__City__c} {!RelatedTo.Axolt__Order_S__r.Axolt__Ship_To_Address__r.Axolt__State__c} {!RelatedTo.Axolt__Order_S__r.Axolt__Ship_To_Address__r.Axolt__Postal_Code__c}</div>
+<div>{!RelatedTo.Axolt__Order_S__r.Axolt__Ship_To_Address__r.Axolt__Country__c}</div>
+<div>Phone: {!RelatedTo.Axolt__Order_S__r.Axolt__Contact__r.Phone}</div>
+</td>
+</tr>
+</tbody>
+<tbody style="{!IF(RelatedTo.Axolt__Work_Orders__c != null, '', 'display:none;')}">
+<tr>
+<td width="49%" valign="top" style="width:49%;padding:2px 0 2px 14px;border-left:2px solid #c8102e;">
+<div style="font-weight:bold;font-size:8px;color:#6b7487;line-height:16px;margin-bottom:6px;letter-spacing:1.5px;">BILL TO</div>
+<div style="font-weight:bold;color:#14213d;font-size:13px;line-height:20px;">{!RelatedTo.Axolt__Account__r.Name}</div>
+<div>{!RelatedTo.Axolt__Work_Orders__r.Axolt__Contact__r.Name}</div>
+<div>{!RelatedTo.Axolt__Work_Orders__r.Axolt__Billing_Address__r.Axolt__Address_Line1__c} {!RelatedTo.Axolt__Work_Orders__r.Axolt__Billing_Address__r.Axolt__Address_Line2__c} {!RelatedTo.Axolt__Work_Orders__r.Axolt__Billing_Address__r.Axolt__Address_Line3__c}</div>
+<div>{!RelatedTo.Axolt__Work_Orders__r.Axolt__Billing_Address__r.Axolt__City__c} {!RelatedTo.Axolt__Work_Orders__r.Axolt__Billing_Address__r.Axolt__State__c} {!RelatedTo.Axolt__Work_Orders__r.Axolt__Billing_Address__r.Axolt__Postal_Code__c}</div>
+<div>{!RelatedTo.Axolt__Work_Orders__r.Axolt__Billing_Address__r.Axolt__Country__c}</div>
+<div>Phone: {!RelatedTo.Axolt__Work_Orders__r.Axolt__Contact__r.Phone}</div>
+</td>
+<td width="2%" style="width:2%;padding:0;">&#160;</td>
+<td width="49%" valign="top" style="width:49%;padding:2px 0 2px 14px;border-left:2px solid #d7dce4;">
+<div style="font-weight:bold;font-size:8px;color:#6b7487;line-height:16px;margin-bottom:6px;letter-spacing:1.5px;">SHIP TO</div>
+<div style="font-weight:bold;color:#14213d;font-size:13px;line-height:20px;">{!RelatedTo.Axolt__Account__r.Name}</div>
+<div>{!RelatedTo.Axolt__Work_Orders__r.Axolt__Contact__r.Name}</div>
+<div>{!RelatedTo.Axolt__Work_Orders__r.Axolt__Shipping_Address__r.Name}</div>
+<div>{!RelatedTo.Axolt__Work_Orders__r.Axolt__Shipping_Address__r.Axolt__Address_Line1__c} {!RelatedTo.Axolt__Work_Orders__r.Axolt__Shipping_Address__r.Axolt__Address_Line2__c} {!RelatedTo.Axolt__Work_Orders__r.Axolt__Shipping_Address__r.Axolt__Address_Line3__c}</div>
+<div>{!RelatedTo.Axolt__Work_Orders__r.Axolt__Shipping_Address__r.Axolt__City__c} {!RelatedTo.Axolt__Work_Orders__r.Axolt__Shipping_Address__r.Axolt__State__c} {!RelatedTo.Axolt__Work_Orders__r.Axolt__Shipping_Address__r.Axolt__Postal_Code__c}</div>
+<div>{!RelatedTo.Axolt__Work_Orders__r.Axolt__Shipping_Address__r.Axolt__Country__c}</div>
+<div>Phone: {!RelatedTo.Axolt__Work_Orders__r.Axolt__Contact__r.Phone}</div>
+</td>
+</tr>
+</tbody>
+</table>
+
+<!-- Line items -->
+<div style="font-size:14px;line-height:20px;font-weight:bold;color:#14213d;margin-bottom:8px;">Invoice items</div>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="table-layout:fixed;border-collapse:collapse;font-size:11px;-fs-table-paginate:paginate;color:#14213d;margin-bottom:20px;border-bottom:1px solid #e3e7ed;">
+<thead style="display:table-header-group;">
+<tr style="background-color:#f1f3f6;color:#6b7487;">
+<th align="center" style="padding:10px 3px;border-bottom:1px solid #d7dce4;font-size:8px;letter-spacing:1px;font-weight:bold;width:4%;text-align:center;">#</th>
+<th align="left" style="padding:10px 5px;border-bottom:1px solid #d7dce4;font-size:8px;letter-spacing:1px;font-weight:bold;width:28%;">ITEM</th>
+<th align="left" style="padding:10px 5px;border-bottom:1px solid #d7dce4;font-size:8px;letter-spacing:1px;font-weight:bold;width:12%;">SKU</th>
+<th align="right" style="padding:10px 4px;border-bottom:1px solid #d7dce4;font-size:8px;letter-spacing:1px;font-weight:bold;width:7%;text-align:right;">QTY</th>
+<th align="right" style="padding:10px 4px;border-bottom:1px solid #d7dce4;font-size:8px;letter-spacing:1px;font-weight:bold;width:14%;text-align:right;">UNIT PRICE</th>
+<th align="right" style="padding:10px 4px;border-bottom:1px solid #d7dce4;font-size:8px;letter-spacing:1px;font-weight:bold;width:11%;text-align:right;">DISCOUNT</th>
+<th align="right" style="padding:10px 4px;border-bottom:1px solid #d7dce4;font-size:8px;letter-spacing:1px;font-weight:bold;width:11%;text-align:right;">VAT/TAX</th>
+<th align="right" style="padding:10px 5px;border-bottom:1px solid #d7dce4;font-size:8px;letter-spacing:1px;font-weight:bold;width:13%;text-align:right;">TOTAL</th>
+</tr>
+</thead>
+<apex:variable var="rowNumber" value="{!0}"/>
+<apex:repeat var="item" value="{!RelatedTo.Axolt__Invoice_Line_Items__r}">
+<tbody style="page-break-inside:avoid;break-inside:avoid;">
+<tr style="page-break-inside:avoid;break-inside:avoid;">
+<td align="center" valign="top" style="padding:12px 3px;border-bottom:1px solid #e3e7ed;text-align:center;">{!rowNumber + 1}</td>
+<td align="left" valign="top" style="padding:12px 5px;border-bottom:1px solid #e3e7ed;font-weight:bold;line-height:14px;word-wrap:break-word;">{!item.Axolt__Product__r.Name}</td>
+<td align="left" valign="top" style="padding:12px 5px;border-bottom:1px solid #e3e7ed;font-size:9px;color:#6b7487;word-wrap:break-word;">{!item.Axolt__Product__r.ProductCode}</td>
+<td align="right" valign="top" style="padding:12px 5px;border-bottom:1px solid #e3e7ed;text-align:right;"><apex:outputText value="{0, number, #,##0.##}"><apex:param value="{!item.Axolt__Quantity__c}"/></apex:outputText></td>
+<td align="right" valign="top" style="padding:12px 5px;border-bottom:1px solid #e3e7ed;text-align:right;"><apex:outputText value="{0, number, currency}"><apex:param value="{!BLANKVALUE(item.Axolt__Unit_Price__c, 0)}"/></apex:outputText></td>
+<td align="right" valign="top" style="padding:12px 5px;border-bottom:1px solid #e3e7ed;text-align:right;"><apex:outputText value="{0, number, currency}"><apex:param value="{!BLANKVALUE(item.Axolt__Discount_Amount__c, 0)}"/></apex:outputText></td>
+<td align="right" valign="top" style="padding:12px 5px;border-bottom:1px solid #e3e7ed;text-align:right;"><apex:outputText value="{0, number, currency}"><apex:param value="{!BLANKVALUE(item.Axolt__Total_Tax__c, 0)}"/></apex:outputText></td>
+<td align="right" valign="top" style="padding:12px 5px;border-bottom:1px solid #e3e7ed;text-align:right;font-weight:bold;"><apex:outputText value="{0, number, currency}"><apex:param value="{!BLANKVALUE(item.Axolt__Total_Price__c, 0)}"/></apex:outputText></td>
+</tr>
+<tr style="{!IF(AND(item.Axolt__Order_Product__c != null, item.Axolt__Order_Product__r.Axolt__Is_Subscribe__c), '', 'display:none;')}page-break-inside:avoid;break-inside:avoid;">
+<td colspan="8" style="padding:10px 14px;background-color:#f7f8f9;border-bottom:1px solid #ddd;">
+<div style="font-size:11px;font-weight:bold;color:#14213d;border-bottom:1px dashed #ddd;padding-bottom:5px;margin-bottom:6px;">SUBSCRIPTION DETAILS: {!item.Axolt__Product__r.Name} ({!item.Axolt__Product__r.ProductCode})</div>
+<table cellpadding="3" cellspacing="0" width="100%" style="border-collapse:collapse;font-size:11px;color:#14213d;">
+<tr><td width="30%" style="color:#6b7487;">Duration</td><td>{!item.Axolt__Order_Product__r.Axolt__Month_Duration__c} month(s)</td></tr>
+<tr><td style="color:#6b7487;">Period</td><td><apex:outputText value="{0, date, MMM d, yyyy}"><apex:param value="{!item.Axolt__Order_Product__r.ServiceDate}"/></apex:outputText> &#8594; <apex:outputText value="{0, date, MMM d, yyyy}"><apex:param value="{!item.Axolt__Order_Product__r.EndDate}"/></apex:outputText></td></tr>
+<tr><td style="color:#6b7487;">Price / Month</td><td><apex:outputText value="{0, number, currency}"><apex:param value="{!BLANKVALUE(item.Axolt__Order_Product__r.UnitPrice, 0)}"/></apex:outputText></td></tr>
+<tr style="font-weight:bold;color:#14213d;"><td style="border-top:1px solid #ddd;">Net Amount</td><td style="border-top:1px solid #ddd;"><apex:outputText value="{0, number, currency}"><apex:param value="{!BLANKVALUE(item.Axolt__Total_Price__c, 0)}"/></apex:outputText></td></tr>
+</table>
+</td>
+</tr>
+</tbody>
+<apex:variable var="rowNumber" value="{!rowNumber + 1}"/>
+</apex:repeat>
+</table>
+
+<!-- Payment info + totals -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="table-layout:fixed;border-collapse:collapse;page-break-inside:avoid;">
+<tr>
+<td width="48%" valign="top" style="padding:0 18px 0 0;font-size:11px;line-height:17px;color:#3d4659;">
+<div style="font-size:8px;line-height:14px;color:#6b7487;letter-spacing:1.5px;font-weight:bold;margin-bottom:6px;">PAYMENT DETAILS</div>
+<div><strong style="color:#14213d;">Payment Terms:</strong> Please pay amount within 30 days.</div>
+<div style="{!IF(RelatedTo.Axolt__Payment_Mode__c = 'ACH', 'margin-top:10px;', 'display:none;')}"><strong style="color:#14213d;">ACH Details</strong><br/>ACH Details Here...</div>
+<div style="{!IF(RelatedTo.Axolt__Payment_Mode__c = 'Cash', 'margin-top:10px;', 'display:none;')}"><strong style="color:#14213d;">Cash Payment Details</strong><br/>Cash Details Here...</div>
+<div style="{!IF(RelatedTo.Axolt__Payment_Mode__c = 'Wire Transfer', 'margin-top:10px;', 'display:none;')}"><strong style="color:#14213d;">Wire Transfer Details</strong><br/>Bank Name : AB Bank<br/>Sort Code : 1234<br/>Account Number : 0987654321<br/>BIC/SWIFT Code : ABC123XYZ<br/>IBAN : 123ASD456ERT</div>
+<div style="margin-top:14px;font-size:8px;line-height:14px;color:#6b7487;letter-spacing:1.5px;font-weight:bold;">BANK DETAILS &#183; UNIVERSAL STORES</div>
+<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;margin-top:4px;font-size:10px;line-height:16px;">
+<tr><td width="90" style="color:#6b7487;">Sort Code</td><td style="color:#14213d;font-weight:bold;">xx-xx-xx</td></tr>
+<tr><td style="color:#6b7487;">Account Number</td><td style="color:#14213d;font-weight:bold;">xxxxxx</td></tr>
+</table>
+</td>
+<td width="4%" style="padding:0;">&#160;</td>
+<td width="48%" valign="top">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="table-layout:fixed;background-color:#ffffff;font-size:11px;color:#6b7487;border-collapse:collapse;">
+<tr><td width="62%" align="left" style="padding:6px 8px;">Subtotal</td><td width="38%" align="right" style="padding:6px 8px;color:#14213d;font-weight:bold;text-align:right;"><apex:outputText value="{0, number, currency}"><apex:param value="{!BLANKVALUE(RelatedTo.Axolt__Sub_Total2__c, 0)}"/></apex:outputText></td></tr>
+<tr style="{!IF(BLANKVALUE(RelatedTo.Axolt__Order_S__r.Axolt__TotalDiscount__c, 0) > 0, '', 'display:none;')}"><td align="left" style="padding:6px 8px;">Discounts</td><td align="right" style="padding:6px 8px;color:#14213d;font-weight:bold;text-align:right;"><apex:outputText value="{0, number, currency}"><apex:param value="{!RelatedTo.Axolt__Order_S__r.Axolt__TotalDiscount__c}"/></apex:outputText></td></tr>
+<tr><td align="left" style="padding:6px 8px;">Total Tax</td><td align="right" style="padding:6px 8px;color:#14213d;font-weight:bold;text-align:right;"><apex:outputText value="{0, number, currency}"><apex:param value="{!BLANKVALUE(RelatedTo.Axolt__Tax__c, 0)}"/></apex:outputText></td></tr>
+<tr style="{!IF(BLANKVALUE(RelatedTo.Axolt__Order_S__r.Axolt__Total_Shipping_Amount__c, 0) > 0, '', 'display:none;')}"><td align="left" style="padding:6px 8px;">Shipping Amount</td><td align="right" style="padding:6px 8px;color:#14213d;font-weight:bold;text-align:right;"><apex:outputText value="{0, number, currency}"><apex:param value="{!RelatedTo.Axolt__Order_S__r.Axolt__Total_Shipping_Amount__c}"/></apex:outputText></td></tr>
+<tr style="{!IF(BLANKVALUE(RelatedTo.Axolt__Total_Down_Payment_Amount__c, 0) > 0, '', 'display:none;')}"><td align="left" style="padding:6px 8px;">Down Payment %</td><td align="right" style="padding:6px 8px;color:#14213d;font-weight:bold;text-align:right;"><apex:outputText value="{0, number, #,##0.##}%"><apex:param value="{!RelatedTo.Axolt__Down_Payment__c}"/></apex:outputText></td></tr>
+<tr><td align="left" style="padding:6px 8px;">Amount Paid</td><td align="right" style="padding:6px 8px;color:#14213d;font-weight:bold;text-align:right;"><apex:outputText value="{0, number, currency}"><apex:param value="{!BLANKVALUE(RelatedTo.Axolt__Paid_Amount__c, 0)}"/></apex:outputText></td></tr>
+<tr style="{!IF(BLANKVALUE(RelatedTo.Axolt__Paid_Amount_Applied__c, 0) > 0, '', 'display:none;')}"><td align="left" style="padding:6px 8px;">Paid Amount Applied</td><td align="right" style="padding:6px 8px;color:#14213d;font-weight:bold;text-align:right;"><apex:outputText value="{0, number, currency}"><apex:param value="{!RelatedTo.Axolt__Paid_Amount_Applied__c}"/></apex:outputText></td></tr>
+<tr><td colspan="2" style="padding:4px 0 0 0;font-size:1px;line-height:4px;">&#160;</td></tr>
+<tr><td colspan="2" style="padding:0;"><div style="margin:0 4px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#fdecee;">&#160;</div><div style="margin:0 2px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#fdecee;border-left:2px solid #fdecee;border-right:2px solid #fdecee;">&#160;</div><div style="margin:0 1px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#fdecee;border-left:1px solid #fdecee;border-right:1px solid #fdecee;">&#160;</div><div style="margin:0 1px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#fdecee;border-left:1px solid #fdecee;border-right:1px solid #fdecee;">&#160;</div><div style="background-color:#fdecee;border-left:1px solid #fdecee;border-right:1px solid #fdecee;padding:0;"><table width="100%" cellpadding="0" cellspacing="0" border="0" style="table-layout:fixed;border-collapse:collapse;"><tr style="font-weight:bold;"><td width="50%" align="left" style="padding:14px 12px;font-size:12px;color:#a50f2d;">{!IF(BLANKVALUE(RelatedTo.Axolt__Down_Payment__c, 0) > 0, 'Total down payment', 'Amount due')}</td><td width="50%" align="right" style="padding:14px 12px;font-size:19px;color:#c8102e;text-align:right;"><apex:outputText value="{0, number, currency}"><apex:param value="{!IF(BLANKVALUE(RelatedTo.Axolt__Down_Payment__c, 0) > 0, BLANKVALUE(RelatedTo.Axolt__Total_Down_Payment_Amount__c, 0), IF(RelatedTo.RecordType.DeveloperName = 'Advance', BLANKVALUE(RelatedTo.Axolt__Total_Due__c, 0), BLANKVALUE(RelatedTo.Axolt__Final_Due_Amount__c, 0)))}"/></apex:outputText></td></tr></table></div><div style="margin:0 1px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#fdecee;border-left:1px solid #fdecee;border-right:1px solid #fdecee;">&#160;</div><div style="margin:0 1px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#fdecee;border-left:1px solid #fdecee;border-right:1px solid #fdecee;">&#160;</div><div style="margin:0 2px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#fdecee;border-left:2px solid #fdecee;border-right:2px solid #fdecee;">&#160;</div><div style="margin:0 4px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#fdecee;">&#160;</div></td></tr>
+</table>
+</td>
+</tr>
+</table>
+
+<!-- Ready to pay / QR; app artwork intentionally omitted -->
+<div style="{!IF(AND(IF(RelatedTo.RecordType.DeveloperName = 'Advance', BLANKVALUE(RelatedTo.Axolt__Total_Due__c, 0), BLANKVALUE(RelatedTo.Axolt__Final_Due_Amount__c, 0)) > 0, RelatedTo.Axolt__Payment_Mode__c != 'Cash', RelatedTo.Axolt__Payment_Mode__c != 'Wire Transfer'), '', 'display:none;')}">
+<div style="margin-top:26px;page-break-inside:avoid;"><div style="margin:0 4px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#e3e7ed;">&#160;</div><div style="margin:0 2px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#f7f8fa;border-left:2px solid #e3e7ed;border-right:2px solid #e3e7ed;">&#160;</div><div style="margin:0 1px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#f7f8fa;border-left:1px solid #e3e7ed;border-right:1px solid #e3e7ed;">&#160;</div><div style="margin:0 1px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#f7f8fa;border-left:1px solid #e3e7ed;border-right:1px solid #e3e7ed;">&#160;</div><div style="background-color:#f7f8fa;border-left:1px solid #e3e7ed;border-right:1px solid #e3e7ed;padding:0;"><table width="100%" cellpadding="0" cellspacing="0" border="0" style="table-layout:fixed;border-collapse:collapse;">
+<tr>
+<td width="50%" valign="middle" style="padding:18px 22px;">
+<div style="font-size:14px;line-height:20px;font-weight:bold;color:#14213d;">Ready to pay?</div>
+<div style="font-size:10px;line-height:16px;color:#5e687b;margin-top:2px;">Use the secure payment link to settle this invoice online.</div>
+</td>
+<td width="24%" valign="middle" align="center" style="padding:14px 16px;border-left:0px solid #e3e7ed;text-align:center;">
+<div style="{!IF(ISBLANK(RelatedTo.Axolt__Discription__c), 'display:none;', '')}"><apex:image url="https://api.qrserver.com/v1/create-qr-code/?size=108x108&amp;format=png&amp;margin=0&amp;data={!URLENCODE(RelatedTo.Axolt__Discription__c)}" alt="Scan payment QR code" width="108" height="108" style="display:block;width:108px;height:108px;margin:0 auto;border:0;"/><div style="font-size:9px;line-height:14px;font-weight:bold;color:#14213d;margin-top:4px;">Scan to pay</div></div>
+<div style="{!IF(ISBLANK(RelatedTo.Axolt__Discription__c), '', 'display:none;')}font-size:10px;line-height:15px;color:#6b7487;"></div>
+</td>
+<td width="26%" valign="middle" align="center" style="padding:18px 10px;text-align:center;">
+<table width="120" cellpadding="0" cellspacing="0" border="0" align="center" style="width:120px;border-collapse:collapse;"><tr><td align="center" bgcolor="#c8102e" style="background-color:#c8102e;border-radius:6px;padding:11px 16px;text-align:center;"><a href="https://orgfarm-f88edcecf8-dev-ed.develop.my.site.com/secureCheckout?token={!URLENCODE(RelatedTo.ID)}" style="display:block;color:#ffffff;text-decoration:none;font-size:12px;font-weight:bold;text-align:center;">Pay invoice &#8599;</a></td></tr></table>
+</td>
+
+</tr>
+</table>
+</div><div style="margin:0 1px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#f7f8fa;border-left:1px solid #e3e7ed;border-right:1px solid #e3e7ed;">&#160;</div><div style="margin:0 1px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#f7f8fa;border-left:1px solid #e3e7ed;border-right:1px solid #e3e7ed;">&#160;</div><div style="margin:0 2px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#f7f8fa;border-left:2px solid #e3e7ed;border-right:2px solid #e3e7ed;">&#160;</div><div style="margin:0 4px;height:1px;line-height:1px;font-size:1px;overflow:hidden;background-color:#e3e7ed;">&#160;</div></div>
+</div>
+
+</body>
+</html>
+
+
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

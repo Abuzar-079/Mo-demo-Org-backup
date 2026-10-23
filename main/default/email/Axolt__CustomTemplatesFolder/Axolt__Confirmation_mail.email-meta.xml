@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <available>true</available>
+    <description>Confirmation mail to the job applicant on receiving job application</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Confirmation mail</name>
+    <style>none</style>
+    <subject>Your Application Has Been Received!</subject>
+    <type>visualforce</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

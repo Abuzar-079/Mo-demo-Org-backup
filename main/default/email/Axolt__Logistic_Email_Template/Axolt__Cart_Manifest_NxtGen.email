@@ -1,0 +1,59 @@
+<messaging:emailTemplate subject="Cart manifest · {!RelatedTo.Name}" recipientType="User" relatedToType="Axolt__Cart__c">
+    <messaging:plainTextEmailBody >Cart manifest for {!RelatedTo.Name}.</messaging:plainTextEmailBody>
+    <messaging:htmlEmailBody >
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><style>.d-page{position:relative;background:#fff;color:#101828;font-family:Inter,Arial,Helvetica,sans-serif;font-size:10.5px;line-height:1.45;text-align:left;width:794px;min-height:1123px;padding:44px 48px 64px;box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.d-page *{box-sizing:border-box}
+.d-page table{border-collapse:collapse;width:100%;border-spacing:0}
+.d-page td,.d-page th{font-family:Inter,Arial,Helvetica,sans-serif}
+.d-head{margin-bottom:18px;border-bottom:2px solid #101828}
+.d-head>tbody>tr>td{vertical-align:top;padding:0 0 16px}
+.d-org td{vertical-align:top;padding:0}
+.d-logo{display:block;width:34px;height:34px;line-height:34px;border-radius:7px;background:#101828;color:#fff;text-align:center;font-weight:800;font-size:12px;letter-spacing:-.02em}
+.d-org .d-org-text{padding-left:12px;color:#475467;font-size:9.5px}
+.d-org-text b{display:block;color:#101828;font-size:12.5px;font-weight:700;margin-bottom:2px}
+.d-org-text span{display:block}
+.d-title{text-align:right}
+.d-kind{font-size:19px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.d-no{font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-weight:600;font-size:12px;color:#344054;margin-top:3px}
+.d-title .bc{margin-top:4px}
+.d-status{display:inline-block;margin-top:5px;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border:1.5px solid #101828;border-radius:3px}
+.d-meta{margin-bottom:18px;border:1px solid #D0D5DD}
+.d-meta td{width:25%;padding:7px 10px;border:1px solid #E4E7EC;vertical-align:top}
+.d-meta span,.d-k{display:block;font-size:8px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#667085}
+.d-meta b{display:block;font-weight:600;font-size:10.5px;margin-top:2px}
+.d-parties{margin-bottom:18px}
+.d-parties td.d-party{width:49%;vertical-align:top;padding:10px 12px;border:1px solid #D0D5DD;font-size:10px;color:#344054}
+.d-parties td.d-gap{width:2%;border:0}
+.d-party b{display:block;color:#101828;font-size:11px;margin-top:3px}
+.d-party span{display:block}
+.d-mut{color:#667085}
+.d-table{margin-bottom:18px;font-size:10px}
+.d-table th{text-align:left;font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#475467;background:#F2F4F7;padding:7px 8px;border-top:1px solid #D0D5DD;border-bottom:1px solid #D0D5DD}
+.d-table td{padding:7px 8px;border-bottom:1px solid #EAECF0;vertical-align:top}
+.d-table .num{text-align:right;white-space:nowrap}
+.d-table tr.is-group td{background:#F9FAFB;font-weight:700;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:#344054}
+.d-mono{font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:9.5px}
+.d-sub{display:block;color:#667085;font-size:9px;margin-top:1px}
+.d-cb{display:inline-block;width:11px;height:11px;border:1.2px solid #344054;border-radius:2px}
+.d-fill{display:inline-block;min-width:44px;height:14px;border-bottom:1px solid #98A2B3}
+.d-totals{width:280px;margin:0 0 18px auto;font-size:10.5px}
+.d-page table.d-totals{width:280px}
+.d-totals td{padding:2px 0;color:#475467}
+.d-totals td.v{text-align:right;font-weight:700;color:#101828}
+.d-totals tr.is-strong td{border-top:1.5px solid #101828;padding-top:6px;font-size:12px;color:#101828}
+.d-note{margin-bottom:12px;padding:9px 12px;border-left:3px solid #101828;background:#F9FAFB;font-size:10px;color:#344054}
+.d-note b{display:block;font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:#101828}
+.d-note span{display:block}
+.d-sign{margin-top:24px}
+.d-sign td{width:33%;padding:0 24px 0 0;vertical-align:top;font-size:9.5px;font-weight:600}
+.d-sign span{display:block}
+.d-sign .d-line{height:30px;margin-bottom:3px;border-bottom:1px solid #344054}
+.d-sign .d-mut{font-weight:400;font-size:8.5px}
+.d-foot{position:absolute;left:48px;right:48px;bottom:24px;padding-top:8px;border-top:1px solid #EAECF0;font-size:8.5px;color:#98A2B3}
+.d-foot td{padding:0;font-size:8.5px;color:#98A2B3}
+.d-foot td.c{text-align:center}
+.d-foot td.r{text-align:right}
+.bc{display:inline-block;line-height:1}
+.bc-svg{display:block}</style></head><body><c:StockTransferNxtGenDocument recordId="{!RelatedTo.Id}" type="manifest"/></body></html>
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

@@ -1,0 +1,228 @@
+<messaging:emailTemplate subject="Loan Agreement Action Required: {!RelatedTo.Name} — {!RelatedTo.Order_Product__r.Product2.Name}" 
+    recipientType="Contact" 
+    relatedToType="Axolt__Loan_Agreement__c">
+
+    <!-- ====================================================================== -->
+    <!-- 1. EMAIL BODY UI (Stored in plainTextEmailBody for Apex extraction)    -->
+    <!-- ====================================================================== -->
+    <messaging:plainTextEmailBody >
+Dear {!Recipient.Name},
+
+Please review and sign the attached Loan Agreement {!RelatedTo.Name} for {!RelatedTo.Order_Product__r.Product2.Name}.
+
+A PDF copy is attached for your records and signature. Please return the signed agreement to {!RelatedTo.Order_Product__r.Order.Company__r.Name}.
+
+EQUIPMENT SUMMARY
+Product: {!RelatedTo.Order_Product__r.Product2.Name}
+Quantity: {!RelatedTo.Order_Product__r.Quantity}
+Start date: {!RelatedTo.Axolt__Start_Date__c}
+Expected return date: {!RelatedTo.Axolt__End_Date__c}
+Rental rate: {!RelatedTo.Rental_Rate__c}
+
+If you have any questions about this agreement or need to request a loan extension, please reply to this email.
+
+Thank you,
+{!RelatedTo.Order_Product__r.Order.Company__r.Name}
+{!RelatedTo.Order_Product__r.Order.Company__r.BillingStreet}
+{!RelatedTo.Order_Product__r.Order.Company__r.BillingCity} {!RelatedTo.Order_Product__r.Order.Company__r.BillingState} {!RelatedTo.Order_Product__r.Order.Company__r.BillingPostalCode}
+{!RelatedTo.Order_Product__r.Order.Company__r.BillingCountry}
+{!RelatedTo.Order_Product__r.Order.Company__r.Phone}
+{!RelatedTo.Order_Product__r.Order.Company__r.Axolt__Email__c}
+    </messaging:plainTextEmailBody>
+
+    <!-- ====================================================================== -->
+    <!-- 2. PDF DOCUMENT UI (Stored in htmlEmailBody for Visualforce/PDF render)-->
+    <!-- ====================================================================== -->
+    <messaging:htmlEmailBody >
+        <html>
+            <head>
+                <style type="text/css">
+                    @page {
+                        size: A4;
+                        margin: 20mm;
+                        @bottom-right {
+                            content: "Page " counter(page) " of " counter(pages);
+                            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                            font-size: 9pt;
+                            color: #64748b;
+                        }
+                    }
+                    body {
+                        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                        font-size: 10pt;
+                        color: #0f172a;
+                        line-height: 1.5;
+                    }
+                    .header {
+                        border-bottom: 2px solid #1d4ed8;
+                        padding-bottom: 10px;
+                        margin-bottom: 30px;
+                    }
+                    .header h1 {
+                        color: #1d4ed8;
+                        font-size: 20pt;
+                        margin: 0;
+                        text-transform: uppercase;
+                    }
+                    .header p {
+                        margin: 5px 0 0;
+                        color: #64748b;
+                        font-size: 10pt;
+                    }
+                    .section-title {
+                        background-color: #f1f5f9;
+                        padding: 8px 12px;
+                        font-size: 11pt;
+                        font-weight: bold;
+                        color: #0f172a;
+                        margin: 20px 0 10px;
+                        border-left: 4px solid #1d4ed8;
+                    }
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        margin-bottom: 20px;
+                    }
+                    th {
+                        background-color: #f8fafc;
+                        color: #475569;
+                        font-weight: bold;
+                        text-align: left;
+                        padding: 8px 10px;
+                        border: 1px solid #e2e8f0;
+                        font-size: 9pt;
+                        text-transform: uppercase;
+                    }
+                    td {
+                        padding: 10px;
+                        border: 1px solid #e2e8f0;
+                        font-size: 10pt;
+                        vertical-align: top;
+                    }
+                    .terms {
+                        font-size: 9pt;
+                        color: #475569;
+                        text-align: justify;
+                    }
+                    .signature-box {
+                        width: 45%;
+                        float: left;
+                        margin-top: 40px;
+                    }
+                    .signature-line {
+                        border-bottom: 1px solid #0f172a;
+                        height: 40px;
+                        margin-bottom: 5px;
+                    }
+                    .signature-label {
+                        font-size: 9pt;
+                        color: #64748b;
+                    }
+                </style>
+            </head>
+            <body>
+                <!-- Document Header -->
+                <div class="header">
+                    <h1>Loan Agreement</h1>
+                    <p>Agreement Reference: <strong>{!RelatedTo.Name}</strong> | Issued: <strong><apex:outputText value="{0,date,MMMM dd, yyyy}"><apex:param value="{!TODAY()}" /></apex:outputText></strong></p>
+                </div>
+
+                <!-- Parties Table -->
+                <div class="section-title">1. Parties</div>
+                <table>
+                    <tr>
+                        <td width="50%">
+                            <strong style="color:#64748b; font-size:8pt; text-transform:uppercase;">Lender</strong><br/>
+                            <strong>{!RelatedTo.Order_Product__r.Order.Company__r.Name}</strong>
+                            <apex:outputPanel layout="block" rendered="{!NOT(ISBLANK(RelatedTo.Order_Product__r.Order.Company__r.BillingStreet))}" style="white-space:pre-line;">{!RelatedTo.Order_Product__r.Order.Company__r.BillingStreet}</apex:outputPanel>
+                            <apex:outputPanel layout="block" rendered="{!NOT(ISBLANK(RelatedTo.Order_Product__r.Order.Company__r.BillingCity))}">{!RelatedTo.Order_Product__r.Order.Company__r.BillingCity}</apex:outputPanel>
+                            <apex:outputPanel layout="block" rendered="{!NOT(ISBLANK(RelatedTo.Order_Product__r.Order.Company__r.BillingState))}">{!RelatedTo.Order_Product__r.Order.Company__r.BillingState}</apex:outputPanel>
+                            <apex:outputPanel layout="block" rendered="{!NOT(ISBLANK(RelatedTo.Order_Product__r.Order.Company__r.BillingPostalCode))}">{!RelatedTo.Order_Product__r.Order.Company__r.BillingPostalCode}</apex:outputPanel>
+                            <apex:outputPanel layout="block" rendered="{!NOT(ISBLANK(RelatedTo.Order_Product__r.Order.Company__r.BillingCountry))}">{!RelatedTo.Order_Product__r.Order.Company__r.BillingCountry}</apex:outputPanel>
+                            <apex:outputPanel layout="block" rendered="{!NOT(ISBLANK(RelatedTo.Order_Product__r.Order.Company__r.Phone))}">Phone: {!RelatedTo.Order_Product__r.Order.Company__r.Phone}</apex:outputPanel>
+                            <apex:outputPanel layout="block" rendered="{!NOT(ISBLANK(RelatedTo.Order_Product__r.Order.Company__r.Axolt__Email__c))}">{!RelatedTo.Order_Product__r.Order.Company__r.Axolt__Email__c}</apex:outputPanel>
+                            <apex:outputPanel layout="block" rendered="{!NOT(ISBLANK(RelatedTo.Order_Product__r.Order.Company__r.Website))}">{!RelatedTo.Order_Product__r.Order.Company__r.Website}</apex:outputPanel>
+                        </td>
+                        <td width="50%">
+                            <strong style="color:#64748b; font-size:8pt; text-transform:uppercase;">Borrower / Customer</strong><br/>
+                            <strong>{!RelatedTo.Order_Product__r.Order.Account.Name}</strong><br/>
+                            <apex:outputPanel layout="block" rendered="{!NOT(ISBLANK(RelatedTo.Order_Product__r.Order.Account.BillingStreet))}" style="white-space:pre-line;">{!RelatedTo.Order_Product__r.Order.Account.BillingStreet}</apex:outputPanel>
+                            <apex:outputPanel layout="block" rendered="{!NOT(ISBLANK(RelatedTo.Order_Product__r.Order.Account.BillingCity))}">{!RelatedTo.Order_Product__r.Order.Account.BillingCity}</apex:outputPanel>
+                            <apex:outputPanel layout="block" rendered="{!NOT(ISBLANK(RelatedTo.Order_Product__r.Order.Account.BillingState))}">{!RelatedTo.Order_Product__r.Order.Account.BillingState}</apex:outputPanel>
+                            <apex:outputPanel layout="block" rendered="{!NOT(ISBLANK(RelatedTo.Order_Product__r.Order.Account.BillingPostalCode))}">{!RelatedTo.Order_Product__r.Order.Account.BillingPostalCode}</apex:outputPanel>
+                            <apex:outputPanel layout="block" rendered="{!NOT(ISBLANK(RelatedTo.Order_Product__r.Order.Account.BillingCountry))}">{!RelatedTo.Order_Product__r.Order.Account.BillingCountry}</apex:outputPanel>
+                            Attn: {!Recipient.Name}<br/>
+                            {!Recipient.Email}
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- Schedule of Equipment -->
+                <div class="section-title">2. Equipment Schedule</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product Description</th>
+                            <th>Qty</th>
+                            <th>Status</th>
+                            <th>Initial Charge</th>
+                            <th>Rental Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>{!RelatedTo.Order_Product__r.Product2.Name}</strong></td>
+                            <td align="center">{!RelatedTo.Order_Product__r.Quantity}</td>
+                            <td>{!RelatedTo.Status__c}</td>
+                            <td>{!RelatedTo.Initial_Charge__c}</td>
+                            <td>{!RelatedTo.Rental_Rate__c}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Terms & Dates -->
+                <div class="section-title">3. Loan Tenure &amp; Critical Dates</div>
+                <table>
+                    <tr>
+                        <td width="33%">
+                            <strong style="color:#64748b; font-size:8pt; text-transform:uppercase;">Start Date</strong><br/>
+                            <apex:outputText value="{0,date,dd MMM yyyy}"><apex:param value="{!RelatedTo.Axolt__Start_Date__c}" /></apex:outputText>
+                        </td>
+                        <td width="33%">
+                            <strong style="color:#64748b; font-size:8pt; text-transform:uppercase;">Return Due Date</strong><br/>
+                            <span style="color:#dc2626; font-weight:bold;"><apex:outputText value="{0,date,dd MMM yyyy}"><apex:param value="{!RelatedTo.Axolt__End_Date__c}" /></apex:outputText></span>
+                        </td>
+                        <td width="34%">
+                            <strong style="color:#64748b; font-size:8pt; text-transform:uppercase;">Grace Period Ends</strong><br/>
+                            <apex:outputText value="{0,date,dd MMM yyyy}"><apex:param value="{!RelatedTo.Axolt__Grace_End_Date__c}" /></apex:outputText>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- Terms and Conditions -->
+                <div class="section-title">4. Terms and Conditions</div>
+                <div class="terms">
+                    <p><strong>1. Ownership:</strong> The equipment listed in Section 2 remains the sole property of the Lender at all times. The Borrower shall not pledge, loan, mortgage, or attempt to sell the equipment.</p>
+                    <p><strong>2. Care and Use:</strong> The Borrower agrees to keep the equipment in good repair and condition and to use it only in a careful and proper manner, abiding by all provided manuals and safety guidelines.</p>
+                    <p><strong>3. Late Returns &amp; Overdue Charges:</strong> The equipment must be returned by the Return Due Date. If the equipment is not returned by the Grace Period End Date, overdue charges will accrue automatically as defined by the assigned Loan Policy, and the Borrower will be liable for the full Replacement Charge if the item is deemed lost.</p>
+                    <p><strong>4. Liability:</strong> The Borrower assumes full responsibility for the equipment from the time of dispatch until it has been returned and formally accepted by the Lender's QA team.</p>
+                </div>
+
+                <!-- Signatures -->
+                <div style="margin-top: 50px;">
+                    <div class="signature-box" style="margin-right: 10%;">
+                        <div class="signature-line"></div>
+                        <div class="signature-label">Authorized Signature (Lender)</div>
+                        <div style="margin-top: 5px; font-weight: bold;">{!RelatedTo.Order_Product__r.Order.Company__r.Name}</div>
+                    </div>
+                    <div class="signature-box">
+                        <div class="signature-line"></div>
+                        <div class="signature-label">Authorized Signature (Borrower)</div>
+                        <div style="margin-top: 5px; font-weight: bold;">{!Recipient.Name}</div>
+                    </div>
+                </div>
+            </body>
+        </html>
+    </messaging:htmlEmailBody>
+
+</messaging:emailTemplate>

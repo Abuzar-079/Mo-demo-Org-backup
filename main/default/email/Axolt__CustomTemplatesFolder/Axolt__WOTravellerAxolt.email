@@ -1,0 +1,169 @@
+<messaging:emailTemplate subject="WO-{!RelatedTo.Name}" recipientType="Contact" relatedToType="Axolt__WO__c" >
+    <messaging:htmlEmailBody >
+        <html>
+            <head>
+                <meta charset="utf-8"/>
+                <title>Work Order Traveller</title>
+                <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700" rel="stylesheet"/>
+            </head>
+            <style>
+                .wrap {
+                    width: 300px;
+                    margin: 0 auto;
+                    box-shadow:1px 2px 7px rgba(0,0,0,.2);
+                }
+                .vertical-text1{
+                    transform: rotate(-90deg);
+                    transform-origin: bottom right 0px;
+                    transform-origin: top right 0px;
+                    float: left;
+                }
+                @page {
+                    size: 6in 4in;
+                    @top-center {
+                    content: element(header);
+                    }
+                    @bottom-left {
+                    content: element(footer);
+                    }
+                }
+                .wrapper {
+                    width: 800px;
+                    height: auto;
+                    margin: 50px auto 50px;
+                    box-shadow: 0px 0px 7px 0px rgba(0,0,0, 0.1);
+                    padding:10px;
+                }
+            </style>
+            <body style="background: aliceblue;">
+            <div class="wrapper" style="background:#fff;">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding:10px;">
+                    <tbody>
+                        <tr>
+                            <td width="31%" align="center"><img src="https://aqxolt-base-dev-ed.develop.my.salesforce.com/servlet/servlet.ImageServer?id=015J70000011GAy&oid=00D8d000007YxgS&lastMod=1728028740000" height="100"/></td>
+                            <td style="font: 300 14px 'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12px;color:#333;;" width="22%">
+                                <!--  20 East Long Street,
+                                    <br/>Columbus Ohio USA 4315
+                                    <br/>Phone: 1-877-763-6169 Fax: 
+                                       <br/>Fax: 905-939-0646
+                                    <br/>Email: info@northernwideplank.ca <br/> <br/>
+                                      
+                                      Remit to Head Office:<br/>
+                                      5930 Llyod <br/>
+                                      Schomberg LDA 1T0 Canada-->
+                            </td>
+                            <td valign="top" width="46%" style="font: 11px 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#333;">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding:3px;">
+                                    <tr>
+                                        <td width="36%" align="center" style="font: 11px 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#333;border-top:1px solid #ddd;border-left:1px solid #ddd;border-bottom:1px solid #ddd;padding:3px;"><strong>Work Order #</strong></td>
+                                        <td width="64%" align="center" style="font: 11px 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#333;border-top:1px solid #ddd;border-left:1px solid #ddd;border-bottom:1px solid #ddd;border-right:1px solid #ddd;padding:3px;">{!RelatedTo.Name}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" style="font: 11px 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#333;border-left:1px solid #ddd;border-bottom:1px solid #ddd;padding:3px;"><strong>Start Date</strong></td>
+                                        <td align="center" style="font: 11px 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#333;border-left:1px solid #ddd;border-bottom:1px solid #ddd;border-right:1px solid #ddd;padding:3px;"> <apex:outputField value="{!RelatedTo.Axolt__Start_Date__c}"/> </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" style="font: 11px 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#333;border-left:1px solid #ddd;border-bottom:1px solid #ddd;padding:3px;"><strong>Expected Date</strong></td>
+                                        <td align="center" style="font: 11px 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#333;border-left:1px solid #ddd;border-bottom:1px solid #ddd;border-right:1px solid #ddd;padding:3px;"> <apex:outputField value="{!RelatedTo.Axolt__ExpectedDate__c}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" style="font: 11px 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#333;border-left:1px solid #ddd;border-bottom:1px solid #ddd;padding:3px;"><strong>End Date</strong></td>
+                                        <td align="center" style="font: 11px 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#333;border-left:1px solid #ddd;border-bottom:1px solid #ddd;border-right:1px solid #ddd;padding:3px;"> <apex:outputField value="{!RelatedTo.Axolt__End_Date__c}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" style="font: 11px 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#333;border-left:1px solid #ddd;border-bottom:1px solid #ddd;padding:3px;"><strong>Status</strong></td>
+                                        <td align="center" style="font: 11px 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#333;border-left:1px solid #ddd;border-bottom:1px solid #ddd;padding:3px;border-right:1px solid #ddd;"><apex:outputField value="{!RelatedTo.Axolt__Status__c}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td style=""></td>
+                                        <td style=""></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td width="1%"> </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
+                    <tr>
+                        <td width="33%" valign="top"  style="font: normal 12px 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#333;">
+                            <strong>Product</strong> <br/>
+                            <apex:outputField value="{!RelatedTo.Product__r.Name}"/>
+                        </td>
+                        <td width="35%" valign="top"  style="font: normal 12px 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#333;">
+                            <strong>Production Version</strong> <br/>
+                            <apex:outputField value="{!RelatedTo.BOM__r.Name}" />
+                        </td>
+                        <td width="19%" valign="top"  style="font: normal 12px 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#333;">
+                            <strong>Quantity</strong> <br/>
+                            {!RelatedTo.Axolt__Quantity_Built__c} / {!RelatedTo.Quantity_Ordered__c} &nbsp; {!RelatedTo.Product__r.QuantityUnitOfMeasure} 
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td height="10"></td>
+                    </tr>
+                    <tr>
+                        <td width="33%" valign="top"  style="font: normal 12px 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#333;">
+                            <strong>Quantity Produced</strong> <br/>
+                            <apex:outputField value="{!RelatedTo.Axolt__Quantity_Built__c}"/>&nbsp;<apex:outputText value="{!RelatedTo.Product__r.QuantityUnitOfMeasure}" />
+                        </td>
+                        <td width="35%" valign="top"  style="font: normal 12px 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#333;">
+                            <strong>Quantity Scrapped</strong> <br/>
+                            <apex:outputField value="{!RelatedTo.Axolt__Quantity_Scrapped__c}" />&nbsp;<apex:outputText value="{!RelatedTo.Product__r.QuantityUnitOfMeasure}" />
+                        </td>                        
+                    </tr>
+                    <tr>
+                        <td height="10"></td>
+                    </tr>
+                    <tr>
+                        <td valign="top"  style="font: normal 12px 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#333;">
+                            <strong>Routing </strong> <br/>
+                            <apex:outputField value="{!RelatedTo.Routing__r.Name}" />
+                        </td>
+                        <td valign="top"  style="font: normal 12px 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#333;">
+                            <strong>Sales Order </strong> <br/>
+                            <apex:outputField value="{!RelatedTo.Order__r.Name}" />
+                        </td>
+                        
+                        <td valign="top"  style="font: normal 12px 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#333;">
+                            <strong>Sales Order Line Item</strong><br/>
+                            <apex:outputField value="{!RelatedTo.Order_Product__r.OrderItemNumber}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="10"></td>
+                    </tr>
+                    <tr>
+                        
+                        <td valign="top" colspan="4">
+                            <table width="100%">
+                                <tr>
+                                    <td width="132"  style="font: normal 12px 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#333;">
+                                        <strong>Labour Cost</strong><br/>
+                                        <apex:outputField value="{!RelatedTo.Axolt__Labour_Cost__c}" />
+                                    </td>
+                                    <td width="138" valign="top"  style="font: normal 12px 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#333;">
+                                        <strong>Material Cost</strong><br/>
+                                        <apex:outputField value="{!RelatedTo.Axolt__Material_Cost__c}" />
+                                    </td>
+                                    <td width="146" valign="top"  style="font: normal 12px 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#333;">
+                                        <strong>Overhead Cost</strong><br/>
+                                        <apex:outputField value="{!RelatedTo.Axolt__Overhead_Cost__c}" />
+                                    </td>
+                                    <td width="100" valign="top"  style="font: normal 12px 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#333;">
+                                        <strong>Total Cost</strong><br/>
+                                        <apex:outputField value="{!RelatedTo.Axolt__Cost__c}" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+              <!--  <c:WOTraveller rId="{!RelatedTo.Id}"/> -->
+               </div>
+            </body>
+        </html>
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

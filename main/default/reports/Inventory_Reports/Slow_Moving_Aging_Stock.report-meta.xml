@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Product2.Axolt__Inventory_Stocks__r$Axolt__Warehouse__c</field>
+    </columns>
+    <columns>
+        <field>Product2.Axolt__Inventory_Stocks__r$Axolt__Location__c</field>
+    </columns>
+    <columns>
+        <field>Product2.Axolt__Inventory_Stocks__r$LastModifiedDate</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Product2.Axolt__Inventory_Stocks__r$Axolt__Number_of_Item_In_Stock__c</field>
+    </columns>
+    <columns>
+        <field>Product2.Axolt__Inventory_Stocks__r$Axolt__Average_Unit_Price__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Maximum</aggregateTypes>
+        <field>CDF1</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>CDF2</field>
+    </columns>
+    <customDetailFormulas>
+        <calculatedFormula>TODAY() - DATEVALUE(Axolt__Inventory_Stock__c.LastModifiedDate)</calculatedFormula>
+        <dataType>Double</dataType>
+        <description>Number of calendar days since the inventory stock record was last updated. This is the available proxy for the last stock movement date.</description>
+        <developerName>CDF1</developerName>
+        <label>Days Since Last Movement</label>
+        <scale>0</scale>
+    </customDetailFormulas>
+    <customDetailFormulas>
+        <calculatedFormula>Axolt__Inventory_Stock__c.Axolt__Number_of_Item_In_Stock__c * Axolt__Inventory_Stock__c.Axolt__Average_Unit_Price__c</calculatedFormula>
+        <dataType>Double</dataType>
+        <description>On-hand quantity multiplied by average unit price.</description>
+        <developerName>CDF2</developerName>
+        <label>Stock Value</label>
+        <scale>2</scale>
+    </customDetailFormulas>
+    <description>Finance and operations summary of on-hand inventory aging by product. Last Modified Date is used as the available proxy for last movement; Days Since Last Movement shows the oldest stock row in each product group.</description>
+    <filter>
+        <criteriaItems>
+            <column>Product2.Axolt__Inventory_Stocks__r$Axolt__Active__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Product2.Axolt__Inventory_Stocks__r$Axolt__Number_of_Item_In_Stock__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>greaterThan</operator>
+            <value>0</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <aggregateType>Maximum</aggregateType>
+        <dateGranularity>Day</dateGranularity>
+        <field>Product2$Name</field>
+        <sortByName>CDF1</sortByName>
+        <sortOrder>Desc</sortOrder>
+        <sortType>Aggregate</sortType>
+    </groupingsDown>
+    <name>Slow-Moving / Aging Stock</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>product_and_inventory__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Product2$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

@@ -1,0 +1,46 @@
+<messaging:emailTemplate subject="Missed Appointment: Your {!relatedTo.Product2__r.Name} Service" recipientType="Contact" relatedToType="Axolt__Registration__c">
+<messaging:htmlEmailBody >
+    <html>
+        <body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333; background-color: #f4f6f9; padding: 30px 10px; margin: 0;">
+            <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                
+                <div style="background-color: #e56700; padding: 30px 20px; text-align: center;">
+                    <h1 style="color: #ffffff; margin: 0; font-size: 26px; font-weight: 600;">We missed you today!</h1>
+                    <p style="color: #fff3e5; margin: 10px 0 0 0; font-size: 16px;">
+                        Hi {!relatedTo.Contact__r.FirstName}, our specialist arrived but couldn't reach you.
+                    </p>
+                </div>
+
+                <div style="padding: 30px 40px;">
+                    <h2 style="font-size: 18px; border-bottom: 2px solid #f0f2f5; padding-bottom: 10px; margin-top: 0; color: #16325c;">
+                        Missed Appointment Details
+                    </h2>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 15px;">
+                        <tr>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; color: #706e6b; width: 35%;"><strong>Service:</strong></td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; font-weight: 500; color: #080707;">{!relatedTo.Product2__r.Name}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; color: #706e6b;"><strong>Scheduled Time:</strong></td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; font-weight: 500; color: #080707;">
+                                <apex:outputField value="{!relatedTo.Axolt__Registration_Time__c}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; color: #706e6b; vertical-align: top;"><strong>Location:</strong></td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; font-weight: 500; color: #080707; line-height: 1.4;">
+                                {!relatedTo.Location__r.Axolt__Address_Line1__c}, {!relatedTo.Location__r.Axolt__City__c}
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div style="margin-top: 40px; text-align: center;">
+                        <a href="https://aqxolt-base-dev-ed.develop.my.site.com/DoorstepServices" style="background-color: #0070d2; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 16px; display: inline-block;">Reschedule Your Service</a>
+                        <p style="font-size: 13px; color: #706e6b; margin-top: 15px;">Please log in to your account to book a new time slot.</p>
+                    </div>
+                </div>
+            </div>
+        </body>
+    </html>
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

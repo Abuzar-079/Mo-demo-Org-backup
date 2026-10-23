@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <available>true</available>
+    <description>Stock Take count sheet with system quantities. Rendered in the Stock Take ERP workspace for preview, PDF and email; edit this template to change the document (label ST_Doc_* holds its name).</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>ST Count sheet</name>
+    <style>none</style>
+    <subject>Stock count sheet {!relatedTo.Name}</subject>
+    <type>visualforce</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

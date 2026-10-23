@@ -1,0 +1,17 @@
+<messaging:emailTemplate subject="Your Application for {!relatedTo.Position__r.Name} Has Been Rejected!" recipientType="User" relatedToType="Axolt__Job_Applicant__c">
+<messaging:plainTextEmailBody >
+        Dear {!Recipient.Name},
+
+        Thank you for applying for the position of {!relatedTo.Position__r.Name} at Axolt Pvt Ltd. We appreciate the time and effort you invested in your application and your interest in joining our team.
+
+        After careful consideration, we regret to inform you that we have decided to not to go ahead with ur Application ,do not be discouraged, as we encourage you to keep an eye on future opportunities with Axolt that may be a better match for your skills and experience.
+
+        If you have any questions or would like to inquire about other openings, feel free to reach out to us at aq@gmail.com.
+
+        We wish you the best of luck in your job search and future endeavors.
+
+        Best regards,
+        Axolt Pvt Ltd
+        HR Manager
+    </messaging:plainTextEmailBody>
+</messaging:emailTemplate>

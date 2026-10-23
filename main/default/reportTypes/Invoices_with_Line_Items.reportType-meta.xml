@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ReportType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <baseObject>Axolt__Invoice_Line_Item__c</baseObject>
+    <category>other</category>
+    <deployed>true</deployed>
+    <description>Invoice Line Items with Sales Revenue, Cost Prices, and Margin Calculations</description>
+    <label>Invoices with Line Items</label>
+    <sections>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Name</field>
+            <table>Axolt__Invoice_Line_Item__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Axolt__Invoice__c</field>
+            <table>Axolt__Invoice_Line_Item__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Axolt__Product__c</field>
+            <table>Axolt__Invoice_Line_Item__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Axolt__Quantity__c</field>
+            <table>Axolt__Invoice_Line_Item__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Axolt__Unit_Price__c</field>
+            <table>Axolt__Invoice_Line_Item__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Axolt__Total_Price__c</field>
+            <table>Axolt__Invoice_Line_Item__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Axolt__Cost_Price__c</field>
+            <table>Axolt__Invoice_Line_Item__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Axolt__Average_Cost_Price__c</field>
+            <table>Axolt__Invoice_Line_Item__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Axolt__Posted__c</field>
+            <table>Axolt__Invoice_Line_Item__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Axolt__Posted_Date__c</field>
+            <table>Axolt__Invoice_Line_Item__c</table>
+        </columns>
+        <masterLabel>Invoice Line Item Details</masterLabel>
+    </sections>
+</ReportType>

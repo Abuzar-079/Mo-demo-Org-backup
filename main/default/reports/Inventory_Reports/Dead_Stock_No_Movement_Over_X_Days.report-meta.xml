@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Product2.Axolt__Inventory_Stocks__r$Axolt__Warehouse__c</field>
+    </columns>
+    <columns>
+        <field>Product2.Axolt__Inventory_Stocks__r$Axolt__Location__c</field>
+    </columns>
+    <columns>
+        <field>Product2.Axolt__Inventory_Stocks__r$Axolt__Serial__c</field>
+    </columns>
+    <columns>
+        <field>Product2.Axolt__Inventory_Stocks__r$Axolt__Batch_Lot__c</field>
+    </columns>
+    <columns>
+        <field>Product2.Axolt__Inventory_Stocks__r$LastModifiedDate</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Product2.Axolt__Inventory_Stocks__r$Axolt__Number_of_Item_In_Stock__c</field>
+    </columns>
+    <columns>
+        <field>Product2.Axolt__Inventory_Stocks__r$Axolt__Average_Unit_Price__c</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Maximum</aggregateTypes>
+        <field>CDF1</field>
+    </columns>
+    <columns>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>CDF2</field>
+    </columns>
+    <customDetailFormulas>
+        <calculatedFormula>TODAY() - DATEVALUE(Axolt__Inventory_Stock__c.LastModifiedDate)</calculatedFormula>
+        <dataType>Double</dataType>
+        <description>Number of calendar days since the inventory stock record was last updated. This is the available proxy for the last stock movement date.</description>
+        <developerName>CDF1</developerName>
+        <label>Days Since Last Movement</label>
+        <scale>0</scale>
+    </customDetailFormulas>
+    <customDetailFormulas>
+        <calculatedFormula>Axolt__Inventory_Stock__c.Axolt__Number_of_Item_In_Stock__c * Axolt__Inventory_Stock__c.Axolt__Average_Unit_Price__c</calculatedFormula>
+        <dataType>Double</dataType>
+        <description>On-hand quantity multiplied by average unit price, representing value at risk.</description>
+        <developerName>CDF2</developerName>
+        <label>Value at Risk</label>
+        <scale>2</scale>
+    </customDetailFormulas>
+    <description>Finance and operations director summary of inventory with no stock-record update for more than 180 days. The unlocked date filter is the configurable X-day threshold; Last Modified Date is the available proxy for last movement.</description>
+    <filter>
+        <criteriaItems>
+            <column>Product2.Axolt__Inventory_Stocks__r$Axolt__Active__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Product2.Axolt__Inventory_Stocks__r$Axolt__Number_of_Item_In_Stock__c</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>greaterThan</operator>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Product2.Axolt__Inventory_Stocks__r$LastModifiedDate</column>
+            <columnToColumn>false</columnToColumn>
+            <isUnlocked>true</isUnlocked>
+            <operator>lessThan</operator>
+            <value>180 DAYS AGO</value>
+        </criteriaItems>
+        <language>en_US</language>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <aggregateType>Sum</aggregateType>
+        <dateGranularity>Day</dateGranularity>
+        <field>Product2$Name</field>
+        <sortByName>CDF2</sortByName>
+        <sortOrder>Desc</sortOrder>
+        <sortType>Aggregate</sortType>
+    </groupingsDown>
+    <name>Dead Stock (No Movement Over X Days)</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>product_and_inventory__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>Product2$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

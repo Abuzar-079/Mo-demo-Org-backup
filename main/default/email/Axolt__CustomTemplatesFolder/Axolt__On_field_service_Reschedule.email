@@ -1,0 +1,80 @@
+<messaging:emailTemplate subject="Rescheduled: Your Appointment on {!relatedTo.Axolt__Appointment_DateDt__c}" recipientType="Contact" relatedToType="Axolt__Registration__c">
+<messaging:htmlEmailBody >
+    <html>
+        <body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333; background-color: #f4f6f9; padding: 30px 10px; margin: 0;">
+            
+            <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                
+                <div style="background-color: #0070d2; padding: 30px 20px; text-align: center;">
+                    <h1 style="color: #ffffff; margin: 0; font-size: 26px; font-weight: 600;">Reschedule Confirmed!</h1>
+                    <p style="color: #e0f0ff; margin: 10px 0 0 0; font-size: 16px;">
+                        Thank you, {!relatedTo.Contact__r.FirstName}. Your service appointment has been successfully Rescheduled.
+                    </p>
+                </div>
+
+                <div style="padding: 30px 40px;">
+                    
+                    <h2 style="font-size: 18px; border-bottom: 2px solid #f0f2f5; padding-bottom: 10px; margin-top: 0; color: #16325c;">
+                        Appointment Details
+                    </h2>
+                    
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 15px;">
+                        <tr>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; color: #706e6b; width: 35%;"><strong>Booking Ref:</strong></td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; font-weight: 500; color: #080707;">{!relatedTo.Name}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; color: #706e6b;"><strong>Service:</strong></td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; font-weight: 500; color: #080707;">{!relatedTo.Product2__r.Name}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; color: #706e6b;"><strong>Date &amp; Time:</strong></td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; font-weight: 500; color: #080707;">
+                                <apex:outputField value="{!relatedTo.Axolt__Registration_Time__c}" /> - <apex:outputField value="{!relatedTo.Axolt__End_Time__c}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; color: #706e6b; vertical-align: top;"><strong>Location:</strong></td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; font-weight: 500; color: #080707; line-height: 1.4;">
+                                {!relatedTo.Location__r.Name}<br/>
+                                <span style="font-size: 13px; color: #706e6b;">{!relatedTo.Location__r.Axolt__Address_Line1__c}, {!relatedTo.Location__r.Axolt__City__c}</span>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <h2 style="font-size: 18px; border-bottom: 2px solid #f0f2f5; padding-bottom: 10px; margin-top: 35px; color: #16325c;">
+                        Your Specialist
+                    </h2>
+                    
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 15px;">
+                        <tr>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; color: #706e6b; width: 35%;"><strong>Name:</strong></td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; font-weight: 500; color: #080707;">{!relatedTo.Resource__r.Name}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; color: #706e6b;"><strong>Phone:</strong></td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; font-weight: 500; color: #080707;">{!relatedTo.Resource__r.Axolt__Phone__c}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; color: #706e6b;"><strong>Email:</strong></td>
+                            <td style="padding: 12px 0; border-bottom: 1px solid #f0f2f5; font-weight: 500;">
+                                <a href="mailto:{!relatedTo.Resource__r.Axolt__Email__c}" style="color: #0070d2; text-decoration: none;">{!relatedTo.Resource__r.Axolt__Email__c}</a>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div style="margin-top: 40px; text-align: center;">
+                        <a href="https://aqxolt-base-dev-ed.develop.my.site.com/DoorstepServices" style="background-color: #0070d2; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 16px; display: inline-block;">Manage Your Booking</a>
+                        <p style="font-size: 13px; color: #706e6b; margin-top: 15px;">Need to change plans? You can reschedule or cancel online.</p>
+                    </div>
+                </div>
+                
+                <div style="background-color: #f8f9fb; padding: 20px; text-align: center; border-top: 1px solid #eeeeee;">
+                    <p style="font-size: 12px; color: #999; margin: 0;">Thank you for choosing our services!</p>
+                </div>
+                
+            </div>
+        </body>
+    </html>
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

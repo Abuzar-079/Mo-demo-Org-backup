@@ -1,0 +1,46 @@
+<messaging:emailTemplate subject="Final Notice: Subscription Expiry – {!relatedTo.Order__r.Name}" recipientType="Contact" relatedToType="Axolt__Subscription__c">
+
+
+    <messaging:htmlEmailBody >
+
+        <html>
+            <body style="font-family: Arial, sans-serif; font-size:14px; color:#333;">
+
+                <p>Dear {!recipient.Name},</p>
+
+                <p>
+                    This is a final reminder that your subscription under 
+                    <strong>Order {!relatedTo.Order__r.Name}</strong> 
+                    will expire on <strong>{!relatedTo.End_Date__c}</strong>.
+                </p>
+
+                <table cellpadding="6" cellspacing="0" border="0">
+                    <tr>
+                        <td><strong>Product:</strong></td>
+                        <td>{!relatedTo.Order_Product__r.PricebookEntry.Product2.Name}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Expiry Date:</strong></td>
+                        <td>{!relatedTo.End_Date__c}</td>
+                    </tr>
+                </table>
+
+                <p>
+                    To avoid any interruption of service, we strongly encourage you to complete the renewal before the expiry date.
+                </p>
+
+                <p>
+                    If you have already renewed, please disregard this message.
+                </p>
+
+                <p>
+                    Best regards,<br/>
+                    Axolt
+                </p>
+
+            </body>
+        </html>
+
+    </messaging:htmlEmailBody>
+
+</messaging:emailTemplate>

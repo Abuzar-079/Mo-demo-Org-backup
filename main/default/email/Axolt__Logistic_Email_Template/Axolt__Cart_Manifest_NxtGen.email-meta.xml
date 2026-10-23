@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>68.0</apiVersion>
+    <available>true</available>
+    <description>Next Gen manifest of stock currently carried on a cart.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Cart Manifest Next Gen</name>
+    <style>none</style>
+    <subject>Cart manifest</subject>
+    <type>visualforce</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

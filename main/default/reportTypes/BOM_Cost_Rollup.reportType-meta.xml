@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ReportType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <baseObject>Axolt__BOM__c</baseObject>
+    <category>products</category>
+    <deployed>true</deployed>
+    <description>BOMs and their Line Items, used to see standard cost rollups grouped by finished product.</description>
+    <join>
+        <outerJoin>false</outerJoin>
+        <relationship>Axolt__BOM_Line_Items__r</relationship>
+    </join>
+    <label>BOM Cost Rollup</label>
+    <sections>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Id</field>
+            <table>Axolt__BOM__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Name</field>
+            <table>Axolt__BOM__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Axolt__Product__c</field>
+            <table>Axolt__BOM__c</table>
+        </columns>
+        <masterLabel>BOMs</masterLabel>
+    </sections>
+    <sections>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Id</field>
+            <table>Axolt__BOM__c.Axolt__BOM_Line_Items__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Name</field>
+            <table>Axolt__BOM__c.Axolt__BOM_Line_Items__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Axolt__Quantity__c</field>
+            <table>Axolt__BOM__c.Axolt__BOM_Line_Items__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Axolt__BOM_Component__c</field>
+            <table>Axolt__BOM__c.Axolt__BOM_Line_Items__r</table>
+        </columns>
+        <masterLabel>BOM Line Items</masterLabel>
+    </sections>
+</ReportType>

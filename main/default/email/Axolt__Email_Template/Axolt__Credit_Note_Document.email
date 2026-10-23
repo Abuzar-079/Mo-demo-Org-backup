@@ -1,0 +1,276 @@
+<messaging:emailTemplate subject="Credit Note for Invoice #{!RelatedTo.Invoice__r.Name}" recipientType="Contact" relatedToType="Axolt__Credit_Note__c">
+
+<messaging:plainTextEmailBody >
+Dear {!Recipient.Name},
+
+Please find attached a detailed credit note on your account.
+The credit note summary is as follows:
+
+Account Name: {!RelatedTo.Account__r.Name}
+Credit Note Number: {!RelatedTo.Name}
+Credit Note Date: <apex:outputText value="{0,date,dd/MM/yyyy}"><apex:param value="{!RelatedTo.Axolt__Date__c}" /></apex:outputText>
+Credit Note Amount: {!RelatedTo.Axolt__Total_Amount__c}
+
+Sincerely,
+The Axolt Accounts Department
+</messaging:plainTextEmailBody>
+
+    <messaging:htmlEmailBody >
+        <html>
+            <head>
+                <meta charset="utf-8"/>
+                <title>Credit Note</title>
+            </head>
+
+            <body style="font-family: Arial, sans-serif; margin: 0; padding: 20px;">
+
+                <div style="max-width: 800px; margin: 0 auto; border: 1px solid #e0e0e0;">
+
+                    <!-- CREDIT NOTE TITLE BAR -->
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                            <td style="text-align: center; padding: 18px 0;">
+                                <span style="font-family: Arial, sans-serif; font-size: 26px; font-weight: bold; color: #000000; letter-spacing: 4px;">
+                                    CREDIT NOTE
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- COMPANY INFO + LOGO -->
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                            <td style="width: 70%; padding: 20px 30px;">
+                                <div style="font-size: 18px; color: #000000; font-weight: bold;">
+                                    <apex:outputText value="{!RelatedTo.Company__r.Name}" />
+                                </div>
+                                <div style="font-size: 13px; color: #000000; line-height: 1.6; padding-top: 6px;">
+                                    <apex:outputText value="{!RelatedTo.Company__r.BillingStreet}" />&nbsp;
+                                    <apex:outputText value="{!RelatedTo.Company__r.BillingCity}" />&nbsp;
+                                    <apex:outputText value="{!RelatedTo.Company__r.BillingState}" /><br/>
+                                    <apex:outputText value="{!RelatedTo.Company__r.BillingCountry}" />
+                                    &nbsp;&nbsp;Phone:<apex:outputText value="{!RelatedTo.Company__r.Phone}" />
+                                </div>
+                            </td>
+                            <td style="width: 30%; text-align: right; vertical-align: middle; padding: 20px 30px;">
+                                <apex:image url="{!$Label.axolt__CompanyLogo}" alt="Company Logo" width="100" height="" style="vertical-align: top;"/>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- DIVIDER -->
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                            <td style="border-top: 1px solid #444444; padding: 0; font-size: 0;">&nbsp;</td>
+                        </tr>
+                    </table>
+
+                    <!-- BILL TO / SHIP TO / DETAILS -->
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="padding: 10px 30px 20px 30px;">
+                        <apex:outputPanel layout="none" rendered="{!RelatedTo.Axolt__Order__c != null}">
+                        <tr>                            
+                            <td style="width: 33%; padding-right: 15px; vertical-align: top;">
+                                <div style="padding: 10px;">
+                                    <div style="font-size: 14px; font-weight: bold; color: #000; padding-bottom: 5px;">
+                                        <strong>Bill To Address</strong>
+                                    </div>
+                                    <div style="font-size: 13px; color: #000; line-height: 1.5;">
+                                        <strong><apex:outputText value="{!RelatedTo.Account__r.Name}" /></strong><br/>
+                                        <apex:outputText value="{!RelatedTo.Order__r.Contact__r.Name}" /><br/>
+                                        <apex:outputText value="{!RelatedTo.Order__r.Bill_To_Address__r.Axolt__Address_Line1__c}" />&nbsp;
+                                        <apex:outputText value="{!RelatedTo.Order__r.Bill_To_Address__r.Axolt__Address_Line2__c}" />&nbsp;
+                                        <apex:outputText value="{!RelatedTo.Order__r.Bill_To_Address__r.Axolt__Address_Line3__c}" /><br/>
+                                        <apex:outputText value="{!RelatedTo.Order__r.Bill_To_Address__r.Axolt__City__c}" />&nbsp;
+                                        <apex:outputText value="{!RelatedTo.Order__r.Bill_To_Address__r.Axolt__State__c}" />&nbsp;
+                                        <apex:outputText value="{!RelatedTo.Order__r.Bill_To_Address__r.Axolt__Postal_Code__c}" /><br/>
+                                        <apex:outputText value="{!RelatedTo.Order__r.Bill_To_Address__r.Axolt__Country__c}" /><br/>
+                                        Phone: <apex:outputText value="{!RelatedTo.Order__r.Contact__r.Phone}" />
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td style="width: 33%; padding-right: 15px; vertical-align: top;">
+                                <div style="padding: 10px;">
+                                    <div style="font-size: 14px; font-weight: bold; color: #000; padding-bottom: 5px;">
+                                        <strong>Ship To Address</strong>
+                                    </div>
+                                    <div style="font-size: 13px; color: #000; line-height: 1.5;">
+                                        <strong><apex:outputText value="{!RelatedTo.Account__r.Name}" /></strong><br/>
+                                        <apex:outputText value="{!RelatedTo.Order__r.Contact__r.Name}" /><br/>
+                                        <apex:outputText value="{!RelatedTo.Order__r.Ship_To_Address__r.Name}" /><br/>
+                                        <apex:outputText value="{!RelatedTo.Order__r.Ship_To_Address__r.Axolt__Address_Line1__c}" />&nbsp;
+                                        <apex:outputText value="{!RelatedTo.Order__r.Ship_To_Address__r.Axolt__Address_Line2__c}" />&nbsp;
+                                        <apex:outputText value="{!RelatedTo.Order__r.Ship_To_Address__r.Axolt__Address_Line3__c}" /><br/>
+                                        <apex:outputText value="{!RelatedTo.Order__r.Ship_To_Address__r.Axolt__City__c}" />&nbsp;
+                                        <apex:outputText value="{!RelatedTo.Order__r.Ship_To_Address__r.Axolt__State__c}" />&nbsp;
+                                        <apex:outputText value="{!RelatedTo.Order__r.Ship_To_Address__r.Axolt__Postal_Code__c}" /><br/>
+                                        <apex:outputText value="{!RelatedTo.Order__r.Ship_To_Address__r.Axolt__Country__c}" /><br/>
+                                        Phone: <apex:outputText value="{!RelatedTo.Order__r.Contact__r.Phone}" />
+                                    </div>
+                                </div>
+                            </td>                                           
+                           <td style="width: 34%; vertical-align: top;">
+    <div style="padding: 10px;">
+        <table width="100%" cellpadding="0" cellspacing="0" style="font-size: 13px; color: #000; border-collapse: collapse;">
+            <tr>
+                <td colspan="2" style="text-align: right; font-size: 15px; color: #000; padding: 0 0 10px 0;">
+                    <strong><apex:outputText value="{!RelatedTo.Name}"/></strong>
+                </td>
+            </tr>
+            <tr>
+                <td width="110" style="width: 110px; text-align: right; padding: 3px 8px 3px 0; white-space: nowrap;"><strong>Credit Note Date :</strong></td>
+                <td style="text-align: left; padding: 3px 0 3px 8px;">
+                    <apex:outputText value="{0,date,dd MMM yyyy}">
+                        <apex:param value="{!RelatedTo.Axolt__Date__c}"/>
+                    </apex:outputText>
+                </td>
+            </tr>
+            <tr>
+                <td width="110" style="width: 110px; text-align: right; padding: 3px 8px 3px 0; white-space: nowrap;"><strong>Invoice # :</strong></td>
+                <td style="text-align: left; padding: 3px 0 3px 8px;"><apex:outputText value="{!RelatedTo.Invoice__r.Name}"/></td>
+            </tr>
+            <apex:outputText rendered="{!NOT(ISBLANK(RelatedTo.Axolt__Reference_Number__c))}">
+            <tr>
+                <td width="110" style="width: 110px; text-align: right; padding: 3px 8px 3px 0; white-space: nowrap;"><strong>Reference # :</strong></td>
+                <td style="text-align: left; padding: 3px 0 3px 8px;"><apex:outputText value="{!RelatedTo.Axolt__Reference_Number__c}"/></td>
+            </tr>
+            </apex:outputText>
+            <apex:outputText rendered="{!NOT(ISBLANK(RelatedTo.Axolt__Description__c))}">
+            <tr>
+                <td width="110" style="width: 110px; text-align: right; padding: 3px 8px 3px 0; white-space: nowrap; vertical-align: top;"><strong>Description :</strong></td>
+                <td style="text-align: left; padding: 3px 0 3px 8px;"><apex:outputText value="{!RelatedTo.Axolt__Description__c}"/></td>
+            </tr>
+            </apex:outputText>
+            <apex:outputText rendered="{!NOT(ISBLANK(RelatedTo.Company__r.Axolt__VAT_registration_number__c))}">
+            <tr>
+                <td width="110" style="width: 110px; text-align: right; padding: 3px 8px 3px 0; white-space: nowrap;"><strong>Vat Number :</strong></td>
+                <td style="text-align: left; padding: 3px 0 3px 8px;"><apex:outputText value="{!RelatedTo.Company__r.Axolt__VAT_registration_number__c}"/></td>
+            </tr>
+            </apex:outputText>
+        </table>
+    </div>
+</td>
+                        </tr>       
+                        </apex:outputPanel>
+                    </table>
+
+                    <!-- LINE ITEMS TABLE -->
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top: 1px solid #e0e0e0;">
+                        <thead>
+                            <tr style="background-color: #E30917; font-size: 12px; color: #ffffff; text-transform: uppercase;">
+                                <th style="width: 11%; padding: 8px 10px; text-align: left;">Code</th>
+                                <th style="width: 21%; padding: 8px 10px; text-align: left;">Item</th>
+                                <th style="width: 13%; padding: 8px 10px; text-align: right;">Quantity</th>
+                                <th style="width: 14%; padding: 8px 10px; text-align: right;">Unit Price</th>
+                                <th style="width: 11%; padding: 8px 10px; text-align: right;">Discount</th>
+                                <th style="width: 7%; padding: 8px 10px; text-align: right;">Vat/Tax</th>
+                                <th style="width: 13%; padding: 8px 30px 8px 10px; text-align: right;">Total Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <apex:repeat var="item" value="{!RelatedTo.Credit_Note_Items__r}" id="rp">
+                                <tr style="font-size: 13px; color: #000; page-break-inside: avoid;">
+                                    <td style="padding: 8px 10px; border-bottom: 2px dashed #E30917; word-break: break-all; vertical-align: top;">
+                                        <apex:outputText value="{!item.Product__r.ProductCode}" />
+                                    </td>
+                                    
+                                    <td style="padding: 8px 10px; border-bottom: 2px dashed #E30917; word-break: break-all; vertical-align: top;">
+                                        <apex:outputText value="{!item.Product__r.Name}" />
+                                    </td>
+                                    <td style="padding: 8px 10px; text-align: right; border-bottom: 2px dashed #E30917;"><apex:outputText value="{!item.Axolt__Quantity__c}" /></td>
+                                    <td style="padding: 8px 10px; text-align: right; border-bottom: 2px dashed #E30917; white-space: nowrap;"><apex:outputField value="{!item.Axolt__Amount__c}" /></td>
+                                    <td style="padding: 8px 10px; text-align: right; border-bottom: 2px dashed #E30917; white-space: nowrap;"><apex:outputField value="{!item.Axolt__Discount__c}" /></td>
+                                    <td style="padding: 8px 10px; text-align: right; border-bottom: 2px dashed #E30917; white-space: nowrap;">
+                                        <apex:outputField value="{!item.Axolt__Tax_Amount__c}" />
+                                    </td>
+                                    <td style="padding: 8px 30px 8px 10px; text-align: right; font-weight: bold; border-bottom: 2px dashed #E30917; white-space: nowrap;">
+                                        <apex:outputField value="{!item.Axolt__Total_Amount__c}" />
+                                    </td>
+                                </tr>
+                                <!-- SUBSCRIPTION ROW -->
+                                <apex:outputPanel layout="none" rendered="{!item.Axolt__Invoice_Line_Item__c != null && item.Invoice_Line_Item__r.Axolt__Order_Product__c != null && item.Invoice_Line_Item__r.Order_Product__r.Axolt__Is_Subscribe__c}">
+                                    <tr style="page-break-inside: avoid;">
+                                        <td></td>
+                                        <td colspan="6" style="padding: 10px 15px; background-color: #f7f8f9; border-bottom: 1px solid #ddd;">
+                                            <table width="100%" cellpadding="0" cellspacing="0" style="font-size: 12px; line-height: 1.6; border-collapse: collapse;">
+                                                <tr>
+                                                    <td colspan="2" style="font-weight: bold; border-bottom: 1px dashed #ccc;">
+                                                        Subscription Details for: {!item.Product__r.Name} ({!item.Product__r.ProductCode})
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 30%; padding-top: 3px; color: #555;">Duration:</td>
+                                                    <td style="padding-top: 3px;">
+                                                        {!IF(item.Invoice_Line_Item__r.Order_Product__r.Year_Duration__c > 0, TEXT(item.Invoice_Line_Item__r.Order_Product__r.Year_Duration__c) & ' Year(s) ', '')}
+                                                        {!IF(item.Invoice_Line_Item__r.Order_Product__r.Month_Duration__c > 0, TEXT(item.Invoice_Line_Item__r.Order_Product__r.Month_Duration__c) & ' Month(s) ', '')}
+                                                        {!IF(item.Invoice_Line_Item__r.Order_Product__r.Duration_in_Days__c > 0, TEXT(item.Invoice_Line_Item__r.Order_Product__r.Duration_in_Days__c) & ' Day(s)', '')}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-top: 3px; color: #555;">Period:</td>
+                                                    <td style="padding-top: 3px;">{!TEXT(item.Invoice_Line_Item__r.Order_Product__r.ServiceDate)} - {!TEXT(item.Invoice_Line_Item__r.Order_Product__r.EndDate)}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-top: 3px; color: #555;">Price/{!IF(item.Product__r.QuantityUnitOfMeasure == 'Year', 'Year', 'Month')}:</td>
+                                                    <td style="padding-top: 3px;"><apex:outputField value="{!item.Invoice_Line_Item__r.Order_Product__r.UnitPrice}" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-top: 3px; font-weight: bold;">Net Amount:</td>
+                                                    <td style="padding-top: 3px; font-weight: bold;"><apex:outputField value="{!item.Axolt__Total_Amount__c}" /></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </apex:outputPanel>
+                            </apex:repeat>
+                        </tbody>
+                    </table>
+
+                    <!-- TOTALS + DETAILS -->
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="padding: 0 30px 20px 30px; page-break-inside: avoid;">
+                        <tr>
+                            <td style="width: 65%;"></td>
+                            <td style="width: 35%; vertical-align: top; padding-top: 20px;">
+                                <table width="100%" cellpadding="5" cellspacing="0" border="0" style="font-size: 14px; color: #000; border: 1px solid #e0e0e0;">
+                                    <tr>
+                                        <td style="text-align: right; padding: 8px 10px; border-bottom: 1px solid #eeeeee; white-space: nowrap;"><strong>Subtotal :</strong></td>
+                                        <td style="text-align: right; padding: 8px 10px; border-bottom: 1px solid #eeeeee; white-space: nowrap;"><apex:outputField value="{!RelatedTo.Axolt__Amount__c}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right; padding: 8px 10px; border-bottom: 1px solid #eeeeee; white-space: nowrap;"><strong>Tax Amount :</strong></td>
+                                        <td style="text-align: right; padding: 8px 10px; border-bottom: 1px solid #eeeeee; white-space: nowrap;"><apex:outputField value="{!RelatedTo.Axolt__Tax_Amount__c}"/></td>
+                                    </tr>
+                                    <tr style="background-color: #f7f8f9; color: #000000; font-size: 16px;">
+                                        <td style="text-align: right; padding: 10px; white-space: nowrap;">
+                                            <strong>Total Amount :</strong>
+                                        </td>
+                                        <td style="text-align: right; padding: 10px; white-space: nowrap;">
+                                            <strong><apex:outputField value="{!RelatedTo.Axolt__Total_Amount__c}"/></strong>
+                                        </td>
+                                    </tr>
+                                    
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- FOOTER -->
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top: 1px solid #e0e0e0; margin-top: 20px;">
+                        <tr>
+                            <td style="text-align: center; padding: 10px 0; font-size: 12px; color: #757575;">
+                                This is a computer-generated credit note and is valid without signature.
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+
+                <div style="max-width: 800px; margin: 10px auto; padding: 10px; text-align: center; font-size: 13px; color: #757575;">
+                    Sincerely,<br/>
+                    <strong>The Axolt Accounts Department</strong>
+                </div>
+
+            </body>
+        </html>
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

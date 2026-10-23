@@ -1,0 +1,12 @@
+Dear HR Manager,
+
+We are pleased to inform you that we have received a job application from the following candidate:
+
+Applicant Details:
+
+Name: {!Axolt__Job_Applicant__c.Axolt__Full_Name__c}
+Email: {!Axolt__Job_Applicant__c.Axolt__Email__c}
+Details:{!Axolt__Job_Applicant__c.Link}
+Please find the applicant’s resume attached to this email under the "Notes and Attachments" section of the job applicant record , and approve or reject it.
+
+Kindly review the application and resume at your earliest convenience.

@@ -1,0 +1,94 @@
+<messaging:emailTemplate subject="WO-{!RelatedTo.Name}" recipientType="Contact" relatedToType="Axolt__WO__c">
+
+    <messaging:htmlEmailBody >
+
+        <html>
+<head>
+<meta charset="utf-8"/>
+<title>ERP Invoice</title>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700" rel="stylesheet"/>
+</head>
+<style>
+        .wrap {
+            width: 300px;
+            margin: 0 auto;
+            box-shadow:1px 2px 7px rgba(0,0,0,.2);
+        }
+
+        .vertical-text1{
+            transform: rotate(-90deg);
+            transform-origin: bottom right 0px;
+            transform-origin: top right 0px;
+            float: left;
+        }
+        @page {
+            size: 6in 4in;
+            @top-center {
+                content: element(header);
+            }
+            @bottom-left {
+                content: element(footer);
+            }
+        }
+        </style>
+<body>
+<div class="wrap" style="width:300px;">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #ddd;">
+    <tr>
+        <td>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+              <tr>
+
+                <td valign="center" style="font-family: 'Open Sans', sans-serif; font-size:22px; padding:5px; ">
+                       <div style="margin-top: -2px;float: left;font-size: 18px;font-weight: 300;padding-left:10px;"><apex:outputText value="{!RelatedTo.Name}"/> </div>
+                    
+                </td>
+              </tr>
+
+            </table>
+        </td>
+
+
+    </tr>
+    <tr><td height="20">&nbsp;</td></tr>
+    <tr>
+        <td>
+           <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+              <thead>
+              <tr style="background:#f7f7f7">
+                <th width="50%" style="font-family: 'Open Sans', sans-serif; font-size:14px; color:#757575; padding:5px;text-align:left; ">Product</th>
+                <th width="25%" style="font-family: 'Open Sans', sans-serif; font-size:14px; color:#757575;padding:5px;text-align:left; ">Code</th>
+                <th width="33%" style="font-family: 'Open Sans', sans-serif; font-size:14px; color:#757575;padding:5px;text-align:left; ">Quantity</th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <apex:repeat var="mrp" value="{!RelatedTo.MRPs__r}" id="rp">
+              <tr>
+                <td style="font-family: 'Open Sans', sans-serif; font-size:14px; color:#757575;padding:5px; ">{!mrp.Name}</td>
+                <td style="font-family: 'Open Sans', sans-serif; font-size:14px; color:#757575;padding:5px; ">{!mrp.MRP_Product__r.ProductCode}</td>
+                <td style="font-family: 'Open Sans', sans-serif; font-size:14px; color:#757575;padding:5px; ">{!mrp.Axolt__Total_Amount_Required__c}</td>
+
+              </tr>
+             </apex:repeat>
+
+              </tbody>
+        </table>
+
+
+        </td>
+    </tr>
+</table>
+
+
+
+
+</div>
+</body>
+</html>
+
+
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

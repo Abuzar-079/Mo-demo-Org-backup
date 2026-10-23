@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; line-height: 1.6; color: #333333; }
+        table { border-collapse: collapse; width: 100%; margin: 15px 0; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+        th { background-color: #f4f4f4; font-weight: bold; }
+        .overdue { color: #d32f2f; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <p>Dear {{CustomerName}},</p>
+    
+    <p>This is a friendly reminder regarding your overdue invoice(s).</p>
+    
+    <!-- Apex will add the full table here -->
+    
+    <p>Please make the payment at your earliest convenience to avoid further delays.</p>
+    
+    <p>If you have already made the payment, please ignore this email.</p>
+    
+    <p>Thank you for your prompt attention.</p>
+    
+    <p>Best regards,<br>
+    Accounts Team</p>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<messaging:emailTemplate subject="CANCELLED: Do Not Route - {!relatedTo.Product2__r.Name} in {!relatedTo.Location__r.Axolt__City__c}" recipientType="User" relatedToType="Axolt__Registration__c">
+<messaging:htmlEmailBody >
+    <html>
+        <body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333; background-color: #eef1f6; padding: 20px 10px; margin: 0;">
+            
+            <div style="max-width: 500px; margin: 0 auto; background-color: #ffffff; border-radius: 6px; overflow: hidden; border: 1px solid #d8dde6;">
+                
+                <div style="background-color: #d93c3c; padding: 20px; text-align: left; border-bottom: 4px solid #8a0000;">
+                    <h1 style="color: #ffffff; margin: 0; font-size: 20px; font-weight: 600;">JOB CANCELLED</h1>
+                    <p style="color: #ffcccc; margin: 5px 0 0 0; font-size: 14px;">
+                        Job Ref: {!relatedTo.Name} has been removed from your route.
+                    </p>
+                </div>
+
+                <div style="padding: 20px;">
+                    <h2 style="font-size: 16px; margin-top: 0; color: #16325c; border-bottom: 1px solid #eeeeee; padding-bottom: 8px;">
+                        Cancelled Job Details
+                    </h2>
+                    
+                    <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                        <tr>
+                            <td style="padding: 8px 0; color: #706e6b; width: 35%;"><strong>Service:</strong></td>
+                            <td style="padding: 8px 0; font-weight: 600; color: #080707; text-decoration: line-through;">{!relatedTo.Product2__r.Name}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0; color: #706e6b;"><strong>Time:</strong></td>
+                            <td style="padding: 8px 0; font-weight: 600; color: #080707; text-decoration: line-through;">
+                                <apex:outputField value="{!relatedTo.Axolt__Registration_Time__c}" /> - <apex:outputField value="{!relatedTo.Axolt__End_Time__c}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0; color: #706e6b; vertical-align: top;"><strong>Reason:</strong></td>
+                            <td style="padding: 8px 0; font-weight: 600; color: #d93c3c;">
+                                {!relatedTo.Cancellation_Reason__c}
+                            </td>
+                        </tr>
+                    </table>
+
+                    <h2 style="font-size: 16px; margin-top: 25px; color: #16325c; border-bottom: 1px solid #eeeeee; padding-bottom: 8px;">
+                        Customer &amp; Location
+                    </h2>
+
+                    <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                        <tr>
+                            <td style="padding: 8px 0; color: #706e6b; width: 35%;"><strong>Name:</strong></td>
+                            <td style="padding: 8px 0; font-weight: 600; color: #080707;">{!relatedTo.Customer_Name__c} {!relatedTo.Customer_Lastname__c}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0; color: #706e6b;"><strong>Phone:</strong></td>
+                            <td style="padding: 8px 0; font-weight: 600; color: #706e6b;">
+                                {!relatedTo.Customer_Contact__c}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0; color: #706e6b; vertical-align: top;"><strong>Address:</strong></td>
+                            <td style="padding: 8px 0; font-weight: 600; color: #080707; line-height: 1.4;">
+                                {!relatedTo.Location__r.Address_Line1__c}<br/>
+                                {!relatedTo.Location__r.City__c}, {!relatedTo.Location__r.Postal_Code__c}
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div style="margin-top: 30px; text-align: center;">
+                        <a href="https://aqxolt-base-dev-ed.develop.lightning.force.com/lightning/n/Resources_Dashboard?c__targetDate={!TEXT(relatedTo.Appointment_DateDt__c)}" 
+                           style="background-color: #f4f6f9; color: #16325c; padding: 12px 24px; text-decoration: none; border-radius: 4px; font-weight: 600; font-size: 14px; display: inline-block; width: 80%; text-align: center; border: 1px solid #d8dde6;">
+                           Return to Dashboard
+                        </a>
+                        <p style="font-size: 13px; color: #706e6b; margin-top: 15px;">You are no longer required to attend this location.</p>
+                    </div>
+                </div>
+            </div>
+        </body>
+    </html>
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

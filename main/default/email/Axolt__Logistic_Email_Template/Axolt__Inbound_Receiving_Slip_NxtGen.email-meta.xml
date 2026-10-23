@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>68.0</apiVersion>
+    <available>true</available>
+    <description>NextGen inbound receiving slip rendered from the Logistic record.</description>
+    <encodingKey>UTF-8</encodingKey>
+    <name>Inbound Receiving Slip Next Gen</name>
+    <style>none</style>
+    <subject>Inbound receiving slip</subject>
+    <type>visualforce</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

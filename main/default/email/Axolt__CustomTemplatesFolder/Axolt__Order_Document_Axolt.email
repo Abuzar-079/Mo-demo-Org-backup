@@ -1,0 +1,430 @@
+<messaging:emailTemplate subject="Sales Order - {!RelatedTo.Name}"
+    recipientType="Contact"
+    relatedToType="Order">
+
+    <messaging:plainTextEmailBody >
+<div style="white-space:normal;max-width:620px;background-color:#f5f6f8;padding:12px;font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:14px;line-height:18px;color:#344054;">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse:separate;background-color:#ffffff;border-radius:16px;">
+<tr>
+<td style="padding:12px 14px;">
+<div style="font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#667085;">Sales Order&nbsp;&nbsp;<span style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:13px;letter-spacing:0;text-transform:none;color:#0f1728;">{!RelatedTo.Name}</span></div>
+<div style="margin:10px 0 4px 0;font-size:17px;line-height:21px;font-weight:bold;color:#0f1728;">Hi {!Recipient.FirstName},</div>
+<div style="color:#344054;">Please find attached the Sales Order Document from AXOLT1.</div>
+<div style="margin-top:6px;color:#344054;">We appreciate your timely payment. For a quick and convenient payment experience, you can securely pay using the payment link below.</div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;margin-top:10px;">
+<tr>
+<td width="40%" valign="top" style="background-color:#eff4ff;padding:6px 7px;">
+<div style="font-size:12px;font-weight:bold;color:#0f1728;">Due Amount&#160;:</div>
+<div style="font-size:19px;line-height:26px; color:#0f1728;">{!RelatedTo.Axolt__Due_Amount__c}</div>
+</td>
+<td width="30%" valign="top" style="padding:6px 7px;">
+<div style="font-size:12px; font-weight:bold; color:#0f1728;">Total&#160;:</div>
+<div style="font-size:14px;line-height:26px; color:#475467;">{!RelatedTo.Axolt__Order_Amount__c}</div>
+</td>
+<td width="30%" valign="top" style="padding:6px 7px;">
+<div style="font-size:12px; font-weight:bold; color:#0f1728;">Order Date&#160;:</div>
+<div style="font-size:14px;line-height:26px; color:#475467;"><apex:outputText value="{0,date,MM/dd/yyyy}"><apex:param value="{!RelatedTo.EffectiveDate}" /></apex:outputText></div>
+</td>
+</tr>
+</table>
+<div style="margin-top:11px;">
+<a href="{!$Label.Axolt__Invoice_Payment_Site_Link}?token={!RelatedTo.Axolt__Payment_Token__c}"
+   id="url"
+   style="display:inline-block;font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:14px;line-height:17px;font-weight:bold;text-decoration:none;color:#ffffff;background-color:#2563eb;border-radius:8px;padding:12px 22px;"
+   target="_blank">
+    Pay Now
+</a>
+</div>
+</td>
+</tr>
+<tr>
+<td style="padding:10px 14px 12px 14px;color:#344054;">Thanks and Regards,<br/><b style="color:#0f1728;">AXOLT</b></td>
+</tr>
+</table>
+</div>
+</messaging:plainTextEmailBody>
+
+
+    <messaging:htmlEmailBody >
+        <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <style type="text/css">
+                .order-item-value {
+                    display: block;
+                    width: 100%;
+                    overflow: hidden;
+                    white-space: normal;
+                    word-wrap: break-word;
+                    word-break: break-all;
+                }
+
+                .terms-list li {
+                    page-break-inside: avoid;
+                }
+            </style>
+        <style>@page{size:A4;margin:8mm 6mm !important;background-color:#f5f6f8}@page :first{margin-top:2mm !important}html,body{margin:0 !important;background-color:#f5f6f8 !important}@media print{.doc-wrap{max-width:none !important}}</style></head>
+
+        <body style="margin:0;padding:0;background-color:#f5f6f8;">
+
+            <div style="background-color:#f5f6f8;padding:14px 10px 17px 10px;font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#0f1728;">
+                <div class="doc-wrap" style="max-width:720px;margin:0 auto;">
+
+                    <!-- ===== Brand row: logo + company name ===== -->
+                    <table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;margin:0 0 8px 2px;">
+                        <tr>
+                            <td valign="middle" style="padding:0;">
+                                <apex:image url="{!$Label.axolt__CompanyLogo}" alt="Company Logo" width="56" style="display:block;width:56px;height:auto;"/>
+                            </td>
+                            <td valign="middle" style="padding:0 0 0 7px;font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:19px;font-weight:bold;color:#344054;white-space:nowrap;">
+                                <apex:outputPanel layout="none" rendered="{!NOT(ISBLANK(RelatedTo.Axolt__Company__c))}">{!RelatedTo.Axolt__Company__r.Name}</apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!ISBLANK(RelatedTo.Axolt__Company__c)}">{!$Organization.Name}</apex:outputPanel>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- ===== Card ===== -->
+                    <div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 7px; background-color:#2563eb;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 5px; background-color:#2563eb;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 3px; background-color:#2563eb;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 2px; background-color:#2563eb;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:2px; margin:0 1px; background-color:#2563eb;"></div><table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse:separate;background-color:#ffffff;">
+
+                        <!-- Section 1: document header, greeting, key figures, pay button -->
+                        <tr>
+                            <td style="padding:13px 14px 13px 14px;">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+                                    <tr>
+                                        <td valign="middle" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#667085;">
+                                            Sales Order&nbsp;&nbsp;<span style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:13px;letter-spacing:0;text-transform:none;color:#0f1728;">{!RelatedTo.Name}</span>
+                                        </td>
+                                        <td valign="middle" align="right" style="text-align:right;">
+                                            <apex:outputPanel layout="none" rendered="{!BLANKVALUE(RelatedTo.Axolt__Due_Amount__c, 0) > 0}">
+                                                <span style="display:inline-block;font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;line-height:18px;color:#b54708;background-color:#fffaeb;border-radius:999px;padding:2px 6px;white-space:nowrap;">&#9679;&nbsp;Payment due</span>
+                                            </apex:outputPanel>
+                                         </td>
+                                    </tr>
+                                </table>
+
+                                <div style="margin:11px 0 4px 0;font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:18px;line-height:21px;font-weight:bold;color:#0f1728;">Dear {!Recipient.FirstName},</div>
+                                <div style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:14px;line-height:18px;color:#344054;">Please find your sales order below.</div>
+
+                                <!-- Key figures -->
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;margin-top:11px;table-layout:fixed;">
+                                    <tr><td width="40%" style="padding:0;"><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 5px; background-color:#eff4ff;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 3px; background-color:#eff4ff;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 2px; background-color:#eff4ff;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:2px; margin:0 1px; background-color:#eff4ff;"></div></td><td width="2%" style="font-size:1px; line-height:1px;">&#160;</td><td width="30%" style="padding:0;"><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 5px; background-color:#f6f7f9;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 3px; background-color:#f6f7f9;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 2px; background-color:#f6f7f9;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:2px; margin:0 1px; background-color:#f6f7f9;"></div></td><td width="2%" style="font-size:1px; line-height:1px;">&#160;</td><td width="30%" style="padding:0;"><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 5px; background-color:#f6f7f9;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 3px; background-color:#f6f7f9;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 2px; background-color:#f6f7f9;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:2px; margin:0 1px; background-color:#f6f7f9;"></div></td></tr>
+<tr><td width="40%" valign="top" style="background-color:#eff4ff;padding:6px 8px;">
+                                            <div style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12px;font-weight:bold;color:#0f1728;">Due Amount&#160;:</div>
+                                            <div style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:22px;line-height:28px; color:#0f1728;margin-top:2px;word-wrap:break-word;">{!RelatedTo.Axolt__Due_Amount__c}</div>
+                                        </td><td width="2%" style="font-size:1px; line-height:1px;">&#160;</td><td width="30%" valign="top" style="background-color:#f6f7f9;padding:6px 8px;">
+                                            <div style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12px; font-weight:bold; color:#0f1728;">Total&#160;:</div>
+                                            <div style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:19px; color:#475467;margin-top:2px;word-wrap:break-word;">{!RelatedTo.Axolt__Order_Amount__c}</div>
+                                        </td><td width="2%" style="font-size:1px; line-height:1px;">&#160;</td><td width="30%" valign="top" style="background-color:#f6f7f9;padding:6px 8px;">
+                                            <div style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12px; font-weight:bold; color:#0f1728;">Order Date&#160;:</div>
+                                            <div style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:19px; color:#475467;margin-top:2px;">
+                                                <apex:outputText value="{0,date,MM/dd/yyyy}">
+                                                    <apex:param value="{!RelatedTo.EffectiveDate}" />
+                                                </apex:outputText>
+                                            </div>
+                                        </td></tr>
+<tr><td width="40%" style="padding:0;"><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:2px; margin:0 1px; background-color:#eff4ff;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 2px; background-color:#eff4ff;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 3px; background-color:#eff4ff;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 5px; background-color:#eff4ff;"></div></td><td width="2%" style="font-size:1px; line-height:1px;">&#160;</td><td width="30%" style="padding:0;"><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:2px; margin:0 1px; background-color:#f6f7f9;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 2px; background-color:#f6f7f9;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 3px; background-color:#f6f7f9;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 5px; background-color:#f6f7f9;"></div></td><td width="2%" style="font-size:1px; line-height:1px;">&#160;</td><td width="30%" style="padding:0;"><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:2px; margin:0 1px; background-color:#f6f7f9;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 2px; background-color:#f6f7f9;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 3px; background-color:#f6f7f9;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 5px; background-color:#f6f7f9;"></div></td></tr>
+                                </table>
+
+                                <!-- Pay button (same condition and link as before) -->
+                                <apex:outputPanel layout="none" rendered="{!BLANKVALUE(RelatedTo.Axolt__Due_Amount__c, 0) > 0}">
+                                    <table border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;margin-top:10px;">
+                                        <tr>
+                                            <td style="background-color:#2563eb;border-radius:8px;">
+                                                <a href="{!$Label.Axolt__Invoice_Payment_Site_Link}?token={!RelatedTo.Axolt__Payment_Token__c}" target="_blank" style="display:inline-block;padding:12px 22px;font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:14px;line-height:17px;font-weight:bold;color:#ffffff;text-decoration:none;">Pay Order</a>
+                                            </td>
+                                            <td style="padding-left:8px;font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12.5px;color:#667085;">Pay this order securely online.</td>
+                                        </tr>
+                                    </table>
+                                </apex:outputPanel>
+                            </td>
+                        </tr>
+
+                        <!-- Section 2: Bill To / Ship To / Details -->
+                        <tr>
+                            <td style="padding:14px;">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="width:100%; border-collapse:separate; table-layout:fixed; page-break-inside:avoid;">
+                                    <tr><td style="padding:0;"><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 5px; background-color:#fafbfc;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 3px; background-color:#fafbfc;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 2px; background-color:#fafbfc;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:2px; margin:0 1px; background-color:#fafbfc;"></div></td><td width="16" style="width:16px; padding:0; font-size:1px; line-height:1px;"></td><td style="padding:0;"><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 5px; background-color:#fafbfc;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 3px; background-color:#fafbfc;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 2px; background-color:#fafbfc;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:2px; margin:0 1px; background-color:#fafbfc;"></div></td><td width="16" style="width:16px; padding:0; font-size:1px; line-height:1px;"></td><td style="padding:0;"><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 5px; background-color:#fafbfc;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 3px; background-color:#fafbfc;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 2px; background-color:#fafbfc;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:2px; margin:0 1px; background-color:#fafbfc;"></div></td></tr>
+<tr><td valign="top" style="background-color:#fafbfc;padding:7px 11px;font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12.5px;line-height:18px;color:#344054;word-wrap:break-word;">
+                                            <div style="font-size:10.5px;font-weight:bold;letter-spacing:0.8px;text-transform:uppercase;color:#0f1728;margin-bottom:8px;">Bill To</div>
+                                            <span style="font-weight:bold;color:#0f1728;">{!RelatedTo.Account.Name}</span><br/>
+                                            {!RelatedTo.Axolt__Contact__r.Name}<br/>
+                                            {!RelatedTo.Axolt__Bill_To_Address__r.Name}<br/>
+                                            {!RelatedTo.Axolt__Bill_To_Address__r.Axolt__Address_Line1__c}<br/>
+                                            {!RelatedTo.Axolt__Bill_To_Address__r.Axolt__City__c},
+                                            {!RelatedTo.Axolt__Bill_To_Address__r.Axolt__State__c} <br/>
+                                            {!RelatedTo.Axolt__Bill_To_Address__r.Axolt__Country__c},
+                                            {!RelatedTo.Axolt__Bill_To_Address__r.Axolt__Postal_Code__c}
+                                        </td><td width="16" style="width:16px; padding:0; font-size:1px; line-height:1px;">&nbsp;</td><td valign="top" style="background-color:#fafbfc;padding:7px 11px;font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12.5px;line-height:18px;color:#344054;word-wrap:break-word;">
+                                            <div style="font-size:10.5px;font-weight:bold;letter-spacing:0.8px;text-transform:uppercase;color:#0f1728;margin-bottom:8px;">Ship To</div>
+                                            <span style="font-weight:bold;color:#0f1728;">{!RelatedTo.Account.Name}</span><br/>
+                                            {!RelatedTo.Axolt__Contact__r.Name}<br/>
+                                            {!RelatedTo.Axolt__Ship_To_Address__r.Name}<br/>
+                                            {!RelatedTo.Axolt__Ship_To_Address__r.Axolt__Address_Line1__c}<br/>
+                                            {!RelatedTo.Axolt__Ship_To_Address__r.Axolt__City__c},
+                                             {!RelatedTo.Axolt__Ship_To_Address__r.Axolt__State__c} <br/>
+                                            {!RelatedTo.Axolt__Ship_To_Address__r.Axolt__Country__c},
+                                             {!RelatedTo.Axolt__Ship_To_Address__r.Axolt__Postal_Code__c}
+                                        </td><td width="16" style="width:16px; padding:0; font-size:1px; line-height:1px;">&nbsp;</td><td valign="top" style="background-color:#fafbfc;padding:7px 11px;font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12.5px;line-height:18px;color:#344054;word-wrap:break-word;">
+                                            <div style="font-size:10.5px;font-weight:bold;letter-spacing:0.8px;text-transform:uppercase;color:#0f1728;margin-bottom:8px;">Details</div>
+                                            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+                                                <tr><td valign="top" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:11.5px; line-height:18px; font-weight:bold; color:#0f1728; padding:3px 6px 3px 0; white-space:nowrap; vertical-align:top;">Order&#160;:</td><td valign="top" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12.5px;line-height:18px; color:#475467;word-wrap:break-word; padding:3px 0; text-align:right; vertical-align:top;">{!RelatedTo.Name}</td></tr>
+                                                <tr><td valign="top" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:11.5px; line-height:18px; font-weight:bold; color:#0f1728; padding:3px 6px 3px 0; white-space:nowrap; vertical-align:top;">Status&#160;:</td><td valign="top" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12.5px;line-height:18px; color:#475467;word-wrap:break-word; padding:3px 0; text-align:right; vertical-align:top;">{!RelatedTo.Status}</td></tr>
+                                                <apex:outputPanel layout="none" rendered="{!NOT(ISNULL(RelatedTo.Axolt__Customer_Purchase_Order_Reference__c))}">
+                                                <tr><td valign="top" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:11.5px; line-height:18px; font-weight:bold; color:#0f1728; padding:3px 6px 3px 0; white-space:nowrap; vertical-align:top;">P.O. Number&#160;:</td><td valign="top" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12.5px;line-height:18px; color:#475467;word-wrap:break-word; padding:3px 0; text-align:right; vertical-align:top;">{!RelatedTo.Axolt__Customer_Purchase_Order_Reference__c}</td></tr>
+                                                </apex:outputPanel>
+                                                <apex:outputPanel layout="none" rendered="{!NOT(ISNULL(RelatedTo.Axolt__Quote__r.Axolt__Contract__c))}">
+                                                <tr><td valign="top" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:11.5px; line-height:18px; font-weight:bold; color:#0f1728; padding:3px 6px 3px 0; white-space:nowrap; vertical-align:top;">Contract Ref&#160;:</td><td valign="top" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12.5px;line-height:18px; color:#475467;word-wrap:break-word; padding:3px 0; text-align:right; vertical-align:top;">{!RelatedTo.Axolt__Quote__r.Axolt__Contract__r.ContractNumber}</td></tr>
+                                                </apex:outputPanel>
+                                            </table>
+                                        </td></tr>
+<tr><td style="padding:0;"><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:2px; margin:0 1px; background-color:#fafbfc;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 2px; background-color:#fafbfc;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 3px; background-color:#fafbfc;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 5px; background-color:#fafbfc;"></div></td><td width="16" style="width:16px; padding:0; font-size:1px; line-height:1px;"></td><td style="padding:0;"><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:2px; margin:0 1px; background-color:#fafbfc;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 2px; background-color:#fafbfc;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 3px; background-color:#fafbfc;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 5px; background-color:#fafbfc;"></div></td><td width="16" style="width:16px; padding:0; font-size:1px; line-height:1px;"></td><td style="padding:0;"><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:2px; margin:0 1px; background-color:#fafbfc;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 2px; background-color:#fafbfc;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 3px; background-color:#fafbfc;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 5px; background-color:#fafbfc;"></div></td></tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <!-- Section 3: Order items + summary -->
+                        <tr>
+                            <td style="padding:13px 14px 13px 14px;">
+                                <div style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:14px;font-weight:bold;color:#0f1728;margin-bottom:6px;text-align:center;">Order Items</div>
+
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;table-layout:fixed;-fs-table-paginate:paginate;">
+                                    <thead>
+                                        <tr>
+                                            <th width="14.2857%" valign="middle" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:10.5px;line-height:15px;font-weight:bold;letter-spacing:0.5px;text-transform:uppercase;color:#0f1728;background-color:#eff4ff;padding:8px 10px;text-align:left;">Item Name</th>
+                                            <th width="14.2857%" valign="middle" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:10.5px;line-height:15px;font-weight:bold;letter-spacing:0.5px;text-transform:uppercase;color:#0f1728;background-color:#eff4ff;padding:8px 10px;text-align:right;">Qty</th>
+                                            <th width="14.2857%" valign="middle" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:10.5px;line-height:15px;font-weight:bold;letter-spacing:0.5px;text-transform:uppercase;color:#0f1728;background-color:#eff4ff;padding:8px 10px;text-align:right;">Unit Price</th>
+                                            <th width="14.2857%" valign="middle" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:10.5px;line-height:15px;font-weight:bold;letter-spacing:0.5px;text-transform:uppercase;color:#0f1728;background-color:#eff4ff;padding:8px 10px;text-align:right;">Discount</th>
+                                            <th width="14.2857%" valign="middle" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:10.5px;line-height:15px;font-weight:bold;letter-spacing:0.5px;text-transform:uppercase;color:#0f1728;background-color:#eff4ff;padding:8px 10px;text-align:right;">Sub Total</th>
+                                            <th width="14.2857%" valign="middle" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:10.5px;line-height:15px;font-weight:bold;letter-spacing:0.5px;text-transform:uppercase;color:#0f1728;background-color:#eff4ff;padding:8px 10px;text-align:right;">Tax</th>
+                                            <th width="14.2857%" valign="middle" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:10.5px;line-height:15px;font-weight:bold;letter-spacing:0.5px;text-transform:uppercase;color:#0f1728;background-color:#eff4ff;padding:8px 10px;text-align:right;">Total Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <apex:repeat var="item" value="{!RelatedTo.OrderItems}">
+                                            <tr style="page-break-inside:avoid;">
+                                                <td valign="middle" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12.5px;line-height:18px;font-weight:normal;color:#0f1728;padding:7px 10px;word-wrap:break-word;text-align:left;">
+                                                    <span class="order-item-value" style="font-weight:normal;">
+                                                        <apex:outputText value="{!LEFT(item.Product2.Name, 20)}" />
+                                                        <apex:outputText value="&lt;br/&gt;{!MID(item.Product2.Name, 21, 20)}" escape="false" rendered="{!LEN(item.Product2.Name) > 20}" />
+                                                        <apex:outputText value="&lt;br/&gt;{!MID(item.Product2.Name, 41, 20)}" escape="false" rendered="{!LEN(item.Product2.Name) > 40}" />
+                                                        <apex:outputText value="&lt;br/&gt;{!MID(item.Product2.Name, 61, 20)}" escape="false" rendered="{!LEN(item.Product2.Name) > 60}" />
+                                                        <apex:outputText value="&lt;br/&gt;..." escape="false" rendered="{!LEN(item.Product2.Name) > 80}" />
+                                                    </span>
+                                                    <span class="order-item-value" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12.5px;line-height:18px;font-weight:normal;color:#0f1728;margin-top:2px;">
+                                                        <apex:outputText value="{!LEFT(item.Product2.ProductCode, 20)}" />
+                                                        <apex:outputText value="&lt;br/&gt;{!MID(item.Product2.ProductCode, 21, 20)}" escape="false" rendered="{!LEN(item.Product2.ProductCode) > 20}" />
+                                                        <apex:outputText value="&lt;br/&gt;{!MID(item.Product2.ProductCode, 41, 20)}" escape="false" rendered="{!LEN(item.Product2.ProductCode) > 40}" />
+                                                        <apex:outputText value="&lt;br/&gt;{!MID(item.Product2.ProductCode, 61, 20)}" escape="false" rendered="{!LEN(item.Product2.ProductCode) > 60}" />
+                                                        <apex:outputText value="&lt;br/&gt;..." escape="false" rendered="{!LEN(item.Product2.ProductCode) > 80}" />
+                                                    </span>
+                                                    <apex:outputPanel layout="none" rendered="{!item.Axolt__Is_Subscribe__c}">
+                                                        <span style="display:inline-block;margin-top:6px;font-size:11px;font-weight:bold;line-height:16px;color:#5925dc;background-color:#f4f3ff;border-radius:999px;padding:0 8px;">Subscription</span>
+                                                    </apex:outputPanel>
+                                                </td>
+                                                <td valign="middle" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12.5px;line-height:18px;color:#0f1728;padding:7px 10px;text-align:right;">
+                                                    {!item.Quantity}
+                                                </td>
+                                                <td valign="middle" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12.5px;line-height:18px;color:#0f1728;padding:7px 10px;text-align:right;word-wrap:break-word;">
+                                                    <apex:outputText value="{0,number,#,##0.00######}"><apex:param value="{!item.UnitPrice}" /></apex:outputText>
+                                                </td>
+                                                <td valign="middle" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12.5px;line-height:18px;color:#0f1728;padding:7px 10px;text-align:right;word-wrap:break-word;">
+                                                    <apex:outputText value="{0,number,#,##0.00######}"><apex:param value="{!item.Axolt__Discount_Amount__c}" /></apex:outputText>
+                                                </td>
+                                                <td valign="middle" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12.5px;line-height:18px;color:#0f1728;padding:7px 10px;text-align:right;word-wrap:break-word;">
+                                                    <apex:outputText value="{0,number,#,##0.00######}"><apex:param value="{!item.Axolt__Sub_Total__c}" /></apex:outputText>
+                                                </td>
+                                                <td valign="middle" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12.5px;line-height:18px;color:#0f1728;padding:7px 10px;text-align:right;word-wrap:break-word;">
+                                                    <apex:outputText value="{0,number,#,##0.00######}"><apex:param value="{!item.Axolt__VAT_Amount__c}" /></apex:outputText>
+                                                </td>
+                                                <td valign="middle" style="font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12.5px;line-height:18px;font-weight:normal;color:#0f1728;padding:7px 10px;text-align:right;word-wrap:break-word;">
+                                                    <apex:outputText value="{0,number,#,##0.00######}"><apex:param value="{!item.Axolt__Total_Price__c}" /></apex:outputText>
+                                                </td>
+                                            </tr>
+
+                                            <apex:outputPanel layout="none" rendered="{!item.Axolt__Is_Subscribe__c}">
+                                                <tr style="page-break-inside:avoid;">
+                                                    <td colspan="7" style="padding:0 6px 8px 6px;">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;background-color:#fafbfc;font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12px;line-height:16px;color:#0f1728;">
+                                                            <tr>
+                                                                <td colspan="2" style="padding:7px 7px 3px 7px;font-size:12px;font-weight:bold;color:#5925dc;">
+                                                                    Subscription Details For:
+                                                                    <span style="color:#0f1728;">{!item.Product2.Name} ({!item.Product2.ProductCode})</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="45%" style="font-weight:bold; color:#0f1728; padding:1px 7px;">Duration&#160;:</td>
+                                                                <td style="padding:1px 7px;text-align:right; color:#475467;">
+                                                                    {!IF(BLANKVALUE(item.Axolt__Year_Duration__c, 0) > 0, TEXT(item.Axolt__Year_Duration__c) & ' Year(s) ', '')}
+                                                                    {!IF(BLANKVALUE(item.Axolt__Month_Duration__c, 0) > 0, TEXT(item.Axolt__Month_Duration__c) & ' Month(s) ', '')}
+                                                                    {!IF(BLANKVALUE(item.Axolt__Duration_in_Days__c, 0) > 0, TEXT(item.Axolt__Duration_in_Days__c) & ' Day(s)', '')}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="font-weight:bold; color:#0f1728; padding:1px 7px;">Period&#160;:</td>
+                                                                <td style="padding:1px 7px;text-align:right; color:#475467;">
+                                                                    {!TEXT(item.ServiceDate)} to {!TEXT(item.EndDate)}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="font-weight:bold; color:#0f1728; padding:1px 7px;">Price/{!IF(item.Product2.QuantityUnitOfMeasure == 'Year', 'Year', 'Month')}&#160;:</td>
+                                                                <td style="padding:1px 7px;text-align:right; color:#475467;">
+                                                                    {!item.UnitPrice}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="font-weight:bold; color:#0f1728;padding:4px 7px 1px 7px;font-weight:bold;">
+                                                                    Gross Amount (Qty x Price x Duration)&#160;:
+                                                                </td>
+                                                                <td style="padding:4px 7px 1px 7px;text-align:right; color:#475467;">
+                                                                    {!item.Axolt__Sub_Total__c}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="font-weight:bold; color:#0f1728; padding:1px 7px;">Discount&#160;:</td>
+                                                                <td style="padding:1px 7px;text-align:right; color:#475467;">
+                                                                    {!item.Axolt__Discount_Amount__c}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="font-weight:bold; color:#0f1728; padding:1px 7px;">VAT ({!item.Axolt__VAT_Percentage__c}%)&#160;:</td>
+                                                                <td style="padding:1px 7px;text-align:right; color:#475467;">
+                                                                    {!item.Axolt__VAT_Amount__c}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding:4px 7px 6px 7px;font-weight:bold;">Net Amount (Included in Total Price)&#160;:</td>
+                                                                <td style="padding:4px 7px 6px 7px;text-align:right; color:#475467;">
+                                                                    {!item.Axolt__Total_Price__c}
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </apex:outputPanel>
+
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>
+
+                                <!-- Summary (right aligned) -->
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;margin-top:8px;page-break-inside:avoid;">
+                                    <tr>
+                                        <td width="48%">&nbsp;</td>
+                                        <td width="52%" valign="top">
+                                            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:13px;line-height:18px;">
+                                                <tr>
+                                                    <td style="font-weight:bold; color:#0f1728;padding:5px 6px;">Subtotal&#160;:</td>
+                                                    <td style="color:#475467;padding:5px 6px;text-align:right;white-space:nowrap;">{!RelatedTo.Axolt__Sub_Total__c}</td>
+                                                </tr>
+                                                <apex:outputPanel layout="none" rendered="{!AND(NOT(ISBLANK(RelatedTo.Axolt__TotalDiscount__c)), RelatedTo.Axolt__TotalDiscount__c <> 0)}">
+                                                <tr>
+                                                    <td style="font-weight:bold; color:#0f1728;padding:5px 6px;">Total Discount&#160;:</td>
+                                                    <td style="color:#475467;padding:5px 6px;text-align:right;white-space:nowrap;">{!RelatedTo.Axolt__TotalDiscount__c}</td>
+                                                </tr>
+                                                </apex:outputPanel>
+                                                <apex:outputPanel layout="none" rendered="{!AND(NOT(ISBLANK(RelatedTo.Axolt__Total_Shipping_Amount__c)), RelatedTo.Axolt__Total_Shipping_Amount__c <> 0)}">
+                                                <tr>
+                                                    <td style="font-weight:bold; color:#0f1728;padding:5px 6px;">Shipping Amount&#160;:</td>
+                                                    <td style="color:#475467;padding:5px 6px;text-align:right;white-space:nowrap;">{!RelatedTo.Axolt__Total_Shipping_Amount__c}</td>
+                                                </tr>
+                                                </apex:outputPanel>
+                                                <apex:outputPanel layout="none" rendered="{!AND(NOT(ISBLANK(RelatedTo.Axolt__Shipment_Handling_Cost__c)), RelatedTo.Axolt__Shipment_Handling_Cost__c <> 0)}">
+                                                <tr>
+                                                    <td style="font-weight:bold; color:#0f1728;padding:5px 6px;">Shipment Handling Cost&#160;:</td>
+                                                    <td style="color:#475467;padding:5px 6px;text-align:right;white-space:nowrap;">{!RelatedTo.Axolt__Shipment_Handling_Cost__c}</td>
+                                                </tr>
+                                                </apex:outputPanel>
+                                                <tr>
+                                                    <td style="font-weight:bold; color:#0f1728;padding:5px 6px;">Total Tax&#160;:</td>
+                                                    <td style="color:#475467;padding:5px 6px;text-align:right;white-space:nowrap;">{!RelatedTo.Axolt__Total_Tax2__c}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="color:#0f1728;font-weight:bold;padding:8px 6px;">Total&#160;:</td>
+                                                    <td style="color:#475467;padding:8px 6px;text-align:right;white-space:nowrap;">{!RelatedTo.Axolt__Order_Amount__c}</td>
+                                                </tr>
+                                                <apex:outputPanel layout="none"
+                                                    rendered="{!AND(NOT(ISBLANK(RelatedTo.Axolt__Amount_Paid__c)), RelatedTo.Axolt__Amount_Paid__c <> 0)}">
+                                                    <tr>
+                                                        <td style="font-weight:bold; color:#0f1728;padding:5px 6px;">Amount Paid&#160;:</td>
+                                                        <td style="color:#475467;padding:5px 6px;text-align:right;white-space:nowrap;">{!RelatedTo.Axolt__Amount_Paid__c}</td>
+                                                    </tr>
+                                                </apex:outputPanel>
+                                                <tr>
+                                                    <td style="font-size:13px;line-height:18px;font-weight:bold;color:#0f1728;background-color:#eff4ff;padding:6px 6px;">Due Amount&#160;:</td>
+                                                    <td style="font-size:13px;line-height:18px;color:#0f1728;background-color:#eff4ff;padding:6px 6px;text-align:right;white-space:nowrap;">{!RelatedTo.Axolt__Due_Amount__c}</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <!-- Authorised signature -->
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;margin-top:24px;page-break-inside:avoid;">
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td width="220" style="border-top:1px solid #344054;text-align:center;padding-top:6px;font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:12px;color:#344054;">
+                                            Authorised Sign
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                    </table><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:2px; margin:0 1px; background-color:#ffffff;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 2px; background-color:#ffffff;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 3px; background-color:#ffffff;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 5px; background-color:#ffffff;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 7px; background-color:#ffffff;"></div>
+
+                    <!-- ===== Footer: company name + address ===== -->
+                    <div style="margin-top:10px;text-align:center;font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:11.5px;line-height:18px;color:#667085;">
+                        <apex:outputPanel layout="none" rendered="{!NOT(ISBLANK(RelatedTo.Axolt__Company__c))}">
+                            <span style="font-weight:bold;color:#344054;">{!RelatedTo.Axolt__Company__r.Name}</span>&#160;&#183;&#160;
+                            {!RelatedTo.Axolt__Company__r.BillingStreet}&#160;&#183;&#160;
+                            {!RelatedTo.Axolt__Company__r.BillingCity}, {!RelatedTo.Axolt__Company__r.BillingState}, {!RelatedTo.Axolt__Company__r.BillingCountry}&#160;&#183;&#160;
+                            Email: {!RelatedTo.Axolt__Company__r.Axolt__SCH_Email__c}
+                        </apex:outputPanel>
+                        <apex:outputPanel layout="none" rendered="{!ISBLANK(RelatedTo.Axolt__Company__c)}">
+                            <span style="font-weight:bold;color:#344054;">{!$Organization.Name}</span>&#160;&#183;&#160;
+                            {!$Organization.Street}&#160;&#183;&#160;
+                            {!$Organization.City}&nbsp;{!$Organization.State}&nbsp;{!$Organization.PostalCode}&nbsp;{!$Organization.Country}&#160;&#183;&#160;
+                            {!$Organization.Phone}
+                        </apex:outputPanel>
+                    </div>
+
+                    <!-- ===== Terms and Conditions (kept together on one page) ===== -->
+                    <div style="page-break-inside: avoid; break-inside: avoid;">
+                        <div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 7px; background-color:#2563eb;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 5px; background-color:#2563eb;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 3px; background-color:#2563eb;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 2px; background-color:#2563eb;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:2px; margin:0 1px; background-color:#2563eb;"></div><table width="100%" border="0" cellspacing="0" cellpadding="0" style="page-break-inside:avoid; break-inside:avoid; border-collapse:separate;background-color:#ffffff;margin-top:14px;">
+                            <tr>
+                                <td style="padding:13px 14px 11px 14px;font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#344054;">
+                                    <h1 style="margin:0;padding-bottom:8px;font-family:Inter,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:11px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;color:#667085;">Terms and Conditions Summary</h1>
+
+                                    <p style="margin:7px 0 0 0;font-style:italic;font-size:12px; font-weight:bold; color:#0f1728;">Below is a summary of the four key terms and conditions:</p>
+
+                                    <ol class="terms-list" style="margin:6px 0 0 0;padding-left:11px;line-height:1.6;">
+                                        <li style="margin-bottom:6px;font-size:12px; font-weight:bold; color:#0f1728;">
+                                            <strong style="font-size:13px;color:#0f1728;">Pricing Accuracy&#160;:</strong>
+                                            <p style="margin:2px 0 0 0;font-size:12px;color:#344054;">The Monthly/Unit Price displayed is rounded to two decimal places for presentation. The final total for the order is calculated using the actual price (which may include up to eight decimal places) and represents the true and binding total.</p>
+                                        </li>
+                                        <li style="margin-bottom:6px;font-size:12px; font-weight:bold; color:#0f1728;">
+                                            <strong style="font-size:13px;color:#0f1728;">Order Activation&#160;:</strong>
+                                            <p style="margin:2px 0 0 0;font-size:12px;color:#344054;">If this Order Form is signed or submitted to {!RelatedTo.Axolt__Company__r.Name} after the Order Start Date, {!RelatedTo.Axolt__Company__r.Name} reserves the right to adjust the order terms (excluding the total price) based on the actual activation date. Adjustments can be reviewed in your Checkout account, the order confirmation email, or by contacting Customer Service.</p>
+                                        </li>
+                                        <li style="margin-bottom:6px;font-size:12px; font-weight:bold; color:#0f1728;">
+                                            <strong style="font-size:13px;color:#0f1728;">Taxes&#160;:</strong>
+                                            <p style="margin:2px 0 0 0;font-size:12px;color:#344054;">Prices shown exclude any applicable taxes. The Customer is solely responsible for any such taxes.</p>
+                                        </li>
+                                        <li style="margin-bottom:6px;font-size:12px; font-weight:bold; color:#0f1728;">
+                                            <strong style="font-size:13px;color:#0f1728;">Non-Invoice Document&#160;:</strong>
+                                            <p style="margin:2px 0 0 0;font-size:12px;color:#344054;">This Order Form is not an invoice. It is provided solely for order confirmation purposes.</p>
+                                        </li>
+                                    </ol>
+
+                                    <p style="margin:6px 0 0 0;padding-top:7px;text-align:center;color:#667085;font-size:12px;"><em>Please review all terms carefully before proceeding.</em></p>
+                                </td>
+                            </tr>
+                        </table><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:2px; margin:0 1px; background-color:#ffffff;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 2px; background-color:#ffffff;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 3px; background-color:#ffffff;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 5px; background-color:#ffffff;"></div><div style="display:block; font-size:1px; line-height:1px; overflow:hidden; height:1px; margin:0 7px; background-color:#ffffff;"></div>
+                    </div>
+
+                </div>
+            </div>
+        </body>
+        </html>
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ReportType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <baseObject>Axolt__BOM_Line_Item__c</baseObject>
+    <category>products</category>
+    <deployed>true</deployed>
+    <description>Analyzes which BOM components are used in which parent products (Where-Used).</description>
+    <label>BOM Component Usage (Where-Used)</label>
+    <sections>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Id</field>
+            <table>Axolt__BOM_Line_Item__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Name</field>
+            <table>Axolt__BOM_Line_Item__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Axolt__BOM_Product__c</field>
+            <table>Axolt__BOM_Line_Item__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Axolt__BOM_Component__c</field>
+            <table>Axolt__BOM_Line_Item__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Axolt__Quantity__c</field>
+            <table>Axolt__BOM_Line_Item__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Axolt__Active__c</field>
+            <table>Axolt__BOM_Line_Item__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Axolt__Process_Cycle__c</field>
+            <table>Axolt__BOM_Line_Item__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Axolt__Routing_Link__c</field>
+            <table>Axolt__BOM_Line_Item__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Axolt__Unit_of_Measure__c</field>
+            <table>Axolt__BOM_Line_Item__c</table>
+        </columns>
+        <masterLabel>BOM Line Items</masterLabel>
+    </sections>
+</ReportType>

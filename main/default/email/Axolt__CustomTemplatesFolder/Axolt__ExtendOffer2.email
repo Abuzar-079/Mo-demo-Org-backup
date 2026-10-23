@@ -1,0 +1,83 @@
+<messaging:emailTemplate subject="Job Offer from Unity Ltd: {!relatedTo.Axolt__Position__r.Name}"
+    recipientType="Contact"
+    relatedToType="Axolt__Job_Applicant__c"
+    renderUsingSystemContextWithoutSharing="true">
+
+    <messaging:htmlEmailBody >
+        <div style="background-color: #f4f6f9; padding: 40px 20px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333; line-height: 1.6;">
+            
+            <!-- Main Container (Added a subtle top border for branding) -->
+            <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e1e5ea; border-top: 5px solid #1e40af; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                
+                <!-- Minimalist Text Header -->
+                <div style="padding: 40px 40px 20px 40px; border-bottom: 1px solid #f1f5f9;">
+                    <div style="color: #64748b; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px;">
+                        Unity Ltd
+                    </div>
+                    <h1 style="color: #0f172a; font-size: 28px; margin: 0; font-weight: 600; letter-spacing: -0.5px;">
+                        Offer of Employment
+                    </h1>
+                </div>
+
+                <!-- Body Section -->
+                <div style="padding: 30px 40px 40px 40px;">
+                    <p style="font-size: 16px; margin-top: 0;">Dear <strong>{!relatedTo.Name}</strong>,</p>
+                    
+                    <p style="font-size: 16px;">
+                        Following our recent discussions, we are thrilled to formally offer you the position of <strong>{!relatedTo.Axolt__Position__r.Name}</strong> at Unity Ltd. We were highly impressed with your background and are confident that you will be a valuable addition to our team.
+                    </p>
+
+                    <!-- Highlighted Details Box -->
+                    <div style="background-color: #f8fafc; border-left: 4px solid #1e40af; padding: 20px; margin: 25px 0; border-radius: 0 4px 4px 0;">
+                        <h3 style="color: #1e40af; font-size: 14px; margin-top: 0; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px;">Position Details</h3>
+                        <table width="100%" cellpadding="0" cellspacing="0" style="font-size: 15px;">
+                            <tr>
+                                <td style="padding-bottom: 8px; color: #64748b; width: 120px;"><strong>Job Title:</strong></td>
+                                <td style="padding-bottom: 8px; color: #333333;">{!relatedTo.Axolt__Position__r.Name}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding-bottom: 8px; color: #64748b;"><strong>Department:</strong></td>
+                                <td style="padding-bottom: 8px; color: #333333;">{!relatedTo.Axolt__Position__r.Department__c}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <h3 style="color: #0f172a; font-size: 18px; margin-top: 35px; border-bottom: 1px solid #e1e5ea; padding-bottom: 8px;">Key Terms and Conditions</h3>
+                    <ul style="padding-left: 20px; margin-top: 15px; font-size: 15px; color: #4a5568;">
+                        <li style="margin-bottom: 8px;"><strong>Work Hours:</strong> Your working hours will align with standard company policies.</li>
+                        <li style="margin-bottom: 8px;"><strong>Verification:</strong> Employment is strictly subject to successful background verification.</li>
+                        <li style="margin-bottom: 8px;"><strong>Confidentiality:</strong> You will be required to sign a Non-Disclosure Agreement (NDA) on or before your start date.</li>
+                    </ul>
+
+                    <!-- Action Box -->
+                    <div style="background-color: #f0fdf4; border: 1px solid #bbf7d0; padding: 16px; border-radius: 6px; margin: 30px 0;">
+                        <p style="margin: 0; font-size: 15px; color: #166534;">
+                            <strong>Next Steps:</strong> Please confirm your acceptance of this offer by <strong><apex:outputText value="{0,date,MMMM d, yyyy}"><apex:param value="{!relatedTo.Axolt__Offer_Expiration_Date__c}"/></apex:outputText></strong>.
+                        </p>
+                    </div>
+
+                    <p style="font-size: 16px; margin-bottom: 5px;">We look forward to welcoming you to the team!</p>
+                    
+                    <p style="font-size: 16px; margin-top: 25px;">
+                        Sincerely,<br/>
+                        <span style="display: inline-block; margin-top: 10px;">
+                            <strong>{!relatedTo.Axolt__Position__r.Hiring_Manager__r.Name}</strong><br/>
+                            <span style="color: #64748b; font-size: 14px;">HR Manager | Unity Ltd</span>
+                        </span>
+                    </p>
+                </div>
+
+                <!-- Footer Section -->
+                <div style="background-color: #f8fafc; border-top: 1px solid #e1e5ea; padding: 20px 40px; text-align: center;">
+                    <p style="font-size: 12px; color: #94a3b8; margin: 0; line-height: 1.5;">
+                        This email and any attachments are confidential and intended solely for the use of <strong>{!relatedTo.Name}</strong>. If you have received this email in error, please notify the sender immediately.
+                    </p>
+                    <p style="font-size: 12px; color: #94a3b8; margin: 10px 0 0 0;">
+                        &copy; 2026 Unity Ltd. All rights reserved.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>
